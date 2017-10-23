@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd"
+       default-lazy-init="true">
+    <description>Sql Mapping配置</description>
+
+    <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourcejdbc"/>
+        <property name="configLocation" value="classpath:context/mybatis-config.xml"/>
+        <property name="mapperLocations">
+            <list>
+                   <value>classpath*:com/hiveview/icp/dao/mapper/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- JDBC template 注:prototype为了避免被手动关闭-->
+    <bean id="jdbcTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
+        <constructor-arg>
+            <ref bean="sessionFactory"></ref>
+        </constructor-arg>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.hiveview.icp.dao"/>
+        <property name="annotationClass" value="com.hiveview.base.mybatis.annotation.MyBatisDao"></property>
+        <property name="sqlSessionTemplateBeanName" value="jdbcTemplate"></property>
+    </bean>
+</beans>

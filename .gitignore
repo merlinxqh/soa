@@ -7,6 +7,10 @@ icp/icp-core/.settings/
 *.jsdtscope
 *.prefs
 *.component
-*.xml
 *.container
 *.name
+icp/icp-entity/.settings/org.eclipse.wst.common.project.facet.core.xml
+icp/icp-web/.settings/org.eclipse.wst.common.project.facet.core.xml
+icp-admin/.settings/
+icp-tv-api/.settings/
+soa-base/.settings/
