@@ -1,0 +1,12 @@
+icp/.settings/
+icp/icp-api/.settings/
+icp/icp-core/.settings/
+*.classpath
+*.project
+*.iml
+*.jsdtscope
+*.prefs
+*.component
+*.xml
+*.container
+*.name
