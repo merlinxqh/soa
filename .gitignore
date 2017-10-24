@@ -14,3 +14,11 @@ icp/icp-web/.settings/org.eclipse.wst.common.project.facet.core.xml
 icp-admin/.settings/
 icp-tv-api/.settings/
 soa-base/.settings/
+.idea/
+icp-admin/target/
+soa-base/target/
+icp-tv-api/target/
+icp/icp-api/target/
+icp/icp-web/target/
+icp/icp-entity/target/
+icp/icp-core/target/

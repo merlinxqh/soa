@@ -13,6 +13,7 @@
         <module>icp</module>
         <module>icp-admin</module>
         <module>icp-tv-api</module>
+        <module>pms</module>
     </modules>
     <properties>
         <spring.version>4.2.5.RELEASE</spring.version>
