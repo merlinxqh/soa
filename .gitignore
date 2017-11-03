@@ -22,3 +22,6 @@ icp/icp-api/target/
 icp/icp-web/target/
 icp/icp-entity/target/
 icp/icp-core/target/
+pms/pms-api/.settings/
+*/.settings/*
+pms/*/.settings/*

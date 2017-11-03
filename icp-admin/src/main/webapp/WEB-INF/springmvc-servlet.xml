@@ -55,4 +55,16 @@
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
     <mvc:default-servlet-handler/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/login"/>
+            <mvc:exclude-mapping path="/logout"/>
+            <mvc:exclude-mapping path="/assets/**"/>
+            <!--身份验证的拦截器-->
+            <bean id="loginInterceptor" class="com.hiveview.admin.icp.commom.LoginInterceptor">
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

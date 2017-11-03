@@ -16,7 +16,4 @@ public class HttpCodeConstant {
 
     public static final Integer HTTP_SUCCESS=200;
 
-
-
-
 }

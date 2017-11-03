@@ -1,5 +1,7 @@
 package com.hiveview.icp.entity;
 
+import com.hiveview.base.common.BaseEntity;
+
 import java.math.BigDecimal;
 
 /**
