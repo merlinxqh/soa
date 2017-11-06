@@ -39,6 +39,19 @@ public class SysUser extends BaseEntity {
     private String email;
 
     /**
+     * 默认角色
+     */
+    private String defaultRole;
+
+    public String getDefaultRole() {
+        return defaultRole;
+    }
+
+    public void setDefaultRole(String defaultRole) {
+        this.defaultRole = defaultRole;
+    }
+
+    /**
      * 
      * {@linkplain #username}
      *

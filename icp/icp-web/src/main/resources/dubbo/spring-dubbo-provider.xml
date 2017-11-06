@@ -5,7 +5,7 @@
 	 http://code.alibabatech.com/schema/dubbo	http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
     <!-- 子系统暴露服务接口 -->
-    <dubbo:service interface="com.hiveview.icp.api.DemoService" ref="demoService" version="1.0.0" registry="zookeeperService"/>
+    <dubbo:service interface="com.hiveview.icp.api.DemoService" ref="demoService" timeout="30000" retries="3" version="1.0.0" registry="zookeeperService"/>
     <bean id="demoService" class="com.hiveview.icp.api.DemoServiceImpl"/>
 
 </beans>

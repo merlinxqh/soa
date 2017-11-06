@@ -1,14 +1,10 @@
-package com.hiveview.base.util.redis;
+package com.hiveview.admin.icp.commom;
 
 /**
  *
  */
 public class RedisKeyConstants {
 
-    /**
-     * 代码启用缓存宏
-     */
-    //public static final boolean REDIS_OPEN = false; //false;
 
     /**
      * 验证码在redis中存储的前缀
@@ -67,9 +63,40 @@ public class RedisKeyConstants {
     public static final String DOMY_SHOP_SPECIAL_KEY="domyshop:special:online";
 
     /**
+     * 上线专题列表信息
+     */
+    public static final String DOMY_SHOP_SPECIAL_LIST_KEY="domyshop:special:list";
+
+    /**
      * 字段
      */
     public static final String DOMY_SHOP_SPECIAL_FIELD="%s:%d:%d";
+
+
+    /**
+     * 有名称字段
+     */
+    public static final String DOMY_SHOP_SPECIAL_LIST_FIELD="%s:%d:%d:%d";
+
+    /**
+     * 无名称字段
+     */
+    public static final String DOMY_SHOP_SPECIAL_LIST_NULL_FIELD="%d:%d:%d";
+
+    /**
+     * 上线专题信息
+     */
+    public static final String DOMY_SHOP_MATRIX_LIST_KEY="domyshop:matrix:list";
+
+    /**
+     * 推荐矩阵字段
+     */
+    public static final String DOMY_SHOP_MATRIX_LIST_FIELD="%s:%d:%d";
+
+    /**
+     * 推荐矩阵空字段
+     */
+    public static final String DOMY_SHOP_MATRIX_NULL_LIST_FIELD="%d:%d";
 
     /**
      * 基础数据map

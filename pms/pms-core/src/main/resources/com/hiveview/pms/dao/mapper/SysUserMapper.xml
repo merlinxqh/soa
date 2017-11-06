@@ -8,6 +8,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="default_role" property="defaultRole" jdbcType="VARCHAR" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="last_update_by" property="lastUpdateBy" jdbcType="VARCHAR" />
@@ -15,7 +16,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     t.id, t.username, t.password, t.name, t.status, t.email, t.create_by as 'createBy', 
-    t.create_date, t.last_update_by as 'lastUpdateBy', t.last_update_date
+    t.create_date, t.last_update_by as 'lastUpdateBy', t.last_update_date, t.default_role
   </sql>
   <sql id="condition" >
     <if test="null!=params" >
@@ -36,6 +37,9 @@
       </if>
       <if test="params.email != null and '' != params.email" >
         and t.email = #{params.email,jdbcType=VARCHAR}
+      </if>
+      <if test="params.defaultRole != null and '' != params.defaultRole" >
+        and t.default_role = #{params.defaultRole,jdbcType=VARCHAR}
       </if>
       <if test="params.createBy != null and '' != params.createBy" >
         and t.create_by = #{params.createBy,jdbcType=VARCHAR}
@@ -91,11 +95,11 @@
   </delete>
   <insert id="insert" parameterType="com.hiveview.pms.entity.SysUser" >
     insert into sys_user (id, username, password, 
-      name, status, email, 
+      name, status, email, default_role,
       create_by, create_date, last_update_by, 
       last_update_date)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{defaultRole,jdbcType=VARCHAR},
       #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
       #{lastUpdateDate,jdbcType=TIMESTAMP})
   </insert>
@@ -119,6 +123,9 @@
       </if>
       <if test="email != null" >
         email,
+      </if>
+      <if test="defaultRole != null" >
+        default_role,
       </if>
       <if test="createBy != null" >
         create_by,
@@ -152,6 +159,9 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
+      <if test="defaultRole != null" >
+        #{defaultRole,jdbcType=VARCHAR},
+      </if>
       <if test="createBy != null" >
         #{createBy,jdbcType=VARCHAR},
       </if>
@@ -184,6 +194,9 @@
       <if test="email != null" >
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="defaultRole != null" >
+        default_role = #{defaultRole,jdbcType=VARCHAR},
+      </if>
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
@@ -206,6 +219,7 @@
       name = #{name,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
+      default_role = #{defaultRole,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},

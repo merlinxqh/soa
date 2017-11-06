@@ -86,6 +86,7 @@ CREATE TABLE sys_user
 	name varchar(30) COMMENT '名称',
 	status int(1) COMMENT '状态(1:启用,2:禁用)',
 	email varchar(100) COMMENT '邮箱',
+	default_role varchar(30) COMMENT '默认角色',
 	create_by varchar(50) COMMENT '创建人',
 	create_date datetime COMMENT '创建时间',
 	last_update_by varchar(50) COMMENT '最新更新人',

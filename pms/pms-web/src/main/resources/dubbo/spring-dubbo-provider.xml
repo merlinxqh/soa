@@ -5,7 +5,13 @@
 	 http://code.alibabatech.com/schema/dubbo	http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
     <!-- 子系统暴露服务接口 -->
-    <dubbo:service interface="com.hiveview.icp.api.DemoService" ref="demoService" version="1.0.0" registry="zookeeperService"/>
-    <bean id="demoService" class="com.hiveview.icp.api.DemoServiceImpl"/>
+    <dubbo:service interface="com.hiveview.pms.api.SysUserApiService" timeout="30000" ref="sysUserApiService" version="1.0.0" registry="zookeeperService"/>
+    <bean id="sysUserApiService" class="com.hiveview.pms.api.SysUserApiServiceImpl"/>
+
+    <dubbo:service interface="com.hiveview.pms.api.SysResourceApiService" timeout="30000" ref="sysResourceApiService" version="1.0.0" registry="zookeeperService"/>
+    <bean id="sysUserApiService" class="com.hiveview.pms.api.SysResourceApiServiceImpl"/>
+
+    <dubbo:service interface="com.hiveview.pms.api.SysRoleApiService" timeout="30000" ref="sysRoleApiService" version="1.0.0" registry="zookeeperService"/>
+    <bean id="sysRoleApiService" class="com.hiveview.pms.api.SysRoleApiServiceImpl"/>
 
 </beans>

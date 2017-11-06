@@ -6,6 +6,7 @@ package com.hiveview.admin.icp.security;
 import com.hiveview.admin.icp.commom.Global;
 import com.hiveview.admin.icp.commom.SpringContextHolder;
 import com.hiveview.admin.icp.util.SystemUserUtils;
+import com.hiveview.pms.dto.SysUserDto;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -42,36 +43,35 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String principal = (String) getAvailablePrincipal(principals);
-//		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
-//			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, SystemUserUtils.getSession());
-//			if (sessions.size() > 0){
-//				// 如果是登录进来的，则踢出已在线用户
-//				if (SystemUserUtils.getSubject().isAuthenticated()){
-//					for (Session session : sessions){
-//						getSystemService().getSessionDao().delete(session);
-//					}
-//				}
-//				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
-//				else{
-//					SystemUserUtils.getSubject().logout();
-//					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
-//				}
-//			}
-//		}
+		if (!Global.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
+			Collection<Session> sessions = getSystemService().getSessionDao().getActiveSessions(true, principal, SystemUserUtils.getSession());
+			if (sessions.size() > 0){
+				// 如果是登录进来的，则踢出已在线用户
+				if (SystemUserUtils.getSubject().isAuthenticated()){
+					for (Session session : sessions){
+						getSystemService().getSessionDao().delete(session);
+					}
+				}
+				// 记住我进来的，并且当前用户已登录，则退出当前用户提示信息。
+				else{
+					SystemUserUtils.getSubject().logout();
+					throw new AuthenticationException("msg:账号已在其它地方登录，请重新登录。");
+				}
+			}
+		}
 		
-//		DomyAdmin user = SystemUserUtils.getCurrentUser();
-//		if (user != null) {
-//			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-//			Map<String,String> map = SystemUserUtils.getPermissionMap();
-//			for (String permission : map.keySet()){
-//				info.addStringPermission(permission);
-//			}
-//			info.addRole(user.getDefaultRole().getSn());
-//			return info;
-//		} else {
-//			return null;
-//		}
-		return null;
+		SysUserDto user = SystemUserUtils.getCurrentUser();
+		if (user != null) {
+			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+			Map<String,String> map = SystemUserUtils.getPermissionMap();
+			for (String permission : map.keySet()){
+				info.addStringPermission(permission);
+			}
+			info.addRole(user.getDefaultRole());
+			return info;
+		} else {
+			return null;
+		}
 	}
 	
 	@Override
@@ -111,11 +111,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 * @param permission
 	 */
 	private boolean authorizationValidate(Permission permission){
-//		Map<String,String> map = SystemUserUtils.getPermissionMap();
-//		String currentPermission=permission.toString();
-//		currentPermission=currentPermission.replaceAll("[\\[\\]]", "").trim();
-//		return map.containsKey(currentPermission);
-		return true;
+		Map<String,String> map = SystemUserUtils.getPermissionMap();
+		String currentPermission=permission.toString();
+		currentPermission=currentPermission.replaceAll("[\\[\\]]", "").trim();
+		return map.containsKey(currentPermission);
 	}
 	
 	 /**
@@ -123,15 +122,14 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
      */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-//        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-//        DomyAdmin user=null;
-//        try {
-//			user=getSystemService().loginAndReturnUser(token.getUsername(), String.valueOf(token.getPassword()));
-//		} catch (RuntimeException e) {
-//				throw new AuthenticationException("msg:"+e.getMessage());
-//		}
-//		return new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
-		return null;
+        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+        SysUserDto user=null;
+        try {
+			user=getSystemService().getUserByUserName(token.getUsername());
+		} catch (RuntimeException e) {
+				throw new AuthenticationException("msg:"+e.getMessage());
+		}
+		return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
 	}
 	/**
 	 * 获取系统业务对象

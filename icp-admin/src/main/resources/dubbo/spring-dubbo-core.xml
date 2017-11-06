@@ -11,7 +11,7 @@
     <dubbo:protocol name="dubbo" port="${dubbo.registry.port}" />
 
     <!-- 使用zookeeper注册中心暴露服务地址 register : true/false 是否向注册中心注册-->
-    <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address.client}" id="zookeeperClient" default="false" register="true"/>
+    <dubbo:registry protocol="zookeeper" timeout="30000" address="${dubbo.registry.address.client}" id="zookeeperClient" default="false" register="true"/>
 
     <!-- 使用zookeeper注册中心暴露服务地址 -->
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" id="zookeeperService"/>

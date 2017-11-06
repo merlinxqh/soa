@@ -6,5 +6,11 @@
 						   http://code.alibabatech.com/schema/dubbo
 						   http://code.alibabatech.com/schema/dubbo/dubbo.xsd"
        default-lazy-init="true">
-    <dubbo:reference id="demoService" interface="com.hiveview.icp.api.DemoService" timeout="30000" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
+    <dubbo:reference id="demoService" interface="com.hiveview.icp.api.DemoService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
+
+    <dubbo:reference id="sysUserApiService" interface="com.hiveview.pms.api.SysUserApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
+
+    <dubbo:reference id="sysResourceApiService" interface="com.hiveview.pms.api.SysResourceApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
+
+    <dubbo:reference id="sysRoleApiService" interface="com.hiveview.pms.api.SysRoleApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
 </beans>

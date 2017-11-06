@@ -5,13 +5,34 @@ import java.util.List;
 /**
  * Created by leo on 2017/11/3.
  */
-public interface CrudApiService<D,P> {
+public interface CrudApiService<T> {
 
-     int saveData(D data);
+     /**
+      * 新增保存
+      * @param data
+      * @return
+      */
+     int saveData(T data);
 
-     int deleteData(D data);
+     /**
+      * 删除
+      * @param data
+      * @return
+      */
+     int deleteData(T data);
 
-     List<D> findListData(P params);
+     /**
+      * 查询数据
+      * @param params
+      * @return
+      */
+     List<T> findList(T params);
 
-     PageDto<D> findPageData(PageDto<D> page,P params);
+     /**
+      * 查询分页数据
+      * @param page
+      * @param params
+      * @return
+      */
+     PageDto<T> findPage(PageDto<T> page, T params);
 }

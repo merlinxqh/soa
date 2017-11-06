@@ -6,7 +6,7 @@ import java.util.List;
  * Created by leo on 2017/11/3.
  * 分页
  */
-public class PageDto<D> {
+public class PageDto<T> {
 
     private int pageIndex;
 
@@ -25,7 +25,7 @@ public class PageDto<D> {
     /**
      * 数据集合
      */
-    protected List<D> records;
+    protected List<T> records;
 
     public int getPageIndex() {
         return pageIndex;
@@ -59,11 +59,11 @@ public class PageDto<D> {
         this.pageCount = pageCount;
     }
 
-    public List<D> getRecords() {
+    public List<T> getRecords() {
         return records;
     }
 
-    public void setRecords(List<D> records) {
+    public void setRecords(List<T> records) {
         this.records = records;
     }
 }

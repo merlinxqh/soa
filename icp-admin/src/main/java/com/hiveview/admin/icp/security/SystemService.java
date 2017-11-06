@@ -1,6 +1,7 @@
 package com.hiveview.admin.icp.security;
 
 import com.hiveview.admin.icp.security.session.SessionDAO;
+import com.hiveview.pms.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,15 +26,10 @@ public class SystemService {
 	 * 根据登录账号获取 用户信息
 	 * @return
 	 */
-//	public DomyAdmin getUserByLoginName(String userName){
-//        Map<String,String> map=RequestUtils.getCommonMap();
-//        map.put("userName", userName);
-//        List<DomyAdmin> userList=getUserList(map);
-//        if(!CollectionUtils.isEmpty(userList)){
-//        	return userList.get(0);
-//        }
-//		return null;
-//	}
+	public SysUserDto getUserByUserName(String userName){
+
+		return null;
+	}
 	
 	/**
 	 * 登录并 返回用户对象
