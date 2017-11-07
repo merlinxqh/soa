@@ -5,6 +5,7 @@ package com.hiveview.base.util.serializer;
  */
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -85,5 +86,18 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * Copy对象
+     * @param resourceObj
+     * @param targetObject
+     * @param <R>
+     * @param <T>
+     * @return
+     */
+    public static <R,T> T copyObject(R resourceObj,T targetObject){
+        BeanUtils.copyProperties(resourceObj,targetObject);
+        return targetObject;
     }
 }

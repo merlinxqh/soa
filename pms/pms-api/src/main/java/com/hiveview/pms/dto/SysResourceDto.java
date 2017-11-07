@@ -2,6 +2,8 @@ package com.hiveview.pms.dto;
 
 import com.hiveview.common.api.BaseEntityDto;
 
+import java.util.List;
+
 /**
  * Created by leo on 2017/10/24.
  * 系统权限项
@@ -62,6 +64,18 @@ public class SysResourceDto extends BaseEntityDto{
      * 权限标识.
      */
     private String permission;
+
+
+    //////////
+    private List<SysResourceDto> childList;
+
+    public List<SysResourceDto> getChildList() {
+        return childList;
+    }
+
+    public void setChildList(List<SysResourceDto> childList) {
+        this.childList = childList;
+    }
 
     public String getCode() {
         return code;

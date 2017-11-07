@@ -1,5 +1,6 @@
 package com.hiveview.pms.api;
 
+import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.dto.SysUserDto;
 import com.hiveview.pms.entity.SysUser;
@@ -8,8 +9,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by leo on 2017/11/6.
@@ -19,6 +23,17 @@ public class SysUserApiServiceImpl implements SysUserApiService {
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Override
+    public SysUserDto getUserByUserName(String userName) {
+        Map<String,Object> params=new HashMap<>();
+        params.put("username",userName);
+        List<SysUser> ulist=sysUserService.findByBiz(params);
+        if(!CollectionUtils.isEmpty(ulist)){
+            return ObjectUtils.copyObject(ulist.get(0),new SysUserDto());
+        }
+        return null;
+    }
 
     @Override
     @Transactional

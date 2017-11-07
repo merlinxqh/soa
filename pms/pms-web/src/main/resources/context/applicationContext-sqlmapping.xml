@@ -23,7 +23,7 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hiveview.icp.dao"/>
+        <property name="basePackage" value="com.hiveview.pms.dao"/>
         <property name="annotationClass" value="com.hiveview.base.mybatis.annotation.MyBatisDao"></property>
         <property name="sqlSessionTemplateBeanName" value="jdbcTemplate"></property>
     </bean>

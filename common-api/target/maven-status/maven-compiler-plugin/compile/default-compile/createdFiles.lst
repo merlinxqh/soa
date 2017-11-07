@@ -1,0 +1,3 @@
+com\hiveview\common\api\CrudApiService.class
+com\hiveview\common\api\BaseEntityDto.class
+com\hiveview\common\api\PageDto.class

@@ -1,5 +1,7 @@
 package com.hiveview.admin.icp.rpc.pms;
 
+import com.hiveview.pms.api.SysResourceApiService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -7,5 +9,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SysResourceApiConsumer {
+
+    @Autowired
+    private SysResourceApiService sysResourceApiService;
 
 }

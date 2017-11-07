@@ -1,5 +1,6 @@
 package com.hiveview.admin.icp.security;
 
+import com.hiveview.admin.icp.rpc.pms.SysUserApiConsumer;
 import com.hiveview.admin.icp.security.session.SessionDAO;
 import com.hiveview.pms.dto.SysUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class SystemService {
 	
 	@Autowired
 	private SessionDAO sessionDao;
+
+	@Autowired
+	private SysUserApiConsumer userApiConsumer;
 	
 	
 	public SessionDAO getSessionDao(){
@@ -27,8 +31,7 @@ public class SystemService {
 	 * @return
 	 */
 	public SysUserDto getUserByUserName(String userName){
-
-		return null;
+		return userApiConsumer.getUserByUserName(userName);
 	}
 	
 	/**

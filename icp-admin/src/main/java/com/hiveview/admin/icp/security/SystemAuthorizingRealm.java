@@ -123,7 +123,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        SysUserDto user=null;
+        SysUserDto user;
         try {
 			user=getSystemService().getUserByUserName(token.getUsername());
 		} catch (RuntimeException e) {

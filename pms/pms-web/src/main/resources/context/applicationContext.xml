@@ -46,8 +46,8 @@
         </property>
     </bean>
 
-    <import resource="classpath:context/applicationContext-db.xml" />
-    <import resource="classpath:context/applicationContext-sqlmapping.xml" />
+    <import resource="classpath:context/applicationContext-db.xml"/>
+    <import resource="classpath:context/applicationContext-sqlmapping.xml"/>
     <import resource="classpath:context/applicationContext-cache.xml" />
     <import resource="classpath:dubbo/spring-dubbo-core.xml"/>
     <import resource="classpath:dubbo/spring-dubbo-consumer.xml"/>

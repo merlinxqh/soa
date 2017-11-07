@@ -13,6 +13,7 @@
     <url>http://maven.apache.org</url>
     <properties>
         <shiro.version>1.2.3</shiro.version>
+        <javax.servlet.jsp-api.version>2.3.1</javax.servlet.jsp-api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -79,6 +80,12 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>${javax.servlet.jsp-api.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>

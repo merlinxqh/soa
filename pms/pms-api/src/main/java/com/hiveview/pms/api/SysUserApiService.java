@@ -8,4 +8,6 @@ import com.hiveview.pms.dto.SysUserDto;
  */
 public interface SysUserApiService extends CrudApiService<SysUserDto>{
 
+    SysUserDto getUserByUserName(String userName);
+
 }
