@@ -9,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
@@ -26,6 +27,7 @@ public class SysUserApiServiceImpl implements SysUserApiService {
 
     @Override
     public SysUserDto getUserByUserName(String userName) {
+        Assert.isTrue(false,"这是一个大异常");
         Map<String,Object> params=new HashMap<>();
         params.put("username",userName);
         List<SysUser> ulist=sysUserService.findByBiz(params);
@@ -38,9 +40,7 @@ public class SysUserApiServiceImpl implements SysUserApiService {
     @Override
     @Transactional
     public int saveData(SysUserDto data) {
-        SysUser entity=new SysUser();
-        BeanUtils.copyProperties(data,entity);
-        return sysUserService.saveData(entity);
+        return sysUserService.saveData(ObjectUtils.copyObject(data,new SysUser()));
     }
 
     @Override

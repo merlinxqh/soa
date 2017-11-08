@@ -21,8 +21,8 @@ public class EncryUtils {
 	public static final int SALT_SIZE = 8;
     
     public static void main(String[] args) {
-		System.out.println(getMd5("p14080415583262231871fa18f49742f95295ef7fe5d3550"));
-//		System.out.println(encryPwd("hiveview"));
+//		System.out.println(getMd5("p14080415583262231871fa18f49742f95295ef7fe5d3550"));
+		System.out.println(encryPwd("123456"));
 	}
     
     /**

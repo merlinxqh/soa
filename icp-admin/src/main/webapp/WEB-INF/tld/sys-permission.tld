@@ -7,7 +7,7 @@
 
     <tag>
         <name>requiredPermission</name>
-        <tag-class>com.hiveview.admin.icp.commom.taglib.RequiredPermissionTag</tag-class>
+        <tag-class>com.hiveview.admin.commom.taglib.RequiredPermissionTag</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>resource</name>

@@ -19,6 +19,11 @@ public class SysResource extends BaseEntity {
     private String code;
 
     /**
+     * 资源名称
+     */
+    private String name;
+
+    /**
      * 长编码.
      */
     private String longCode;
@@ -67,6 +72,28 @@ public class SysResource extends BaseEntity {
      * 权限标识.
      */
     private String permission;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
     /**
      * 

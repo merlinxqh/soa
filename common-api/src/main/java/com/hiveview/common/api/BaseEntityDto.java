@@ -1,11 +1,12 @@
 package com.hiveview.common.api;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by leo on 2017/11/6.
  */
-public class BaseEntityDto {
+public class BaseEntityDto implements Serializable{
 
     private String id;
 

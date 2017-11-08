@@ -36,13 +36,22 @@ public interface BaseCrudService<T> {
 	public  T findById(Long id) throws ServiceException;
 
 	/**
-	 * 根据参数查询
+	 * 根据参数查询 列表
 	 *
-	 * @param params    页面其他参数
+	 * @param params
 	 * @return
 	 * @throws ServiceException
 	 */
 	public  List<T> findByBiz(Map<String, Object> params) throws ServiceException;
+
+
+	/**
+	 * 根据参数查找一条数据
+	 * @param params
+	 * @return
+	 * @throws ServiceException
+	 */
+	public T findOneByBiz(Map<String, Object> params) throws ServiceException;
 
 	/**
 	 * 根据id修改实体

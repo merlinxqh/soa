@@ -13,6 +13,7 @@ import com.hiveview.base.dao.CrudMapper;
 import com.hiveview.base.exception.ServiceException;
 import com.hiveview.base.mybatis.page.Page;
 import com.hiveview.base.service.BaseCrudService;
+import org.springframework.util.CollectionUtils;
 
 /**
  * service基类实现
@@ -71,6 +72,15 @@ public abstract class BaseCrudServiceImpl<T> implements BaseCrudService<T> {
 		} catch (Exception e) {
 			throw new ServiceException("",e.getMessage());
 		}
+	}
+
+	@Override
+	public T findOneByBiz(Map<String, Object> params) throws ServiceException {
+		List<T> resList=findByBiz(params);
+		if(!CollectionUtils.isEmpty(resList)){
+			return resList.get(0);
+		}
+		return null;
 	}
 
 	@Override

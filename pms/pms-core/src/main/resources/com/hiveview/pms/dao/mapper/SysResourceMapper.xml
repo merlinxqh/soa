@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.hiveview.pms.entity.SysResource" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="long_code" property="longCode" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="sub_system_code" property="subSystemCode" jdbcType="VARCHAR" />
@@ -14,20 +15,24 @@
     <result column="level" property="level" jdbcType="INTEGER" />
     <result column="icon_code" property="iconCode" jdbcType="VARCHAR" />
     <result column="permission" property="permission" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="last_update_by" property="lastUpdateBy" jdbcType="VARCHAR" />
     <result column="last_update_date" property="lastUpdateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    t.id, t.code, t.long_code, t.status, t.sub_system_code, t.parent_code, t.url, t.is_menu, 
-    t.orders, t.level, t.icon_code, t.permission, t.create_by as 'createBy', t.create_date, 
+    t.id, t.code, t.name, t.long_code, t.status, t.sub_system_code, t.parent_code, t.url, t.is_menu,
+    t.orders, t.level, t.icon_code, t.permission, t.remark, t.create_by as 'createBy', t.create_date,
     t.last_update_by as 'lastUpdateBy', t.last_update_date
   </sql>
   <sql id="condition" >
     <if test="null!=params" >
       <if test="params.id != null" >
         and t.id = #{params.id,jdbcType=BIGINT}
+      </if>
+      <if test="params.name != null and '' != params.name" >
+        and instr(t.name, #{params.name,jdbcType=VARCHAR}) &gt; 0
       </if>
       <if test="params.code != null and '' != params.code" >
         and t.code = #{params.code,jdbcType=VARCHAR}
@@ -115,16 +120,16 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.hiveview.pms.entity.SysResource" >
-    insert into sys_resource (id, code, long_code, 
+    insert into sys_resource (id, code, name, long_code,
       status, sub_system_code, parent_code, 
       url, is_menu, orders, 
-      level, icon_code, permission, 
+      level, icon_code, permission, remark,
       create_by, create_date, last_update_by, 
       last_update_date)
-    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{longCode,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{longCode,jdbcType=VARCHAR},
       #{status,jdbcType=INTEGER}, #{subSystemCode,jdbcType=VARCHAR}, #{parentCode,jdbcType=VARCHAR}, 
       #{url,jdbcType=VARCHAR}, #{isMenu,jdbcType=INTEGER}, #{orders,jdbcType=INTEGER}, 
-      #{level,jdbcType=INTEGER}, #{iconCode,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{iconCode,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR},  #{remark,jdbcType=VARCHAR},
       #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
       #{lastUpdateDate,jdbcType=TIMESTAMP})
   </insert>
@@ -136,6 +141,9 @@
       </if>
       <if test="code != null" >
         code,
+      </if>
+      <if test="name != null" >
+        name,
       </if>
       <if test="longCode != null" >
         long_code,
@@ -167,6 +175,9 @@
       <if test="permission != null" >
         permission,
       </if>
+      <if test="remark != null" >
+        remark,
+      </if>
       <if test="createBy != null" >
         create_by,
       </if>
@@ -186,6 +197,9 @@
       </if>
       <if test="code != null" >
         #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="longCode != null" >
         #{longCode,jdbcType=VARCHAR},
@@ -217,6 +231,9 @@
       <if test="permission != null" >
         #{permission,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="createBy != null" >
         #{createBy,jdbcType=VARCHAR},
       </if>
@@ -236,6 +253,9 @@
     <set >
       <if test="code != null" >
         code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="longCode != null" >
         long_code = #{longCode,jdbcType=VARCHAR},
@@ -267,6 +287,9 @@
       <if test="permission != null" >
         permission = #{permission,jdbcType=VARCHAR},
       </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=VARCHAR},
       </if>
@@ -285,6 +308,7 @@
   <update id="updateByPrimaryKey" parameterType="com.hiveview.pms.entity.SysResource" >
     update sys_resource
     set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
       long_code = #{longCode,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       sub_system_code = #{subSystemCode,jdbcType=VARCHAR},
@@ -295,6 +319,7 @@
       level = #{level,jdbcType=INTEGER},
       icon_code = #{iconCode,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
