@@ -121,14 +121,15 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
      * 登录校验
      */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-        UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
+	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
+        UsernamePasswordToken token = (UsernamePasswordToken) authToken;
         SysUserDto user;
         try {
 			user=getSystemService().getUserByUserName(token.getUsername());
 		} catch (RuntimeException e) {
 				throw new AuthenticationException("msg:"+e.getMessage());
 		}
+		SystemUserUtils.setCurrentUser(user);//
 		return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
 	}
 	/**

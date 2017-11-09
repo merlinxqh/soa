@@ -49,7 +49,7 @@
     <div class="panel panel-color panel-primary panel-pages">
         <div class="panel-heading bg-img">
             <div class="bg-overlay"></div>
-            <h3 class="text-center m-t-10 text-white" style="margin-top: 100px;"> <strong>家视天下电商后台</strong> </h3>
+            <h3 class="text-center m-t-10 text-white" style="margin-top: 100px;"> <strong>admin后台</strong> </h3>
         </div>
 
 

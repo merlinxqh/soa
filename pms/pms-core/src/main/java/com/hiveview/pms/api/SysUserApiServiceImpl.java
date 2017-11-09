@@ -27,7 +27,6 @@ public class SysUserApiServiceImpl implements SysUserApiService {
 
     @Override
     public SysUserDto getUserByUserName(String userName) {
-        Assert.isTrue(false,"这是一个大异常");
         Map<String,Object> params=new HashMap<>();
         params.put("username",userName);
         List<SysUser> ulist=sysUserService.findByBiz(params);

@@ -48,6 +48,14 @@ public class SystemUserUtils {
     	return user;
     }
 
+	/**
+	 *
+	 * @param dto
+	 */
+	public static void setCurrentUser(SysUserDto dto){
+    	currentUser.set(dto);
+	}
+
 
     /**
      * 初始threadLocal化信息
