@@ -79,6 +79,12 @@
       <if test="params.lastUpdateDate != null" >
         and t.last_update_date = #{params.lastUpdateDate,jdbcType=TIMESTAMP}
       </if>
+      <!-- 根据角色编码查询 -->
+      <if test="params.roleCode != null and '' != params.roleCode">
+         and EXISTS (select 1 from sys_role_resource r where r.role_code = #{params.roleCode,jdbcType=VARCHAR}
+                       and r.resource_code = t.code
+                    )
+      </if>
     </if>
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

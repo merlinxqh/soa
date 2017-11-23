@@ -34,13 +34,13 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
         params.put("code",roleCode);
         SysRole role=roleService.findOneByBiz(params);
         if(null != role){
-            if(role.getRemark().equals(RoleTypeEnums.SUPER_ADMIN.toString())){//超级管理员
-                //返回所有资源数据
-                List<SysResource> resourceList=sysResourceService.findByBiz(null);
-                return resourceList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList());
-            }else{
-                //从
+            Map<String,Object> map=new HashMap<>();
+            if(!role.getRoleType().equals(RoleTypeEnums.SUPER_ADMIN.toString())){
+                //非超级管理员
+                map.put("roleCode",roleCode);
             }
+            List<SysResource> resourceList=sysResourceService.findByBiz(map);
+            return resourceList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList());
         }
         return null;
     }

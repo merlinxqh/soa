@@ -16,6 +16,11 @@ public class SysResourceDto extends BaseEntityDto{
     private String code;
 
     /**
+     * 名称
+     */
+    private String name;
+
+    /**
      * 长编码.
      */
     private String longCode;
@@ -68,6 +73,14 @@ public class SysResourceDto extends BaseEntityDto{
 
     //////////
     private List<SysResourceDto> childList;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public List<SysResourceDto> getChildList() {
         return childList;

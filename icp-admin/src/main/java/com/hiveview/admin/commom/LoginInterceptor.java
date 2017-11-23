@@ -15,11 +15,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         RequestContextHolder.currentRequest.set(request);
         RequestContextHolder.currentResponse.set(response);
         RequestContextHolder.initRequestMap();
+        SystemUserUtils.setInitInfo();
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         RequestContextHolder.removeData();//清除Thread局部变量数据
+        SystemUserUtils.clearInitInfo();
     }
 }

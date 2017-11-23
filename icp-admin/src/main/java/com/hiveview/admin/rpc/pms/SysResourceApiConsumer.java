@@ -1,5 +1,6 @@
 package com.hiveview.admin.rpc.pms;
 
+import com.hiveview.base.mybatis.page.Page;
 import com.hiveview.pms.api.SysResourceApiService;
 import com.hiveview.pms.dto.SysResourceDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,12 @@ public class SysResourceApiConsumer {
     public List<SysResourceDto> getResourceByRole(String roleCode){
         return sysResourceApiService.getResourceByRole(roleCode);
     }
+
+
+//    public Page<SysResourceDto> getPageData(){
+////        return sysResourceApiService.findPage()
+//    }
+
+
 
 }

@@ -25,3 +25,4 @@ icp/icp-core/target/
 pms/pms-api/.settings/
 */.settings/*
 pms/*/.settings/*
+common-api/target/

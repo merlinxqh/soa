@@ -44,7 +44,9 @@ public class SystemUserUtils {
     	if(redisService.mapExists(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName)){
     		user=redisService.getHashObject(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName, SysUserDto.class);
     	}
-    	currentUser.set(user);
+    	if(null != user){
+			currentUser.set(user);
+		}
     	return user;
     }
 
@@ -72,6 +74,21 @@ public class SystemUserUtils {
 		currentPermissionMap.remove();
 		currentUser.remove();
     }
+
+
+	/**
+	 * shiro登录校验通过后
+	 * 初始化 用户登录成功 事件
+	 * @param user
+	 */
+	public static void initUserLoginSuccessEvent(SysUserDto user){
+        redisService.setHashObject(RedisKeyConstants.SECURITY_USER_MAP_KEY,user.getUsername(),user);
+		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole());
+		//登录 资源数据重新获取 因此这里删除redis 该角色数据
+		if(redisService.exists(resourceKey)){
+			redisService.deleteByKey(resourceKey);
+		}
+	}
 
     /**
      * 获取当前登录人 资源数据
@@ -160,28 +177,5 @@ public class SystemUserUtils {
 	 */
 	public static Subject getSubject(){
 		return SecurityUtils.getSubject();
-	}
-
-
-	/**
-	 * 用户缓存 操作
-	 * @param key
-	 * @return
-	 */
-	public static Object getCache(String key) {
-		return getCache(key, null);
-	}
-
-	public static Object getCache(String key, Object defaultValue) {
-		Object obj = getSession().getAttribute(key);
-		return obj==null?defaultValue:obj;
-	}
-
-	public static void putCache(String key, Object value) {
-		getSession().setAttribute(key, value);
-	}
-
-	public static void removeCache(String key) {
-		getSession().removeAttribute(key);
 	}
 }

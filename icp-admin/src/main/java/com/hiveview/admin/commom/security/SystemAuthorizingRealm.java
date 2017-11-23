@@ -126,10 +126,11 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
         SysUserDto user;
         try {
 			user=getSystemService().getUserByUserName(token.getUsername());
+			SystemUserUtils.setCurrentUser(user);
+			//TODO 判断账号 禁用状态 等等...
 		} catch (RuntimeException e) {
 				throw new AuthenticationException("msg:"+e.getMessage());
 		}
-		SystemUserUtils.setCurrentUser(user);//
 		return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
 	}
 	/**
