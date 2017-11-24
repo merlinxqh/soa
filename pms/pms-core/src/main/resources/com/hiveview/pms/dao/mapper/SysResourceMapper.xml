@@ -85,6 +85,9 @@
                        and r.resource_code = t.code
                     )
       </if>
+      <if test="params.searchCode != null and '' != params.searchCode">
+        and instr(t.long_code,#{params.searchCode,jdbcType=VARCHAR})
+      </if>
     </if>
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

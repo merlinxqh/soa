@@ -71,8 +71,29 @@ public class SysResourceDto extends BaseEntityDto{
     private String permission;
 
 
-    //////////
+
+    //////////////////////////////
     private List<SysResourceDto> childList;
+
+    private String roleCode;//根据 角色编码查询 资源数据
+
+    private String searchCode;//根据编码查找
+
+    public String getSearchCode() {
+        return searchCode;
+    }
+
+    public void setSearchCode(String searchCode) {
+        this.searchCode = searchCode;
+    }
+
+    public String getRoleCode() {
+        return roleCode;
+    }
+
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode;
+    }
 
     public String getName() {
         return name;

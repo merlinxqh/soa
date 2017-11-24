@@ -75,7 +75,6 @@ public abstract class BaseController {
 
 	/**
 	 * 获取request参数map
-	 * 因 admin项目 用http 所以都用string
 	 * @return
 	 */
 	protected Map<String,String> getRequestMap(){

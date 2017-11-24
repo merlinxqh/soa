@@ -1,5 +1,6 @@
 package com.hiveview.pms.api;
 
+import com.hiveview.base.mybatis.page.Page;
 import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.dto.SysResourceDto;
@@ -10,6 +11,7 @@ import com.hiveview.pms.service.SysResourceService;
 import com.hiveview.pms.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -57,11 +59,19 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
 
     @Override
     public List<SysResourceDto> findList(SysResourceDto params) {
-        return null;
+        List<SysResource> resList=sysResourceService.findByBiz(ObjectUtils.changeToMap(params));
+        return resList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList());
     }
 
     @Override
     public PageDto<SysResourceDto> findPage(PageDto<SysResourceDto> page, SysResourceDto params) {
-        return null;
+        Page<SysResource> _page=ObjectUtils.copyObject(page,new Page<>());
+        sysResourceService.findByPage(_page,ObjectUtils.changeToMap(params));
+        List<SysResource> resList=_page.getRecords();
+        if(!CollectionUtils.isEmpty(resList)){
+            ObjectUtils.copyObject(_page,page);
+            page.setRecords(resList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList()));
+        }
+        return page;
     }
 }

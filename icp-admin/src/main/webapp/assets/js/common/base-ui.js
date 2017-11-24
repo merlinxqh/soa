@@ -1,15 +1,15 @@
 /**
- * 
+ *
  */
 var _globalParamObj={};//存储查询参数
 var _globalTableViewer;//列表图片查看viewer对象
 $(function() {
-	// 处理session 超时
-	$.ajaxSetup({
-		contentType : "application/x-www-form-urlencoded;charset=utf-8",
+    // 处理session 超时
+    $.ajaxSetup({
+        contentType : "application/x-www-form-urlencoded;charset=utf-8",
         cache : false,// 关闭AJAX相应的缓存
-		dataType : 'json',
-		complete : function(xhr, status) {
+        dataType : 'json',
+        complete : function(xhr, status) {
             switch(xhr.status) {
                 case 404 :
                     wrapperHideModal('base_modal');
@@ -30,47 +30,47 @@ $(function() {
                     }, 1500);
                     break;
             }
-		}
-	});
-	
-	// navTab 方式打开页面
-	$("body").delegate("*[data-target='navTab']","click",function() {
-		var url = $(this).attr("href") || $(this).data("url");
-		$("#navTab").load(url, initHtml);
-		return false;
-	});
-	
-	// navTab 方式打开页面
-	$("body").delegate( "*[data-target='divload']", "click", function() {
-		var url = $(this).attr("href") || $(this).data("url");
-		var div = $(this).data("div");
-		$("#"+div).data("url",url);
-		$("#"+div).load(url, initHtml);
-		
-		//只加载菜单特殊处理
-		if(div=="sidebar-menu"){
-			$("#baseContainer").html("");
-		}
-		return false;
-	});
-	
-	// 防止modal缓存
-	$("#base_modal,#base_modal_center").on("loaded.bs.modal", function() {
-		initHtml();
-		// 重置校验
-		resetValidator();
-	});
+        }
+    });
 
-	$("#base_modal,#base_modal_center").on("hidden.bs.modal", function() {
-		// 清除modal缓存
+    // navTab 方式打开页面
+    $("body").delegate("*[data-target='navTab']","click",function() {
+        var url = $(this).attr("href") || $(this).data("url");
+        $("#navTab").load(url, initHtml);
+        return false;
+    });
+
+    // navTab 方式打开页面
+    $("body").delegate( "*[data-target='divload']", "click", function() {
+        var url = $(this).attr("href") || $(this).data("url");
+        var div = $(this).data("div");
+        $("#"+div).data("url",url);
+        $("#"+div).load(url, initHtml);
+
+        //只加载菜单特殊处理
+        if(div=="sidebar-menu"){
+            $("#baseContainer").html("");
+        }
+        return false;
+    });
+
+    // 防止modal缓存
+    $("#base_modal,#base_modal_center").on("loaded.bs.modal", function() {
+        initHtml();
+        // 重置校验
+        resetValidator();
+    });
+
+    $("#base_modal,#base_modal_center").on("hidden.bs.modal", function() {
+        // 清除modal缓存
         modalHideClearCache($(this));
-		resetValidator();
-	});
-	
-	// modal 打开完后激活 校验
-	$('#base_modal,#base_modal_center').on('shown.bs.modal', function() {
-		initValidator();
-	});
+        resetValidator();
+    });
+
+    // modal 打开完后激活 校验
+    $('#base_modal,#base_modal_center').on('shown.bs.modal', function() {
+        initValidator();
+    });
 
     //回车事件
     document.onkeydown=function(e){
@@ -82,7 +82,7 @@ $(function() {
             return false;
         }
     };
-	//解决modal 弹框 select2搜索框不能输入问题
+    //解决modal 弹框 select2搜索框不能输入问题
     $.fn.modal.Constructor.prototype.enforceFocus = function () { };
     //监控 浏览器窗口大小变化事件
     window.onresize = function(){
@@ -120,6 +120,13 @@ function autoSetWidthHeight(){
         });
     }
 
+    if($(".auction-content").length>0){
+        //商品新增编辑页
+        $(".auction-content").css({
+            height: ($(window).height()-300)+'px'
+        });
+    }
+
     //设定左边树高度
     if($(".tree-fixed-height").length>0){
         $(".tree-fixed-height").css({
@@ -136,55 +143,55 @@ function initHtml() {
 
     autoSetWidthHeight();
     wrapperSetStoreSearchParam($("#paramForm"));
-	// 绑定 ajaxToDo 事件
-	$(".ajaxToDo").unbind().bind( "click", function() {
-		var url = $(this).attr("href");
-		$.Notification.confirm('success', 'top center', '操作提示！', ajaxToDo, url);
-	});
+    // 绑定 ajaxToDo 事件
+    $(".ajaxToDo").unbind().bind( "click", function() {
+        var url = $(this).attr("href");
+        $.Notification.confirm('success', 'top center', '操作提示！', ajaxToDo, url);
+    });
     //绑定 bootstrap-table 事件
     bindBootstrapTableEvent($("#paramForm"));
     // bootstrap-table渲染
     initBootstrapTable();
 
     /**
-	 * 设置 dataTable最小宽度 为了解决 小屏电脑 显示问题
+     * 设置 dataTable最小宽度 为了解决 小屏电脑 显示问题
      * @type {*}
      * @private
      */
     var _panel=$(".table-hover").parents(".adapt-window-height");
     if(!_panel.hasClass("panel-data-table")
-		&& !_panel.hasClass("auth-width")){//不需要最小宽度1200px的 添加这个class
+        && !_panel.hasClass("auth-width")){//不需要最小宽度1200px的 添加这个class
         _panel.addClass("panel-data-table");
-	}
+    }
     /**
-	 * 清空按钮
+     * 清空按钮
      */
     $(".clearSearch").unbind().bind("click",function(){
 
         wrapperClearFun(this);
     });
     /**
-	 * 查询按钮
+     * 查询按钮
      */
     $(".searchBtn").unbind().bind("click",function(){
 
         wrapperFormSearch(this);
     });
 
-	// 绑定 tableAjaxTodo 事件
-	$(".tableAjaxTodo").unbind().bind( "click", function() {
-		var url = $(this).attr("href");
-		$.Notification.confirm('success', 'top center', '操作提示！',
-				tableAjaxTodo, url);
-	});
-	
-	$(".ajaxDel").unbind().bind( "click", function(event) {
-		event.preventDefault();
-		var url = $(this).attr("href");
-		ajaxDel(url);
-	});
+    // 绑定 tableAjaxTodo 事件
+    $(".tableAjaxTodo").unbind().bind( "click", function() {
+        var url = $(this).attr("href");
+        $.Notification.confirm('success', 'top center', '操作提示！',
+            tableAjaxTodo, url);
+    });
+
+    $(".ajaxDel").unbind().bind( "click", function(event) {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        ajaxDel(url);
+    });
     /**
-	 * 滚动条问题 回到顶部
+     * 滚动条问题 回到顶部
      */
 }
 
@@ -234,18 +241,18 @@ function bindBootstrapTableEvent(objForm){
  */
 function wrapperOnLoadSuccess(tableId,data){
     //
-   if($("#"+tableId).find("img").length>0){
-       //图片延迟加载
-       $("img.lazy").lazyload({effect: "fadeIn"});
+    if($("#"+tableId).find("img").length>0){
+        //图片延迟加载
+        $("img.lazy").lazyload({effect: "fadeIn"});
 
-       //查看图片插件viewer
-       if(_globalTableViewer){
-           _globalTableViewer.destroy();
-       }
-       _globalTableViewer=new Viewer(document.getElementById(tableId), {
-           url: 'data-original'
-       });
-   }
+        //查看图片插件viewer
+        if(_globalTableViewer){
+            _globalTableViewer.destroy();
+        }
+        _globalTableViewer=new Viewer(document.getElementById(tableId), {
+            url: 'data-original'
+        });
+    }
 }
 
 /**
@@ -264,18 +271,18 @@ function currentHasModal(){
  * @param obj
  */
 function judgeHasBootstrapTable(obj){
-   if(obj == undefined){
-       //查询全局
-       if($('[data-toggle="table"]').length>0){
-           return true;
-       }
-   }else{
-       if(obj.find('[data-toggle="table"]').length>0){
-           return true;
-       }
-   }
+    if(obj == undefined){
+        //查询全局
+        if($('[data-toggle="table"]').length>0){
+            return true;
+        }
+    }else{
+        if(obj.find('[data-toggle="table"]').length>0){
+            return true;
+        }
+    }
 
-   return false;
+    return false;
 }
 
 /**
@@ -339,13 +346,13 @@ function wrapperParamFormUrl(form){
  * @param obj 对应form对象
  */
 function wrapperStoreSearchParam(obj){
-   var _curParList=obj.serializeArray();
-   var _tableId=obj.attr("tableId");
-   var _curPar={};
-   $.each(_curParList,function(){
-       _curPar[this.name]=this.value;
-   });
-   _globalParamObj[_tableId]=_curPar;
+    var _curParList=obj.serializeArray();
+    var _tableId=obj.attr("tableId");
+    var _curPar={};
+    $.each(_curParList,function(){
+        _curPar[this.name]=this.value;
+    });
+    _globalParamObj[_tableId]=_curPar;
 }
 
 /**
@@ -355,8 +362,8 @@ function wrapperStoreSearchParam(obj){
 function wrapperClearSearchParam(obj){
     var _tableId=$(obj).attr("tableId");
     if(_globalParamObj.hasOwnProperty(_tableId)){
-    	delete _globalParamObj[_tableId];
-	}
+        delete _globalParamObj[_tableId];
+    }
 }
 
 /**
@@ -369,8 +376,10 @@ function wrapperSetStoreSearchParam(obj){
         var _curPar=_globalParamObj[_tableId];
         obj.find("input[type!='checkbox']").each(function(){
             var _this=this;
-            var _name=$(_this).attr("name");
-            $(_this).val(_curPar[_name]);
+            if($(_this).attr("type") != 'hidden'){//隐藏域 不做操作
+                var _name=$(_this).attr("name");
+                $(_this).val(_curPar[_name]);
+            }
         });
         obj.find("input[type='checkbox']").each(function(){
             var _this=this;
@@ -396,6 +405,9 @@ function wrapperClearFun(obj){
     var _form=$(obj).parents("form")[0];
     var tableId = $(_form).attr("tableId");
     _form.reset();
+    $(_form).find("input[type='hidden']").each(function(){
+        $(this).val("");
+    });
     $(_form).find(".select2").each(function(){
         var _value=$(this).find("option:eq(0)").val();
         $(this).val(_value).trigger("change");
@@ -405,61 +417,61 @@ function wrapperClearFun(obj){
 }
 
 function initNavTabValidator() {
-	// modal form 校验 及提交
-	$('.navTabform').bootstrapValidator({
-		excluded : ':disabled, :hidden, :not(:visible)',
-		submitHandler : function(validator, form, submitButton) {
-			$.ajax({
-				type : form.method || 'POST',
-				url : form.attr("action"),
-				data : form.serializeArray(),
-				dataType : "json",
-				cache : false,
-				success : modalAjaxDone,
-				error : ajaxError
-			});
-			this.disableSubmitButtons(true);
-		}
-	});
-	// 带上传文件的form 校验
-	$('.iframenavTabform').bootstrapValidator();
+    // modal form 校验 及提交
+    $('.navTabform').bootstrapValidator({
+        excluded : ':disabled, :hidden, :not(:visible)',
+        submitHandler : function(validator, form, submitButton) {
+            $.ajax({
+                type : form.method || 'POST',
+                url : form.attr("action"),
+                data : form.serializeArray(),
+                dataType : "json",
+                cache : false,
+                success : modalAjaxDone,
+                error : ajaxError
+            });
+            this.disableSubmitButtons(true);
+        }
+    });
+    // 带上传文件的form 校验
+    $('.iframenavTabform').bootstrapValidator();
 }
 
 
 function initValidator() {
-	//TODO
+    //TODO
 }
 
 
 
 function reloadDiv(callback){
-	var url = $("#baseContainer").data("url");
-	$("#baseContainer").load(url, function(){
-	    if(callback){
-	        callback();
-	    }
-	    initHtml();
-	});
+    var url = $("#baseContainer").data("url");
+    $("#baseContainer").load(url, function(){
+        if(callback){
+            callback();
+        }
+        initHtml();
+    });
 }
 
 function reloadDivTip(data,callback){
-	modalAjaxDone(data);
-	var url = $("#baseContainer").data("url");
-	$("#baseContainer").load(url, function(){
-	    if(callback){
-	        callback();
-	    }
-	    initHtml();
-	});
+    modalAjaxDone(data);
+    var url = $("#baseContainer").data("url");
+    $("#baseContainer").load(url, function(){
+        if(callback){
+            callback();
+        }
+        initHtml();
+    });
 }
 
 function resetValidator() {
-	if ($('.bvform').data('bootstrapValidator')) {
-		$('.bvform').data('bootstrapValidator').resetForm();
-	}
-	if ($('.iframeform').data('bootstrapValidator')) {
-		$('.iframeform').data('bootstrapValidator').resetForm();
-	}
+    if ($('.bvform').data('bootstrapValidator')) {
+        $('.bvform').data('bootstrapValidator').resetForm();
+    }
+    if ($('.iframeform').data('bootstrapValidator')) {
+        $('.iframeform').data('bootstrapValidator').resetForm();
+    }
 }
 
 /**
@@ -472,78 +484,78 @@ function resetValidator() {
  * @returns
  */
 function initPagination(targetDiv,targetElementId,pageSize,total,curPage) {
-	//总条数 等于0 不执行分页
-	if(isNaN(total) || parseInt(total)==0){
-		return;
-	}
-	var element = targetDiv.find('#'+targetElementId);
-	var totalPages = Math.ceil(total/pageSize)
-	var url = targetDiv.attr("url");
-	var numberOfPages = totalPages>10?10:totalPages;
-	var options = {
-		bootstrapMajorVersion: 3,
-		currentPage: curPage,
-		numberOfPages: numberOfPages,
-		totalPages: totalPages,
-		itemTexts: function(type, page, current) {
-			switch(type) {
-				case "first":
-					return "首页";
-				case "prev":
-					return "上一页";
-				case "next":
-					return "下一页";
-				case "last":
-					return "尾页";
-				case "page":
-					return page;
-			}
-		},
-		useBootstrapTooltip:true,
-		pageUrl: function(type, page, current) {
-			return "javascript:void(0);";
-		},
-		tooltipTitles: function(type, page, current) {
-			return "第"+page+"页";
-		},
-		onPageClicked:function(event, originalEvent,type,page){
-			var param={size:pageSize,page:page};
-			//获取 查询参数
-			var _searchParamFun=targetDiv.attr("searchParamFun");
-			if(_searchParamFun){
-				var _resParam=eval(_searchParamFun+"()");
-				param=$.extend(param,_resParam);
-			}
-			var ajaxRes=ajaxBsPaginatorData(url,param);
-			ajaxRes.then(function(){
-				 var resData=ajaxRes.pageData;//分页返回数据
-				//渲染数据方法
-				  var renderPageFun=targetDiv.attr("renderPageFun");
-				  if(renderPageFun){
-					  eval(renderPageFun+'(resData)');
-				  }
-			});
-		}
-	};
-	element.bootstrapPaginator(options);
+    //总条数 等于0 不执行分页
+    if(isNaN(total) || parseInt(total)==0){
+        return;
+    }
+    var element = targetDiv.find('#'+targetElementId);
+    var totalPages = Math.ceil(total/pageSize)
+    var url = targetDiv.attr("url");
+    var numberOfPages = totalPages>10?10:totalPages;
+    var options = {
+        bootstrapMajorVersion: 3,
+        currentPage: curPage,
+        numberOfPages: numberOfPages,
+        totalPages: totalPages,
+        itemTexts: function(type, page, current) {
+            switch(type) {
+                case "first":
+                    return "首页";
+                case "prev":
+                    return "上一页";
+                case "next":
+                    return "下一页";
+                case "last":
+                    return "尾页";
+                case "page":
+                    return page;
+            }
+        },
+        useBootstrapTooltip:true,
+        pageUrl: function(type, page, current) {
+            return "javascript:void(0);";
+        },
+        tooltipTitles: function(type, page, current) {
+            return "第"+page+"页";
+        },
+        onPageClicked:function(event, originalEvent,type,page){
+            var param={size:pageSize,page:page};
+            //获取 查询参数
+            var _searchParamFun=targetDiv.attr("searchParamFun");
+            if(_searchParamFun){
+                var _resParam=eval(_searchParamFun+"()");
+                param=$.extend(param,_resParam);
+            }
+            var ajaxRes=ajaxBsPaginatorData(url,param);
+            ajaxRes.then(function(){
+                var resData=ajaxRes.pageData;//分页返回数据
+                //渲染数据方法
+                var renderPageFun=targetDiv.attr("renderPageFun");
+                if(renderPageFun){
+                    eval(renderPageFun+'(resData)');
+                }
+            });
+        }
+    };
+    element.bootstrapPaginator(options);
 }
 
 /**
  * 异步加载分页数据
  */
 function ajaxBsPaginatorData(url, param){
-	var dfd=$.Deferred();
-	$.ajax({
-		  url:url,
-		  type:"POST",
-		  data: param,
-		  cache : false,
-		  success: function(data){
-			  dfd.pageData=data;
-			  dfd.resolve();
-		  }
-		});
-	return dfd;
+    var dfd=$.Deferred();
+    $.ajax({
+        url:url,
+        type:"POST",
+        data: param,
+        cache : false,
+        success: function(data){
+            dfd.pageData=data;
+            dfd.resolve();
+        }
+    });
+    return dfd;
 }
 
 
@@ -551,11 +563,11 @@ function ajaxBsPaginatorData(url, param){
  * 打开点击阴影层&esc键 不自动关闭的模态框
  */
 function manualModal(url,divId){
-	$("#"+divId).modal({
-		backdrop: 'static', //点击空白处 不关闭
-		keyboard: false, //点esc不关闭
-		remote: url
-	});
+    $("#"+divId).modal({
+        backdrop: 'static', //点击空白处 不关闭
+        keyboard: false, //点esc不关闭
+        remote: url
+    });
 }
 
 /**
@@ -578,9 +590,9 @@ function checkTagAndTips(tagObj,dataObj){
         var tipMsg='请完善信息';
         if(tagObj.attr("data-placeholder") != undefined){
             tipMsg=tagObj.attr("data-placeholder");
-		}else if(tagObj.attr("placeholder") != undefined){
+        }else if(tagObj.attr("placeholder") != undefined){
             tipMsg=tagObj.attr("placeholder");
-		}
+        }
         _errorTipsFun(tipMsg);
         tagObj.focus();
     }
@@ -680,10 +692,10 @@ String.prototype.colorHex = function(){
  * @param index
  */
 function statusRender(value, row ,index){
-   if(value == 1){
-   	return '有效';
-   }
-   return '无效';
+    if(value == 1){
+        return '有效';
+    }
+    return '无效';
 }
 
 /**
@@ -693,10 +705,10 @@ function statusRender(value, row ,index){
  * @param index
  */
 function statusRenderOnline(value, row, index){
-	if(value == 1){
-		return '已上线';
-	}
-	return '已下线';
+    if(value == 1){
+        return '已上线';
+    }
+    return '已下线';
 }
 
 /**
@@ -704,11 +716,11 @@ function statusRenderOnline(value, row, index){
  * @param value
  */
 function autoWrapRender(value){
-	if(value != undefined){
+    if(value != undefined){
         return '<div style="max-width: 153px;word-wrap: break-word;word-break:break-all;">'+value+'</div>';
     }else{
-		return '';
-	}
+        return '';
+    }
 }
 
 
@@ -776,20 +788,20 @@ function colorInputBindingEvent(obj){
  * 根据颜色值显示颜色 方法
  */
 function commonRenderColorPlugin(_input){
-	if(_input.val() == ''){
-		//没有输入值 不操作
-		return;
-	}
-	//颜色值加 "#" 只有七位
-	if(_input.val().length > 7){
-		_input.val(_input.val().substr(0,7));
-	}
+    if(_input.val() == ''){
+        //没有输入值 不操作
+        return;
+    }
+    //颜色值加 "#" 只有七位
+    if(_input.val().length > 7){
+        _input.val(_input.val().substr(0,7));
+    }
     var rgbVal=_input.val().colorRgb();
     if(rgbVal == 'error_color_val'){
-    	console.log(_input.val()+"颜色值无效...");
+        console.log(_input.val()+"颜色值无效...");
         _input.val("");
-    	return;
-	}
+        return;
+    }
     var _parentDiv=_input.parents(".col-xs-11");
     _parentDiv.find("i").css({
         backgroundColor: rgbVal
@@ -931,4 +943,90 @@ function defaultDateFormatter(value) {
 
     var formatdate= d.getFullYear()+"-"+(month)+"-"+date+" "+hours+":"+minutes+":"+seconds;
     return formatdate;
+}
+
+
+function _wrapperInitFileInput(targetId,targetInputId){
+    var  _allowedFile=['jpg', 'png','gif'];
+
+    var _maxFileSize=2000;
+
+    $("#"+targetId).fileinput({
+        uploadUrl: rootPath+'/filesystem/upload', // you must set a valid URL here else you will get an error
+        allowedFileExtensions : _allowedFile,
+        overwriteInitial: false,
+        maxFileSize: _maxFileSize,
+        maxFileCount: 1,
+        showPreview: false,
+        fileActionSettings: {showZoom: false},//不显示 预览按钮 因 用modal有问题
+        slugCallback: function(filename) {
+            return filename.replace('(', '_').replace(']', '_');
+        },
+        preferIconicPreview: true,//自定义上传类型图标
+        autoReplace:true,//自动替换当前图片
+        previewFileIconSettings: {
+            'doc': '<i class="fa fa-file-word-o text-primary"></i>',
+            'xls': '<i class="fa fa-file-excel-o text-success"></i>',
+            'ppt': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
+            'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
+            'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
+            'htm': '<i class="fa fa-file-code-o text-info"></i>',
+            'txt': '<i class="fa fa-file-text-o text-info"></i>',
+            'mov': '<i class="fa fa-file-movie-o text-warning"></i>',
+            'mp3': '<i class="fa fa-file-audio-o text-warning"></i>',
+            'apk': '<i class="fa fa-file-archive-o text-muted"></i>',
+        },
+        previewFileExtSettings: {
+            'doc': function(ext) {
+                return ext.match(/(doc|docx)$/i);
+            },
+            'xls': function(ext) {
+                return ext.match(/(xls|xlsx)$/i);
+            },
+            'ppt': function(ext) {
+                return ext.match(/(ppt|pptx)$/i);
+            },
+            'zip': function(ext) {
+                return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
+            },
+            'htm': function(ext) {
+                return ext.match(/(htm|html)$/i);
+            },
+            'txt': function(ext) {
+                return ext.match(/(txt|ini|csv|java|php|js|css)$/i);
+            },
+            'mov': function(ext) {
+                return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
+            },
+            'mp3': function(ext) {
+                return ext.match(/(mp3|wav)$/i);
+            },
+            'apk': function(ext) {
+                return ext.match(/(apk)$/i);
+            }
+        }
+    });
+
+    /**
+     * 文件上传成功事件
+     * $.Event
+     */
+    $("#"+targetId).on("fileuploaded", function (event, data, previewId, index){
+        _commonReplaceImg(data.response.data.filename,targetInputId);
+    });
+}
+
+
+/**
+ * 替换图片
+ * @param fileName
+ */
+function _commonReplaceImg(fileName,targetId){
+    $("#"+targetId).val(fileName);
+    var _parent=$("#"+targetId).parent();
+    _parent.find("img").attr("src",imgPath+'/'+fileName);
+    _parent.show();
+    setTimeout(function(){
+        $("#"+targetId).parents(".form-group").find(".fileinput-remove-button").click();
+    },1000);
 }

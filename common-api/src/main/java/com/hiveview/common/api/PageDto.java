@@ -1,12 +1,13 @@
 package com.hiveview.common.api;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by leo on 2017/11/3.
  * 分页
  */
-public class PageDto<T> {
+public class PageDto<T> implements Serializable{
 
     private int pageIndex;
 

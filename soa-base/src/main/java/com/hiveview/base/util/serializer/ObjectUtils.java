@@ -4,6 +4,8 @@ package com.hiveview.base.util.serializer;
  * Created by mike on 16-5-24.
  */
 
+import com.alibaba.fastjson.JSON;
+import com.hiveview.base.common.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -12,6 +14,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 对象操作工具类, 继承org.apache.commons.lang3.ObjectUtils类
@@ -99,5 +105,46 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
     public static <R,T> T copyObject(R resourceObj,T targetObject){
         BeanUtils.copyProperties(resourceObj,targetObject);
         return targetObject;
+    }
+
+    /**
+     *
+     * @param rList
+     * @param clz
+     * @param <R>
+     * @param <T>
+     * @return
+     */
+    public static <R,T> List<T> copyListObject(List<R> rList,Class<T> clz){
+           return rList.stream().map(r -> {
+                try {
+                    return copyObject(r, clz.newInstance());
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }).collect(Collectors.toList());
+    }
+
+    /**
+     * 将对象转map
+     * @param obj
+     * @param <T>
+     * @return
+     */
+    public static <T> Map<String,Object> changeToMap(T obj){
+        if(null != obj){
+            return JSON.parseObject(JSON.toJSONString(obj),Map.class);
+        }
+        return null;
+    }
+
+    public static void main(String[] args) {
+        BaseEntity b=new BaseEntity();
+        b.setCreateBy("dbbbb");
+        b.setCreateDate(new Date());
+        System.out.println(changeToMap(b).get("createBy"));
     }
 }

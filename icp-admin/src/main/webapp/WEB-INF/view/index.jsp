@@ -210,18 +210,8 @@
         <!-- flot Chart -->
         <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.js"></script>
         <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.pie.js"></script>
-        <%--<script src="${ctx}/assets/js/common/flot-chart/jquery.flot.time.js"></script>
-        <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.tooltip.min.js"></script>
-        <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.resize.js"></script>--%>
-        <%--<script src="${ctx}/assets/js/common/flot-chart/jquery.flot.selection.js"></script>
-        <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.stack.js"></script>
-        <script src="${ctx}/assets/js/common/flot-chart/jquery.flot.crosshair.js"></script>--%>
-        <!-- Chat -->
-        <%--<script src="${ctx}/assets/js/common/flot-chart/jquery.chat.js"></script>--%>
-        <!-- Counter-up -->
         <script src="${ctx}/assets/js/common/counterup/waypoints.min.js" type="text/javascript"></script>
         <script src="${ctx}/assets/js/common/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-        <%--<script src="${ctx}/assets/js/common/waves.js"></script>--%>
 
 		
 		<script type="text/javascript" src="${ctx}/assets/js/common/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
