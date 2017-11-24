@@ -11,6 +11,7 @@ import com.hiveview.pms.service.SysResourceService;
 import com.hiveview.pms.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
@@ -48,11 +49,13 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
     }
 
     @Override
+    @Transactional
     public int saveData(SysResourceDto data) {
-        return 0;
+        return sysResourceService.saveData(ObjectUtils.copyObject(data,new SysResource()));
     }
 
     @Override
+    @Transactional
     public int deleteData(SysResourceDto data) {
         return 0;
     }

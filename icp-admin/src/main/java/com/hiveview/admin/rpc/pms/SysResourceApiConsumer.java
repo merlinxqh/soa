@@ -27,6 +27,20 @@ public class SysResourceApiConsumer {
     }
 
 
+    public List<SysResourceDto> findList(SysResourceDto dto){
+        return sysResourceApiService.findList(dto);
+    }
+
+    /**
+     * 数据保存
+     * @param dto
+     * @return
+     */
+    public int saveData(SysResourceDto dto){
+        return sysResourceApiService.saveData(dto);
+    }
+
+
     /**
      * 查询分页数据
      * @param page

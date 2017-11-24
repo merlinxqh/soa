@@ -70,6 +70,8 @@ public class SysResourceDto extends BaseEntityDto{
      */
     private String permission;
 
+    private String remark;
+
 
 
     //////////////////////////////
@@ -197,5 +199,13 @@ public class SysResourceDto extends BaseEntityDto{
 
     public void setPermission(String permission) {
         this.permission = permission;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

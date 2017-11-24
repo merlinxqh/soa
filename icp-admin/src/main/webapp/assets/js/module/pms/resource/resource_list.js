@@ -86,11 +86,11 @@ function renderOperate(json,htmlObj){
     var _addbtn=htmlObj.find("button:eq(0)");
     var _rootpath=_addbtn.attr("href");
     // json.code=json.id;//bootstrap-treeview.js 已封装 参数code
-    _addbtn.attr("href",_rootpath+"/resource/addChildMenu?parentCode="+json.code+"&callbackMethod=ajaxTreeDone");
+    _addbtn.attr("href",_rootpath+"/pms/resource/addChildMenu?code="+json.code+"&callbackMethod=ajaxTreeDone");
     var _editbtn=htmlObj.find("button:eq(1)");
-    _editbtn.attr("href",_rootpath+"/resource/edit?id="+json.id+"&callbackMethod=ajaxTreeDone");
+    _editbtn.attr("href",_rootpath+"/pms/resource/edit?id="+json.id+"&callbackMethod=ajaxTreeDone");
     var _delbtn=htmlObj.find("button:eq(2)");
-    _delbtn.attr("href",_rootpath+"/resource/modifyData?modifyType=delete&id="+json.id+"&callbackMethod=ajaxTreeDone");
+    _delbtn.attr("href",_rootpath+"/pms/resource/modifyData?modifyType=delete&id="+json.id+"&callbackMethod=ajaxTreeDone");
     if(json.text == 'HOME'){//HOME节点 是虚拟节点 不能 编辑
         _editbtn.remove();
         _delbtn.remove();
@@ -142,10 +142,10 @@ function addResource(){
         _warnTipsFun("请选择菜单节点");
         return ;
     }
-    manualModal(rootPath+'/pms/resource/addResource?parentCode='+$("#searchCode").val(),'base_modal');
+    manualModal(rootPath+'/pms/resource/addResource?code='+$("#searchCode").val(),'base_modal');
 }
 
 function operateRender(value, row, index){
-    return '<a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/resource/edit?id='+row.id+'"  class="view-link">编辑</a>' +
-        ' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/resource/modifyData?modifyType=delete&id='+row.id+'\')" class="view-link">删除</a>';
+    return '<a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/pms/resource/edit?id='+row.id+'"  class="view-link">编辑</a>' +
+        ' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/resource/modifyData?modifyType=delete&id='+row.id+'\')" class="view-link">删除</a>';
 }
