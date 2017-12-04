@@ -5,6 +5,7 @@ package com.hiveview.base.util.serializer;
  */
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.hiveview.base.common.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -96,19 +97,34 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 
     /**
      * Copy对象
+     * 经测试 通过fastJson 序列化 比 该方法高效
      * @param resourceObj
      * @param targetObject
      * @param <R>
      * @param <T>
      * @return
      */
+    @Deprecated
     public static <R,T> T copyObject(R resourceObj,T targetObject){
         BeanUtils.copyProperties(resourceObj,targetObject);
         return targetObject;
     }
 
+
     /**
-     *
+     * 通过fastJson copy对象
+     * @param resourceObj
+     * @param clz
+     * @param <R>
+     * @param <T>
+     * @return
+     */
+    public static <R,T> T copyObject(R resourceObj,Class<T> clz){
+        return JSON.parseObject(JSON.toJSONString(resourceObj),clz);
+    }
+
+    /**
+     * copy list
      * @param rList
      * @param clz
      * @param <R>
@@ -116,35 +132,30 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      * @return
      */
     public static <R,T> List<T> copyListObject(List<R> rList,Class<T> clz){
-           return rList.stream().map(r -> {
-                try {
-                    return copyObject(r, clz.newInstance());
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }).collect(Collectors.toList());
+        return JSONArray.parseArray(JSON.toJSONString(rList),clz);
     }
 
     /**
-     * 将对象转map
+     * 将对象转map 用于dto转查询参数
      * @param obj
      * @param <T>
      * @return
      */
     public static <T> Map<String,Object> changeToMap(T obj){
         if(null != obj){
-            return JSON.parseObject(JSON.toJSONString(obj),Map.class);
+            Map<String,Object> params=copyObject(obj,Map.class);
+            /**
+             * 字符串去空格符
+             */
+            for(String key:params.keySet()){
+                Object object=params.get(key);
+                if(object instanceof String){
+                    object=((String) object).trim();
+                    params.put(key,object);
+                }
+            }
+            return params;
         }
         return null;
-    }
-
-    public static void main(String[] args) {
-        BaseEntity b=new BaseEntity();
-        b.setCreateBy("dbbbb");
-        b.setCreateDate(new Date());
-        System.out.println(changeToMap(b).get("createBy"));
     }
 }

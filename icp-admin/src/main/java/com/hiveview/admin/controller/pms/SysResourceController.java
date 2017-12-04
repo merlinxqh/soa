@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by leo on 2017/11/6.
@@ -33,10 +35,10 @@ public class SysResourceController extends BaseController{
      * 资源列表
      * @return
      */
-    @RequiresPermissions("sys:resource:list")
+    @RequiresPermissions("pms:resource:list")
     @RequestMapping(value = "list",method = RequestMethod.GET)
     public ModelAndView list(){
-        return new ModelAndView("pms/resource_list");
+        return new ModelAndView("pms/resource/resource_list");
     }
 
     @RequestMapping(value = "listData")
@@ -58,24 +60,24 @@ public class SysResourceController extends BaseController{
      * 添加
      * @return
      */
-    @RequiresPermissions("sys:permission:edit")
+    @RequiresPermissions("pms:resource:edit")
     @RequestMapping(value = "addResource",method = RequestMethod.GET)
     public ModelAndView addResource(ModelMap model,SysResourceDto dto){
         model.put("isMenu","2");//权限数据
         putParentData(model,dto);
-        return new ModelAndView("pms/resource_edit");
+        return new ModelAndView("pms/resource/resource_edit");
     }
 
     /**
      * 添加下级菜单
      * @return
      */
-    @RequiresPermissions("sys:menu:edit")
+    @RequiresPermissions("pms:menu:edit")
     @RequestMapping(value = "addChildMenu",method = RequestMethod.GET)
     public ModelAndView addChildMenu(ModelMap model,SysResourceDto dto){
-        model.put("isMenu","1");//权限数据
+        model.put("isMenu","1");//菜单
         putParentData(model,dto);
-        return new ModelAndView("pms/resource_edit");
+        return new ModelAndView("pms/resource/resource_edit");
     }
 
     /**
@@ -83,13 +85,13 @@ public class SysResourceController extends BaseController{
      * @param model
      * @return
      */
-    @RequiresPermissions(value = {"sys:permission:edit","sys:menu:edit"},logical = Logical.OR)
+    @RequiresPermissions(value = {"pms:permission:edit","pms:menu:edit"},logical = Logical.OR)
     @RequestMapping(value="edit",method = RequestMethod.GET)
     public ModelAndView edit(ModelMap model,SysResourceDto dto){
         if(StringUtils.hasText(dto.getId())){
            model.put("data",sysResourceApiConsumer.findList(dto).get(0));
         }
-        return  new ModelAndView("pms/resource_edit");
+        return  new ModelAndView("pms/resource/resource_edit");
     }
 
 
@@ -115,11 +117,31 @@ public class SysResourceController extends BaseController{
     @RequestMapping(value = "saveData",method = RequestMethod.POST)
     public @ResponseBody RespMsg<?> saveData(SysResourceDto dto){
         try {
+            putOperatorInfo(dto);
             sysResourceApiConsumer.saveData(dto);
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
         }
-        return RespMsg.successResp();
+        Map<String,Object> data=new HashMap<>();
+        data.put("callbackMethod",getString("callbackMethod"));
+        return RespMsg.successResp(data);
+    }
+
+    /**
+     * 删除数据
+     * @param dto
+     * @return
+     */
+    @RequestMapping(value = "deleteData",method = RequestMethod.POST)
+    public @ResponseBody RespMsg<?> deleteData(SysResourceDto dto){
+         try {
+             sysResourceApiConsumer.deleteData(dto);
+         }catch (Exception e){
+             return RespMsg.failResp(e.getMessage());
+         }
+        Map<String,Object> data=new HashMap<>();
+        data.put("callbackMethod",getString("callbackMethod"));
+        return RespMsg.successResp(data);
     }
 
 

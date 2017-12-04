@@ -31,7 +31,7 @@ public class SysUserApiServiceImpl implements SysUserApiService {
         params.put("username",userName);
         List<SysUser> ulist=sysUserService.findByBiz(params);
         if(!CollectionUtils.isEmpty(ulist)){
-            return ObjectUtils.copyObject(ulist.get(0),new SysUserDto());
+            return ObjectUtils.copyObject(ulist.get(0),SysUserDto.class);
         }
         return null;
     }
@@ -39,7 +39,7 @@ public class SysUserApiServiceImpl implements SysUserApiService {
     @Override
     @Transactional
     public int saveData(SysUserDto data) {
-        return sysUserService.saveData(ObjectUtils.copyObject(data,new SysUser()));
+        return sysUserService.saveData(ObjectUtils.copyObject(data,SysUser.class));
     }
 
     @Override

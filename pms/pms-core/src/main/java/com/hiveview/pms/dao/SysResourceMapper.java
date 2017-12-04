@@ -13,5 +13,10 @@ import com.hiveview.base.mybatis.annotation.MyBatisDao;
  */
 @MyBatisDao
 public interface SysResourceMapper extends CrudMapper {
-
+    /**
+     * 校验是否包含下级数据
+     * @param id
+     * @return
+     */
+    int checkChildCount(Long id);
 }

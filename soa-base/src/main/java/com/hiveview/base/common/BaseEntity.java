@@ -14,7 +14,7 @@ public class BaseEntity  implements Serializable {
 
     private static final long serialVersionUID = 5557663618469589569L;
 
-    private String id;
+    private Long id;
 
     private String createBy;
 

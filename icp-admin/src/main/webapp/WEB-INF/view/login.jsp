@@ -12,7 +12,7 @@
 
     <link rel="shortcut icon" href="images/favicon_1.ico">
 
-    <title>家视天下电商后台</title>
+    <title>admin后台</title>
 
     <!-- Base Css Files -->
     <link href="${ctx}/assets/css/bootstrap.min.css" rel="stylesheet" />

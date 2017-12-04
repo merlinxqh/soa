@@ -1,11 +1,14 @@
 package com.hiveview.admin.commom;
 
+import com.hiveview.common.api.BaseEntityDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -70,6 +73,20 @@ public abstract class BaseController {
 			}
 		}
 		return defaultValue;
+	}
+
+	/**
+	 * 设置 操作人信息
+	 * @param dto
+	 * @param <T>
+	 */
+	public <T extends BaseEntityDto> void putOperatorInfo(T dto){
+		if(StringUtils.isEmpty(dto.getId())){
+			dto.setCreateBy(SystemUserUtils.getCurrentUser().getUsername());
+			dto.setCreateDate(new Date());
+		}
+		dto.setLastUpdateBy(SystemUserUtils.getCurrentUser().getUsername());
+		dto.setLastUpdateDate(new Date());
 	}
 
 

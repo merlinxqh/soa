@@ -2,6 +2,7 @@ package com.hiveview.admin.rpc.pms;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hiveview.admin.commom.SystemUserUtils;
 import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.api.SysResourceApiService;
 import com.hiveview.pms.dto.SysResourceDto;
@@ -11,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +26,10 @@ public class SysResourceApiConsumer {
 
     public List<SysResourceDto> getResourceByRole(String roleCode){
         return sysResourceApiService.getResourceByRole(roleCode);
+    }
+
+    public int deleteData(SysResourceDto dto){
+        return sysResourceApiService.deleteData(dto);
     }
 
 

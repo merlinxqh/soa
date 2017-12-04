@@ -18,10 +18,21 @@
         <h4 class="modal-title">
             <c:choose>
                 <c:when test="${data ne null}">
-                    修改菜单
+                    <c:if test="${data.isMenu eq 1}">
+                      修改菜单
+                    </c:if>
+                    <c:if test="${data.isMenu eq 2}">
+                        修改权限
+                    </c:if>
                 </c:when>
                 <c:otherwise>
-                    添加菜单
+
+                    <c:if test="${isMenu eq 1}">
+                        添加菜单
+                    </c:if>
+                    <c:if test="${isMenu eq 2}">
+                        添加权限
+                    </c:if>
                 </c:otherwise>
             </c:choose>
         </h4>

@@ -90,7 +90,7 @@ function renderOperate(json,htmlObj){
     var _editbtn=htmlObj.find("button:eq(1)");
     _editbtn.attr("href",_rootpath+"/pms/resource/edit?id="+json.id+"&callbackMethod=ajaxTreeDone");
     var _delbtn=htmlObj.find("button:eq(2)");
-    _delbtn.attr("href",_rootpath+"/pms/resource/modifyData?modifyType=delete&id="+json.id+"&callbackMethod=ajaxTreeDone");
+    _delbtn.attr("href",_rootpath+"/pms/resource/deleteData?id="+json.id+"&callbackMethod=ajaxTreeDone");
     if(json.text == 'HOME'){//HOME节点 是虚拟节点 不能 编辑
         _editbtn.remove();
         _delbtn.remove();

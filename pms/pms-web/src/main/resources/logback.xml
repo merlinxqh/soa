@@ -39,9 +39,8 @@
     </appender>
 
     <!--打印mybatis sql语句-->
-    <!--<logger name="org.springframework" level="DEBUG"/>
-    <logger name="dao" level="DEBUG"/>-->
-    <!--<logger name="com.squareup.okhttp3" level="DEBUG"/>-->
+    <!--<logger name="org.springframework" level="DEBUG"/>-->
+    <logger name="dao" level="DEBUG"/>
     <!-- 日志输出级别 -->
     <root level="INFO">
         <!--控制台输出-->

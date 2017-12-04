@@ -12,12 +12,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>家视天下电商后台</title>
+        <title>admin后台</title>
         <!-- Base Css Files -->
         <link href="${ctx}/assets/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Font Icons -->
         <link href="${ctx}/assets/css/font-awesome.min.css" rel="stylesheet" />
-		<link href="${ctx}/assets/css/ionicons.min.css" rel="stylesheet" />
+		<link href="${ctx}/assets/js/common/ionicon/css/ionicons.min.css" rel="stylesheet" />
         <link href="${ctx}/assets/css/material-design-iconic-font.min.css" rel="stylesheet" />
 
         <!-- Waves-effect -->

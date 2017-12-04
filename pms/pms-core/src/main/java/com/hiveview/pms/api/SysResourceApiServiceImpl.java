@@ -1,6 +1,7 @@
 package com.hiveview.pms.api;
 
 import com.hiveview.base.mybatis.page.Page;
+import com.hiveview.base.util.id.IdWorker;
 import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.dto.SysResourceDto;
@@ -12,11 +13,13 @@ import com.hiveview.pms.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -43,7 +46,7 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
                 map.put("roleCode",roleCode);
             }
             List<SysResource> resourceList=sysResourceService.findByBiz(map);
-            return resourceList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList());
+            return ObjectUtils.copyListObject(resourceList,SysResourceDto.class);
         }
         return null;
     }
@@ -51,29 +54,31 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
     @Override
     @Transactional
     public int saveData(SysResourceDto data) {
-        return sysResourceService.saveData(ObjectUtils.copyObject(data,new SysResource()));
+        return sysResourceService.saveData(ObjectUtils.copyObject(data,SysResource.class));
     }
 
     @Override
     @Transactional
     public int deleteData(SysResourceDto data) {
-        return 0;
+        Assert.notNull(data,"参数不能为空");
+        Assert.hasText(data.getId(),"ID不能为空");
+        return sysResourceService.deleteById(Long.valueOf(data.getId()));
     }
 
     @Override
     public List<SysResourceDto> findList(SysResourceDto params) {
         List<SysResource> resList=sysResourceService.findByBiz(ObjectUtils.changeToMap(params));
-        return resList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList());
+        return resList.stream().map(res-> ObjectUtils.copyObject(res,SysResourceDto.class)).collect(Collectors.toList());
     }
 
     @Override
     public PageDto<SysResourceDto> findPage(PageDto<SysResourceDto> page, SysResourceDto params) {
-        Page<SysResource> _page=ObjectUtils.copyObject(page,new Page<>());
-        sysResourceService.findByPage(_page,ObjectUtils.changeToMap(params));
+        Page<SysResource> _page=ObjectUtils.copyObject(page,Page.class);
+        sysResourceService.findByPage(_page,ObjectUtils.copyObject(params,Map.class));
         List<SysResource> resList=_page.getRecords();
         if(!CollectionUtils.isEmpty(resList)){
-            ObjectUtils.copyObject(_page,page);
-            page.setRecords(resList.stream().map(res-> ObjectUtils.copyObject(res,new SysResourceDto())).collect(Collectors.toList()));
+            page=ObjectUtils.copyObject(_page,PageDto.class);
+            page.setRecords(ObjectUtils.copyListObject(resList,SysResourceDto.class));
         }
         return page;
     }
