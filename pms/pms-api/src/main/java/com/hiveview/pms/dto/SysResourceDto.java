@@ -81,6 +81,16 @@ public class SysResourceDto extends BaseEntityDto{
 
     private String searchCode;//根据编码查找
 
+    private String refRoleCode;//角色资源设置 关联角色资源查询参数
+
+    public String getRefRoleCode() {
+        return refRoleCode;
+    }
+
+    public void setRefRoleCode(String refRoleCode) {
+        this.refRoleCode = refRoleCode;
+    }
+
     public String getSearchCode() {
         return searchCode;
     }

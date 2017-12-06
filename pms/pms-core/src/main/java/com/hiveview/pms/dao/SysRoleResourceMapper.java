@@ -14,4 +14,5 @@ import com.hiveview.base.mybatis.annotation.MyBatisDao;
 @MyBatisDao
 public interface SysRoleResourceMapper extends CrudMapper {
 
+    int deleteByRoleCode(String roleCode);
 }

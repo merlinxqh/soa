@@ -76,10 +76,8 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
         Page<SysResource> _page=ObjectUtils.copyObject(page,Page.class);
         sysResourceService.findByPage(_page,ObjectUtils.copyObject(params,Map.class));
         List<SysResource> resList=_page.getRecords();
-        if(!CollectionUtils.isEmpty(resList)){
-            page=ObjectUtils.copyObject(_page,PageDto.class);
-            page.setRecords(ObjectUtils.copyListObject(resList,SysResourceDto.class));
-        }
+        page=ObjectUtils.copyObject(_page,PageDto.class);
+        page.setRecords(ObjectUtils.copyListObject(resList,SysResourceDto.class));
         return page;
     }
 }

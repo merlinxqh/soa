@@ -1,6 +1,7 @@
 package com.hiveview.pms.entity;
 
 import com.hiveview.base.common.BaseEntity;
+import lombok.Data;
 
 /**
  * 
@@ -9,6 +10,7 @@ import com.hiveview.base.common.BaseEntity;
  * @version 1.0.0
  * @copyright www.hiveview.com
  */
+@Data
 public class SysRoleResource extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -22,40 +24,4 @@ public class SysRoleResource extends BaseEntity {
      * 资源编码.
      */
     private String resourceCode;
-
-    /**
-     * 
-     * {@linkplain #roleCode}
-     *
-     * @return the value of sys_role_resource.role_code
-     */
-    public String getRoleCode() {
-        return roleCode;
-    }
-
-    /**
-     * {@linkplain #roleCode}
-     * @param roleCode the value for sys_role_resource.role_code
-     */
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode == null ? null : roleCode.trim();
-    }
-
-    /**
-     * 
-     * {@linkplain #resourceCode}
-     *
-     * @return the value of sys_role_resource.resource_code
-     */
-    public String getResourceCode() {
-        return resourceCode;
-    }
-
-    /**
-     * {@linkplain #resourceCode}
-     * @param resourceCode the value for sys_role_resource.resource_code
-     */
-    public void setResourceCode(String resourceCode) {
-        this.resourceCode = resourceCode == null ? null : resourceCode.trim();
-    }
 }

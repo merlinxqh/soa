@@ -42,15 +42,23 @@ function modalAjaxDone(json){
 
 		//提示成功消息
 		_successTipsFun(json.msg);
-		if(json.hasOwnProperty('data') && json.data.hasOwnProperty('callbackMethod')){//有传回调函数
+
+        if(judgeHasProperty(json,'data') && judgeHasProperty(json['data'],'callbackMethod')){//有传回调函数
             eval(json.data['callbackMethod']+'()');//执行回调函数
 		}else{//默认刷新列表
             refreshTable();
         }
 	}else{
-		_errorTipsFun(json.data);
+		_errorTipsFun(json.msg);
         ableSubmitBtn();
 	}
+}
+
+function judgeHasProperty(obj,property){
+	if(obj.hasOwnProperty(property) && null != obj[property]){
+		return true;
+	}
+	return false;
 }
 
 function ajaxError(json){
@@ -110,14 +118,14 @@ function ajaxDone(json,callback){
 		_successTipsFun(json.msg);
 		if(callback != undefined){
 			eval(callback+'(json)');
-		}else if(json.hasOwnProperty('data') && json.data.hasOwnProperty('callbackMethod')){//有传回调函数
+		}else if(judgeHasProperty(json,'data') && judgeHasProperty(json['data'],'callbackMethod')){//有传回调函数
             eval(json.data['callbackMethod']+'()');//执行回调函数
         }else{//默认刷新列表
             refreshTable();
         }
 	}else{
 		//提示失败消息
-		_errorTipsFun(json.data);
+		_errorTipsFun(json.msg);
 	}
 }
 

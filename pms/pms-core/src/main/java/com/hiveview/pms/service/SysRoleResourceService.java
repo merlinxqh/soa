@@ -13,4 +13,10 @@ import com.hiveview.pms.entity.SysRoleResource;
  */
 public interface SysRoleResourceService extends BaseCrudService<SysRoleResource> {
 
+    /**
+     * 根据角色编码删除 关联数据
+     * @param roleCode
+     * @return
+     */
+    int deleteByRoleCode(String roleCode);
 }

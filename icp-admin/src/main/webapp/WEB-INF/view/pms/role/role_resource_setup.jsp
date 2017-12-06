@@ -36,11 +36,11 @@
             </div>
             <!-- end Col-9 -->
         </div>
-        <input type="hidden" id="roleSn" name="roleSn" value="${roleSn }" />
+        <input type="hidden" id="refRoleCode" name="refRoleCode" value="${roleCode }" />
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
         <button type="button" onclick="submitData();" class="btn btn-info waves-effect waves-light">保存</button>
     </div>
     <script src="${pageContext.request.contextPath}/assets/js/common/checkableTree-util.js"/>
-    <script src="${pageContext.request.contextPath}/assets/js/system/resource/resource_role_setup.js"/>
+    <script src="${pageContext.request.contextPath}/assets/js/module/pms/role/resource_role_setup.js"/>

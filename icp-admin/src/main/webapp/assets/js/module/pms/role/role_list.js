@@ -17,13 +17,13 @@ function operateRender(value, row, index){
     }
     if($("#enableRolePermission").length>0){
         if(row.status == '1'){
-            action+=' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/role/modifyData?modifyType=disable&id='+row.id+'\')" class="view-link">禁用</a>';
+            action+=' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/role/modifyData?status=2&id='+row.id+'\')" class="view-link">禁用</a>';
         }else{
-            action+=' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/role/modifyData?modifyType=enable&id='+row.id+'\')" class="view-link">启用</a>';
+            action+=' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/role/modifyData?status=1&id='+row.id+'\')" class="view-link">启用</a>';
         }
     }
     if($("#setRolePermission").length>0){
-        action+=' <a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/role/resourceSetting?roleSn='+row.sn+'"  class="view-link">权限设置</a>';
+        action+=' <a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/pms/role/resourceSetting?roleCode='+row.code+'"  class="view-link">权限设置</a>';
     }
     return action;
 }

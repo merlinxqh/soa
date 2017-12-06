@@ -109,4 +109,9 @@
       resource_code = #{resourceCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <delete id="deleteByRoleCode" parameterType="java.lang.String">
+    delete from sys_role_resource
+    where role_code = #{roleCode,jdbcType=VARCHAR}
+  </delete>
 </mapper>

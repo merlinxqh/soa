@@ -8,7 +8,7 @@
     <script src="${pageContext.request.contextPath}/assets/js/common/bootstrapValidator.js"></script>
 </head>
 <form class="form-horizontal tasi-form" method="post"
-      action="${pageContext.request.contextPath}/role/saveData?callbackMethod=refreshTable"
+      action="${pageContext.request.contextPath}/pms/role/saveData"
       data-toggle="validator"
       onsubmit="return validateCallback(this,modalAjaxDone);">
     <div class="modal-header">

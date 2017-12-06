@@ -1,6 +1,7 @@
 package com.hiveview.pms.service;
 
 import com.hiveview.base.service.BaseCrudService;
+import com.hiveview.pms.dto.RoleResourceDto;
 import com.hiveview.pms.entity.SysRole;
 
 /**
@@ -13,4 +14,12 @@ import com.hiveview.pms.entity.SysRole;
  */
 public interface SysRoleService extends BaseCrudService<SysRole> {
 
+    /**
+     * 数据 启用禁用
+     * @param role
+     * @return
+     */
+    int modifyData(SysRole role);
+
+    void roleResourceSave(RoleResourceDto dto);
 }

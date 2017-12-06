@@ -7,6 +7,7 @@ import com.hiveview.pms.entity.SysRoleResource;
 import com.hiveview.pms.service.SysRoleResourceService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 
@@ -24,5 +25,11 @@ public class SysRoleResourceServiceImpl extends BaseCrudServiceImpl<SysRoleResou
     @Override
     public CrudMapper init() {
         return sysRoleResourceMapper;
+    }
+
+    @Override
+    @Transactional
+    public int deleteByRoleCode(String roleCode) {
+        return sysRoleResourceMapper.deleteByRoleCode(roleCode);
     }
 }

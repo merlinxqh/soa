@@ -26,9 +26,6 @@
                     <label>角色类型：
                         <select class="select2 select2-offscreen" id="roleType" name="roleType" style="width: 240px;" data-placeholder="请选择" tabindex="" title="">
                             <option value=" ">全部</option>
-                            <c:forEach items="${typeList}" var="item">
-                                <option value="${item.value}">${item.name}</option>
-                            </c:forEach>
                         </select>
                     </label>
                     <label>状态：
@@ -57,9 +54,9 @@
                     <th data-field="roleType" data-align="left" data-formatter="roleTypeRender">角色类型</th>
                     <th data-field="remark" data-align="left">备注</th>
                     <th data-field="status" data-align="left" data-formatter="statusRender">状态</th>
-                    <th data-field="createBy.userName" data-align="left" >创建者</th>
+                    <th data-field="createBy" data-align="left" >创建者</th>
                     <th data-field="createDate" data-align="left"  data-formatter="defaultDateFormatter">创建日期</th>
-                    <th data-field="lastUpdateBy.userName" data-align="left" >最后修改人</th>
+                    <th data-field="lastUpdateBy" data-align="left" >最后修改人</th>
                     <th data-field="lastUpdateDate" data-align="left"  data-formatter="defaultDateFormatter">最后修改日期</th>
                     <th data-field="" data-align="left" data-formatter="operateRender">操作</th>
                 </tr>
@@ -69,13 +66,13 @@
     </div>
 </div>
 <%--权限--%>
-<sec:requiredPermission resource="sys:role:edit">
+<sec:requiredPermission resource="pms:role:edit">
     <input type="hidden" id="editRolePermission" name="editRolePermission" value="">
 </sec:requiredPermission>
-<sec:requiredPermission resource="sys:role:enable">
+<sec:requiredPermission resource="pms:role:enable">
     <input type="hidden" id="enableRolePermission" name="enableRolePermission" value="">
 </sec:requiredPermission>
-<sec:requiredPermission resource="sys:role:resourceSetting">
+<sec:requiredPermission resource="pms:role:resourceSetting">
     <input type="hidden" id="setRolePermission" name="setRolePermission" value="">
 </sec:requiredPermission>
 <script src="${pageContext.request.contextPath}/assets/js/module/pms/role/role_list.js"></script>
