@@ -33,6 +33,20 @@ public class SysRoleDto extends BaseEntityDto{
      */
     private String remark;
 
+    /**
+     * 排除角色类型
+     */
+    private String exceptRoleType;
+
+
+    public String getExceptRoleType() {
+        return exceptRoleType;
+    }
+
+    public void setExceptRoleType(String exceptRoleType) {
+        this.exceptRoleType = exceptRoleType;
+    }
+
     public String getCode() {
         return code;
     }

@@ -6,6 +6,7 @@ import com.hiveview.pms.dto.RoleResourceDto;
 import com.hiveview.pms.dto.SysRoleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -27,7 +28,10 @@ public class SysRoleApiConsumer {
         return sysRoleApiService.findList(dto);
     }
 
-
+    public SysRoleDto findById(String id){
+        Assert.hasText(id);
+        return sysRoleApiService.findById(Long.valueOf(id));
+    }
     /**
      * 查询分页数据
      * @param page

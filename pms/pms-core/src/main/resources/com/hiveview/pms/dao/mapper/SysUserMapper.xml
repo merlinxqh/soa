@@ -8,7 +8,9 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="default_role" property="defaultRole" jdbcType="VARCHAR" />
+    <result column="default_role" property="defaultRole.code" jdbcType="VARCHAR" />
+    <result column="roleType" property="defaultRole.roleType" jdbcType="VARCHAR"/>
+    <result column="roleName" property="defaultRole.name" jdbcType="VARCHAR"/>
     <result column="create_by" property="createBy" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="last_update_by" property="lastUpdateBy" jdbcType="VARCHAR" />
@@ -63,8 +65,11 @@
   </select>
   <select id="selectByParams" resultMap="BaseResultMap" parameterType="map" >
     select 
-    <include refid="Base_Column_List" />
-    from sys_user t 
+    <include refid="Base_Column_List" />,
+    r.role_type as "roleType",
+    r.name as "roleName"
+    from sys_user t
+    left join sys_role r on t.default_role = r.code
     where 1=1
     <include refid="condition" />
   </select>
@@ -74,8 +79,11 @@
   </select>
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="map" >
     select 
-    <include refid="Base_Column_List" />
-    from sys_user t 
+    <include refid="Base_Column_List" />,
+    r.role_type as "roleType",
+    r.name as "roleName"
+    from sys_user t
+    left join sys_role r on t.default_role = r.code
     where 1=1
     <include refid="condition" />
     <if test="orderByField != null and ''!=orderByField" >
@@ -99,7 +107,7 @@
       create_by, create_date, last_update_by, 
       last_update_date)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{defaultRole,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{defaultRole.code,jdbcType=VARCHAR},
       #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
       #{lastUpdateDate,jdbcType=TIMESTAMP})
   </insert>
@@ -160,7 +168,7 @@
         #{email,jdbcType=VARCHAR},
       </if>
       <if test="defaultRole != null" >
-        #{defaultRole,jdbcType=VARCHAR},
+        #{defaultRole.code,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null" >
         #{createBy,jdbcType=VARCHAR},
@@ -195,7 +203,7 @@
         email = #{email,jdbcType=VARCHAR},
       </if>
       <if test="defaultRole != null" >
-        default_role = #{defaultRole,jdbcType=VARCHAR},
+        default_role = #{defaultRole.code,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null" >
         create_by = #{createBy,jdbcType=VARCHAR},
@@ -219,7 +227,7 @@
       name = #{name,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
-      default_role = #{defaultRole,jdbcType=VARCHAR},
+      default_role = #{defaultRole.code,jdbcType=VARCHAR},
       create_by = #{createBy,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},

@@ -42,7 +42,19 @@ public class SysResourceServiceImpl extends BaseCrudServiceImpl<SysResource> imp
     public int saveData(SysResource entity) throws ServiceException {
         Assert.notNull(entity);
         Assert.notNull(entity.getIsMenu());
-        if(StringUtils.isEmpty(entity.getId())){
+        if(null != entity.getId()){
+
+            //修改数据
+            SysResource old=this.findById(entity.getId());
+            Assert.notNull(old,"找不到资源数据");
+            old.setName(entity.getName());
+            old.setOrders(entity.getOrders());
+            old.setUrl(entity.getUrl());
+            old.setIconCode(entity.getIconCode());
+            old.setRemark(entity.getRemark());
+            old.setPermission(entity.getPermission());
+            return this.sysResourceMapper.updateByPrimaryKey(old);
+        }else{
             //新增
             entity.setCode(IdWorker.getStringCode());
             entity.setStatus(1);
@@ -62,18 +74,7 @@ public class SysResourceServiceImpl extends BaseCrudServiceImpl<SysResource> imp
                 entity.setLevel(1);//没有上级 就是一级菜单
                 entity.setLongCode(entity.getCode());
             }
-            return super.saveData(entity);
-        }else{
-            //修改数据
-            SysResource old=this.findById(entity.getId());
-            Assert.notNull(old,"找不到资源数据");
-            old.setName(entity.getName());
-            old.setOrders(entity.getOrders());
-            old.setUrl(entity.getUrl());
-            old.setIconCode(entity.getIconCode());
-            old.setRemark(entity.getRemark());
-            old.setPermission(entity.getPermission());
-            return this.sysResourceMapper.updateByPrimaryKey(old);
+            return sysResourceMapper.insert(entity);
         }
     }
 

@@ -41,7 +41,7 @@ public class SysRoleController extends BaseController{
     @RequestMapping(value = "edit",method = RequestMethod.GET)
     public ModelAndView edit(ModelMap model,SysRoleDto dto){
         if(StringUtils.hasText(dto.getId())){
-           model.put("data",roleApiConsumer.findList(dto).get(0));
+           model.put("data",roleApiConsumer.findById(dto.getId()));
         }
         return new ModelAndView("pms/role/role_edit");
     }

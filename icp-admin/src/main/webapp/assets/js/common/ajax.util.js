@@ -63,8 +63,8 @@ function judgeHasProperty(obj,property){
 
 function ajaxError(json){
 	if(json.status==200){
-		if(json.message){
-            _errorTipsFun(json.data);
+		if(json.msg){
+            _errorTipsFun(json.msg);
 		}
 	}
     ableSubmitBtn();

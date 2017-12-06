@@ -28,7 +28,7 @@ function operateRender(value, row, index){
     return action;
 }
 
-var roleTypeEnum={ADMIN:'系统用户',OPERATE:'运营角色',MERCHANT:'商户角色',COMMON:'普通角色',SUPER_ADMIN:'超级管理员'};
+var roleTypeEnum={COMMON:'普通',SUPER_ADMIN:'超级管理员'};
 function roleTypeRender(value, row, index){
     return roleTypeEnum[value];
 }

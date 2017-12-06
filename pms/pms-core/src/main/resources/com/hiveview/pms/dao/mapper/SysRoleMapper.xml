@@ -49,6 +49,9 @@
       <if test="params.lastUpdateDate != null" >
         and t.last_update_date = #{params.lastUpdateDate,jdbcType=TIMESTAMP}
       </if>
+      <if test="params.exceptRoleType != null and '' != params.exceptRoleType">
+        and instr(#{params.exceptRoleType,jdbcType=VARCHAR},t.role_type)=0
+      </if>
     </if>
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >

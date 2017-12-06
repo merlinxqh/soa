@@ -35,14 +35,14 @@ public class SysUserDto extends BaseEntityDto{
     /**
      * 默认角色
      */
-    private String defaultRole;
+    private SysRoleDto defaultRole;
 
 
-    public String getDefaultRole() {
+    public SysRoleDto getDefaultRole() {
         return defaultRole;
     }
 
-    public void setDefaultRole(String defaultRole) {
+    public void setDefaultRole(SysRoleDto defaultRole) {
         this.defaultRole = defaultRole;
     }
 

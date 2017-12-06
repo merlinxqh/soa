@@ -1,8 +1,8 @@
 package com.hiveview.pms.api;
 
-import com.hiveview.base.mybatis.page.Page;
 import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
+import com.hiveview.pms.common.WrapperApiService;
 import com.hiveview.pms.dto.RoleResourceDto;
 import com.hiveview.pms.dto.SysRoleDto;
 import com.hiveview.pms.entity.SysRole;
@@ -22,6 +22,11 @@ public class SysRoleApiServiceImpl implements SysRoleApiService{
     @Autowired
     private SysRoleService roleService;
 
+    @Override
+    public SysRoleDto findById(Long id) {
+        SysRole role=roleService.findById(id);
+        return ObjectUtils.copyObject(role,SysRoleDto.class);
+    }
 
     @Override
     @Transactional
@@ -44,12 +49,7 @@ public class SysRoleApiServiceImpl implements SysRoleApiService{
 
     @Override
     public PageDto<SysRoleDto> findPage(PageDto<SysRoleDto> page, SysRoleDto params) {
-        Page _page= ObjectUtils.copyObject(page,Page.class);
-        roleService.findByPage(_page,ObjectUtils.changeToMap(params));
-        List<SysRole> list=_page.getRecords();
-        page=ObjectUtils.copyObject(_page,PageDto.class);
-        page.setRecords(ObjectUtils.copyListObject(list,SysRoleDto.class));
-        return page;
+        return WrapperApiService.findByPage(page,params,roleService,SysRoleDto.class);
     }
 
     @Override

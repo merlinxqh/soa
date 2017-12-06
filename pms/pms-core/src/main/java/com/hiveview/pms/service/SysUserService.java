@@ -13,4 +13,5 @@ import com.hiveview.pms.entity.SysUser;
  */
 public interface SysUserService extends BaseCrudService<SysUser> {
 
+    void modifyData(SysUser dto);
 }

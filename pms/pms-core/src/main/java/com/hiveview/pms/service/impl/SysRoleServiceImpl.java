@@ -46,14 +46,14 @@ public class SysRoleServiceImpl extends BaseCrudServiceImpl<SysRole> implements 
     public int saveData(SysRole entity) throws ServiceException {
         Assert.notNull(entity);
         Assert.hasText(entity.getName());
-        if(StringUtils.isEmpty(entity.getId())){
+        if(null != entity.getId()){
+            return sysRoleMapper.updateByPrimaryKeySelective(entity);
+        }else{
             //新增角色
             entity.setCode(IdWorker.getStringCode());
             entity.setStatus(SysRole.ROLE_STATUS_ENABLE);//默认启用
             entity.setRoleType(SysRole.ROLE_TYPE_COMMON);
             return sysRoleMapper.insert(entity);
-        }else{
-            return sysRoleMapper.updateByPrimaryKeySelective(entity);
         }
     }
 

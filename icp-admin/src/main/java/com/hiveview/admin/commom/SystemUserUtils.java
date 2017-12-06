@@ -83,7 +83,7 @@ public class SystemUserUtils {
 	 */
 	public static void initUserLoginSuccessEvent(SysUserDto user){
         redisService.setHashObject(RedisKeyConstants.SECURITY_USER_MAP_KEY,user.getUsername(),user);
-		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole());
+		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
 		//登录 资源数据重新获取 因此这里删除redis 该角色数据
 		if(redisService.exists(resourceKey)){
 			redisService.deleteByKey(resourceKey);
@@ -98,12 +98,12 @@ public class SystemUserUtils {
     	List<SysResourceDto> resourceList=null;
     	SysUserDto user = getCurrentUser();
     	if(null != user && null != user.getDefaultRole()){
-    		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole());
+    		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
     		if(redisService.exists(resourceKey)){
     			resourceList=redisService.getListObj(resourceKey,SysResourceDto.class);
 			}else{
     			//调用rpc获取该用户权限数据
-                resourceList=sysResourceApiConsumer.getResourceByRole(user.getDefaultRole());
+                resourceList=sysResourceApiConsumer.getResourceByRole(user.getDefaultRole().getCode());
                 redisService.setListObj(resourceKey,resourceList);
 			}
     	}

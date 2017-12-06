@@ -7,6 +7,7 @@ import com.hiveview.pms.api.SysResourceApiService;
 import com.hiveview.pms.dto.SysResourceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -24,6 +25,11 @@ public class SysResourceApiConsumer {
 
     public List<SysResourceDto> getResourceByRole(String roleCode){
         return sysResourceApiService.getResourceByRole(roleCode);
+    }
+
+    public SysResourceDto findById(String id){
+        Assert.hasText(id);
+        return sysResourceApiService.findById(Long.valueOf(id));
     }
 
     public int deleteData(SysResourceDto dto){

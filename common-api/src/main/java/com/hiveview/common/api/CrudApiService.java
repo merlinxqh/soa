@@ -28,6 +28,9 @@ public interface CrudApiService<T> {
       */
      List<T> findList(T params);
 
+
+     T findById(Long id);
+
      /**
       * 查询分页数据
       * @param page

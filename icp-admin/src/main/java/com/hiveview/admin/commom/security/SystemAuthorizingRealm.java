@@ -67,7 +67,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			for (String permission : map.keySet()){
 				info.addStringPermission(permission);
 			}
-			info.addRole(user.getDefaultRole());
+			info.addRole(user.getDefaultRole().getCode());
 			return info;
 		} else {
 			return null;

@@ -2,14 +2,13 @@ package com.hiveview.pms.api;
 
 import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
+import com.hiveview.pms.common.WrapperApiService;
 import com.hiveview.pms.dto.SysUserDto;
 import com.hiveview.pms.entity.SysUser;
 import com.hiveview.pms.service.SysUserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
@@ -37,6 +36,18 @@ public class SysUserApiServiceImpl implements SysUserApiService {
     }
 
     @Override
+    public SysUserDto findById(Long id) {
+        SysUser user=sysUserService.findById(id);
+        return ObjectUtils.copyObject(user,SysUserDto.class);
+    }
+
+    @Override
+    @Transactional
+    public void modifyData(SysUserDto dto) {
+        sysUserService.modifyData(ObjectUtils.copyObject(dto,SysUser.class));
+    }
+
+    @Override
     @Transactional
     public int saveData(SysUserDto data) {
         return sysUserService.saveData(ObjectUtils.copyObject(data,SysUser.class));
@@ -44,16 +55,17 @@ public class SysUserApiServiceImpl implements SysUserApiService {
 
     @Override
     public int deleteData(SysUserDto data) {
-        return 0;
+        return sysUserService.deleteById(Long.valueOf(data.getId()));
     }
 
     @Override
     public List<SysUserDto> findList(SysUserDto params) {
-        return null;
+        List<SysUser> list=sysUserService.findByBiz(ObjectUtils.changeToMap(params));
+        return ObjectUtils.copyListObject(list,SysUserDto.class);
     }
 
     @Override
     public PageDto<SysUserDto> findPage(PageDto<SysUserDto> page, SysUserDto params) {
-        return null;
+        return WrapperApiService.findByPage(page, params, sysUserService, SysUserDto.class);
     }
 }

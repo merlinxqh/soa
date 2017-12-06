@@ -89,7 +89,7 @@ public class SysResourceController extends BaseController{
     @RequestMapping(value="edit",method = RequestMethod.GET)
     public ModelAndView edit(ModelMap model,SysResourceDto dto){
         if(StringUtils.hasText(dto.getId())){
-           model.put("data",sysResourceApiConsumer.findList(dto).get(0));
+           model.put("data",sysResourceApiConsumer.findById(dto.getId()));
         }
         return  new ModelAndView("pms/resource/resource_edit");
     }

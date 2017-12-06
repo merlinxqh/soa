@@ -10,4 +10,6 @@ public interface SysUserApiService extends CrudApiService<SysUserDto>{
 
     SysUserDto getUserByUserName(String userName);
 
+    void modifyData(SysUserDto dto);
+
 }

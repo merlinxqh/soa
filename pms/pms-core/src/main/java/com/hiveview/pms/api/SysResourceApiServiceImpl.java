@@ -1,9 +1,8 @@
 package com.hiveview.pms.api;
 
-import com.hiveview.base.mybatis.page.Page;
-import com.hiveview.base.util.id.IdWorker;
 import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
+import com.hiveview.pms.common.WrapperApiService;
 import com.hiveview.pms.dto.SysResourceDto;
 import com.hiveview.pms.entity.SysResource;
 import com.hiveview.pms.entity.SysRole;
@@ -14,12 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +30,12 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
 
     @Autowired
     private SysRoleService roleService;
+
+    @Override
+    public SysResourceDto findById(Long id) {
+        SysResource res=sysResourceService.findById(id);
+        return ObjectUtils.copyObject(res,SysResourceDto.class);
+    }
 
     @Override
     public List<SysResourceDto> getResourceByRole(String roleCode) {
@@ -73,11 +76,6 @@ public class SysResourceApiServiceImpl implements SysResourceApiService {
 
     @Override
     public PageDto<SysResourceDto> findPage(PageDto<SysResourceDto> page, SysResourceDto params) {
-        Page<SysResource> _page=ObjectUtils.copyObject(page,Page.class);
-        sysResourceService.findByPage(_page,ObjectUtils.copyObject(params,Map.class));
-        List<SysResource> resList=_page.getRecords();
-        page=ObjectUtils.copyObject(_page,PageDto.class);
-        page.setRecords(ObjectUtils.copyListObject(resList,SysResourceDto.class));
-        return page;
+        return WrapperApiService.findByPage(page,params,sysResourceService,SysResourceDto.class);
     }
 }
