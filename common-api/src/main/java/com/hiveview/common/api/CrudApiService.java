@@ -29,6 +29,11 @@ public interface CrudApiService<T> {
      List<T> findList(T params);
 
 
+     /**
+      * 根据ID查询
+      * @param id
+      * @return
+      */
      T findById(Long id);
 
      /**

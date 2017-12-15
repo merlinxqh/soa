@@ -75,6 +75,16 @@ public class SystemUserUtils {
 		currentUser.remove();
     }
 
+	/**
+	 * 退出登录
+	 */
+	public static void logout(){
+		String userName=(String) SecurityUtils.getSubject().getPrincipal();
+		if(redisService.mapExists(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName)){
+			redisService.mapRemove(RedisKeyConstants.SECURITY_USER_MAP_KEY,userName);
+		}
+	}
+
 
 	/**
 	 * shiro登录校验通过后

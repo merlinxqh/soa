@@ -65,9 +65,9 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/logout")
     public String logout() {
+        SystemUserUtils.logout();
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-        //TODO 退出登录
         return "login";
     }
 

@@ -48,7 +48,7 @@ public class SysUserController extends BaseController{
     @RequestMapping(value = "edit",method = RequestMethod.GET)
     public ModelAndView edit(ModelMap model){
         SysRoleDto dto=new SysRoleDto();
-        dto.setExceptRoleType("SUPER_ADMIN");
+        dto.setExceptRoleType("SUPER_ADMIN");//过滤掉超级管理员
         model.put("roleList",roleApiConsumer.findList(dto));
         if(StringUtils.hasText(getString("id"))){
             model.put("data",userApiConsumer.findById(getString("id")));
