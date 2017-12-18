@@ -103,28 +103,6 @@ public class ExcelExportUtil {
 		return file;
 	}
 
-    /**
-	 * 根据key获取value 处理 key为 obj.objItem.key 这种情况
-	 * @param map
-	 * @param key
-	 * @return
-	 */
-	public static String getMapValue(Map map,String key){
-       if(key.contains(".")){
-           String subKey=key.substring(0,key.indexOf("."));
-           if(null != map && map.containsKey(subKey)){
-			   Map subMap= ObjectUtils.changeToMap(map.get(subKey));
-			   key=key.substring(key.indexOf(".")+1);//去除 第一个key
-			   return getMapValue(subMap,key);
-		   }
-	   }else{
-           if(null != map && map.containsKey(key)){
-           	  return map.get(key).toString();
-		   }
-	   }
-	   return "";
-	}
-
 	/**
 	 * 插入数据，返回最大行数
 	 * @param sheet
@@ -145,7 +123,7 @@ public class ExcelExportUtil {
 					String cellValue = "" ;
 					if(isMap){
                          Map map= (Map) bean;
-                         cellValue = getMapValue(map,property);
+                         cellValue = ObjectUtils.getMapValue(map,property);
 					}else {
 						if(property.indexOf(".")>0){
 							String[] params=property.split("\\.");

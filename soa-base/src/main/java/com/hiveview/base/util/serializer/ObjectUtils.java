@@ -6,6 +6,7 @@ package com.hiveview.base.util.serializer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.hiveview.base.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -14,6 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -92,6 +94,13 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
         return null;
     }
 
+    public static <T> T parseObject(String json,Class<T> clz){
+        if(StringUtils.isNotEmpty(json)){
+            return JSON.parseObject(json,clz);
+        }
+        return null;
+    }
+
     /**
      * Copy对象
      * 经测试 通过fastJson 序列化 比 该方法高效
@@ -154,5 +163,45 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
             return params;
         }
         return null;
+    }
+
+    /**
+     * 根据key获取value 处理 key为 obj.objItem.key 这种情况
+     * @param map
+     * @param key
+     * @return
+     */
+    public static String getMapValue(Map map,String key){
+        if(map.containsKey(key)){
+            return map.get(key).toString();
+        }
+        if(key.contains(".")){
+            String subKey=key.substring(0,key.indexOf("."));
+            if(null != map && map.containsKey(subKey)){
+                Map subMap= changeToMap(map.get(subKey));
+                key=key.substring(key.indexOf(".")+1);//去除 第一个key
+                return getMapValue(subMap,key);
+            }
+        }else{
+            if(null != map && map.containsKey(key)){
+                return map.get(key).toString();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * 对时间格式化 (时间戳格式)
+     * @param map
+     * @param key
+     */
+    public static void mapFormatDate(Map<String,Object> map,String key){
+        String dateVal=getMapValue(map,key);
+        if(org.springframework.util.StringUtils.hasText(dateVal)){
+            Date date=new Date(Long.valueOf(dateVal));
+            if(null != date){
+                map.put(key, DateUtils.formatDate(date,DateUtils.DATE_PATTERN_COMPLEX));
+            }
+        }
     }
 }

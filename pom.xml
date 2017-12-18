@@ -27,7 +27,7 @@
         <logback.version>1.1.7</logback.version>
         <logstash.logback.version>4.11</logstash.logback.version>
         <logback-ext-spring.version>0.1.2</logback-ext-spring.version>
-        <org.slf4j.version>1.6.6</org.slf4j.version>
+        <org.slf4j.version>1.7.21</org.slf4j.version>
         <org.mybatis.version>3.3.0</org.mybatis.version>
         <mybatis.spring.version>1.2.3</mybatis.spring.version>
         <mysql.version>5.1.40</mysql.version>
@@ -43,6 +43,7 @@
         <protostuff.version>1.1.1</protostuff.version>
         <lombok.version>1.16.10</lombok.version>
         <ok.http3.version>3.8.1</ok.http3.version>
+        <httpclient.version>4.5.2</httpclient.version>
         <poi.version>3.15-beta2</poi.version>
         <validation.version>1.1.0.Final</validation.version>
         <apache.roketmq.version>4.1.0-incubating</apache.roketmq.version>
@@ -190,6 +191,28 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-common</artifactId>
                 <version>${apache.roketmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpclient.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <!--zookeeper end-->
 
