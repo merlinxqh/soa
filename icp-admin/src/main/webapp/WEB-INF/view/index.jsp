@@ -192,8 +192,13 @@
         <!-- CUSTOM JS -->
         <script src="${ctx}/assets/js/common/wow.min.js"></script>
         <script src="${ctx}/assets/js/common/jquery.app.js"></script>
-        <script src="${ctx}/assets/js/common/ajax.util.js"></script>
-        <script src="${ctx}/assets/js/common/base-ui.js"></script>
+        <script src="${ctx}/assets/js/common/base/base-ui.js"></script>
+        <script src="${ctx}/assets/js/common/base/base-tips.js"></script>
+        <script src="${ctx}/assets/js/common/base/base-plugins.js"></script>
+        <script src="${ctx}/assets/js/common/base/base-render.js"></script>
+        <script src="${ctx}/assets/js/common/base/base-fun.js"></script>
+        <script src="${ctx}/assets/js/common/base/ajax.util.js"></script>
+
         <script src="${ctx}/assets/js/common/template.js"></script>
         <script src="${ctx}/assets/js/common/bootstrap-table/bootstrap-table.js"></script>
         <script src="${ctx}/assets/js/common/bootstrap-table/bootstrap-table-zh-CN.js"></script>

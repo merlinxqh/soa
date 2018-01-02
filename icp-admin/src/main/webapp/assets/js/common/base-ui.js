@@ -945,7 +945,12 @@ function defaultDateFormatter(value) {
     return formatdate;
 }
 
-
+/**
+ * 封装 文件上传 插件方法
+ * @param targetId
+ * @param targetInputId
+ * @private
+ */
 function _wrapperInitFileInput(targetId,targetInputId){
     var  _allowedFile=['jpg', 'png','gif'];
 
@@ -1023,10 +1028,72 @@ function _wrapperInitFileInput(targetId,targetInputId){
  */
 function _commonReplaceImg(fileName,targetId){
     $("#"+targetId).val(fileName);
-    var _parent=$("#"+targetId).parent();
-    _parent.find("img").attr("src",imgPath+'/'+fileName);
-    _parent.show();
-    setTimeout(function(){
-        $("#"+targetId).parents(".form-group").find(".fileinput-remove-button").click();
-    },1000);
+    if(commonCheckImg(fileName)){
+        var _parent=$("#"+targetId).parent();
+        _parent.find("img").attr("src",imgPath+'/'+fileName);
+        _parent.show();
+        setTimeout(function(){
+            $("#"+targetId).parents(".form-group").find(".fileinput-remove-button").click();
+        },1000);
+    }
+}
+
+/**
+ * 根据固定编码获取 图片字典文件路径
+ * @param imgCode
+ */
+function ajaxGetPicDicByCode(imgCode){
+    $.post(rootPath+'/picDictionary/getDicByCode',{imgCode:imgCode},
+        function(resData){
+            if(resData.data != undefined){
+                dfd.resData=resData.data;
+            }
+            dfd.resolve();
+        },'json');
+    var dfd=$.Deferred();
+    return dfd;
+}
+
+
+/**
+ * 判断是否是图片
+ * @param fileName
+ */
+function commonCheckImg(fileName){
+    if(fileName.indexOf(".jpg") != -1 || fileName.indexOf(".png") != -1 || fileName.indexOf(".gif") != -1){
+        return true;
+    }
+    return false;
+}
+
+/**
+ * 下拉 展示操作项
+ * @param action
+ */
+function commonDropDownLink(action){
+    if(undefined == action || action.trim() == ''){
+        return action;
+    }
+    var _div=$("<div></div>");
+    _div.append(action);
+    var _drop=$(getFixedDropDown());
+    $.each(_div.find("a"),function(){
+        var _li=$("<li></li>");
+        _li.append(this);
+        _drop.find(".dropdown-menu").append(_li);
+    });
+    return _drop.prop("outerHTML");
+}
+
+/**
+ * 获取 下拉操作项样式
+ * @returns {string}
+ */
+function getFixedDropDown(){
+    var _dropDown="<div class=\"btn-group\">\n" +
+        "<button type=\"button\" class=\"btn btn-default dropdown-toggle waves-effect\" data-toggle=\"dropdown\" aria-expanded=\"false\">操作<span class=\"caret\"></span></button>\n" +
+        "<ul class=\"dropdown-menu\" role=\"menu\">\n" +
+        "</ul>\n" +
+        "</div>";
+    return _dropDown;
 }

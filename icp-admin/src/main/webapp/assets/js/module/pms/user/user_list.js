@@ -19,6 +19,6 @@ function operateRender(value, row, index){
     }else{
         action+=' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/user/modifyData?id='+row.id+'&status=1\')" class="view-link">启用</a>';
     }
-    return action;
+    return commonDropDownLink(action);
 }
 

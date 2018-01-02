@@ -146,6 +146,7 @@ function addResource(){
 }
 
 function operateRender(value, row, index){
-    return '<a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/pms/resource/edit?id='+row.id+'"  class="view-link">编辑</a>' +
+    var action= '<a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/pms/resource/edit?id='+row.id+'"  class="view-link">编辑</a>' +
         ' <a href="javascript:void(0);" onclick="ajaxDel(\''+rootPath+'/pms/resource/modifyData?modifyType=delete&id='+row.id+'\')" class="view-link">删除</a>';
+    return commonDropDownLink(action);
 }

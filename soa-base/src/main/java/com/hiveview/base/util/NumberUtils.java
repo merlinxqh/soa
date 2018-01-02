@@ -1,11 +1,64 @@
 package com.hiveview.base.util;
 
 import java.math.BigDecimal;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Created by leo on 2017/11/23.
  */
+/**
+ * Created by leo on 2017/11/23.
+ * 算数工具类
+ */
 public class NumberUtils {
+
+    /**
+     * 减法 默认两位小数点
+     * @param a
+     * @param b
+     * @return
+     */
+    public static BigDecimal subtract(BigDecimal a,BigDecimal... b){
+        BigDecimal res=a;
+        for(BigDecimal t:b){
+            if(null != res){
+                res=subtract(res,t,2);
+            }
+        }
+        return res;
+    }
+
+    public static BigDecimal subtract(BigDecimal a,BigDecimal b,int scale){
+        if(null != a && null != b){
+            return a.subtract(b).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }
+        return null;
+    }
+
+    /**
+     * 加法默认两位小数
+     * @param a
+     * @param b
+     * @return
+     */
+    public static BigDecimal add(BigDecimal a,BigDecimal... b){
+        BigDecimal res=a;
+        for(BigDecimal t:b){
+            if(null != res){
+                res=add(res,t,2);
+            }
+        }
+        return res;
+    }
+
+    public static BigDecimal add(BigDecimal a,BigDecimal b, int scale){
+        if(null != a && null != b){
+            return a.add(b).setScale(scale,BigDecimal.ROUND_HALF_UP);
+        }
+        return null;
+    }
 
     /**
      * 乘法 默认保留两位
@@ -14,7 +67,7 @@ public class NumberUtils {
      * @return
      */
     public static BigDecimal multiply(BigDecimal a, BigDecimal b){
-       return multiply(a,b,2);
+        return multiply(a,b,2);
     }
 
     /**
@@ -78,9 +131,27 @@ public class NumberUtils {
         return null;
     }
 
+    /**
+     * 校验手机号码
+     * @param str
+     * @return
+     * @throws PatternSyntaxException
+     */
+    public static boolean checkPhone(String str) throws PatternSyntaxException {
+        String regExp = "^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(str);
+        return m.matches();
+    }
+
+
+
     public static void main(String[] args) {
-        BigDecimal a=new BigDecimal("2");
+        BigDecimal a=new BigDecimal("20");
         BigDecimal b=new BigDecimal("3");
-        System.out.println(multiply(a,b));
+        BigDecimal c=new BigDecimal("1.3");
+        System.out.println(subtract(a,b,c));
+//        System.out.println(multiply(a,b));
+//        System.out.println(checkPhone("13258965421"));
     }
 }
