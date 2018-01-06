@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-11-24 18:24:24
+Date: 2018-01-06 13:32:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,25 +62,25 @@ CREATE TABLE `sys_resource` (
   `last_update_by` varchar(50) DEFAULT NULL COMMENT '最新更新人',
   `last_update_date` datetime DEFAULT NULL COMMENT '最新更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='系统资源表';
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COMMENT='系统资源表';
 
 -- ----------------------------
 -- Records of sys_resource
 -- ----------------------------
-INSERT INTO `sys_resource` VALUES ('1', '权限管理', '866595798555656192', '866595798555656192', '1', '866848898700831111', null, 'resource/list_menu', '1', '4', '1', 'fa fa-key', null, 'resource', 'admin@btte.net', '2017-05-22 18:05:14', 'admin@btte.net', '2017-06-12 14:27:25');
-INSERT INTO `sys_resource` VALUES ('2', '资源管理', '866595883125407744', '866595798555656192,866595883125407744', '1', '866848898700831111', '866595798555656192', 'pms/resource/list', '1', '1', '2', 'icon', 'sys:resource:list', null, 'admin@btte.net', '2017-05-22 18:05:34', 'admin@btte.net', '2017-06-02 13:57:37');
-INSERT INTO `sys_resource` VALUES ('3', '用户管理', '866848827737407488', '866595798555656192,866848827737407488', '1', '866848898700831111', '866595798555656192', 'user/list', '1', '2', '2', 'icon', null, 'ffffff', 'admin@btte.net', '2017-05-23 10:50:40', 'admin@btte.net', '2017-05-23 10:50:40');
-INSERT INTO `sys_resource` VALUES ('4', '角色管理', '866848898700836864', '866595798555656192,866848898700836864', '1', '866848898700831111', '866595798555656192', 'role/list', '1', '3', '2', 'icon', 'sys:role:list', 'ffasdfasdfgghh', 'admin@btte.net', '2017-05-23 10:50:57', 'admin@btte.net', '2017-06-02 15:12:30');
-INSERT INTO `sys_resource` VALUES ('5', '角色权限设置', '870516832400859136', '866595798555656192,866848898700836864,870516832400859136', '1', '866848898700831111', '866848898700836864', 'role/resourceSetting', '2', '1', '3', null, 'sys:role:resourceSetting', null, 'admin@btte.net', '2017-06-02 13:46:01', 'admin@btte.net', '2017-06-02 13:46:01');
-INSERT INTO `sys_resource` VALUES ('6', '角色添加&修改', '870518310993682432', '866595798555656192,866848898700836864,870518310993682432', '1', '866848898700831111', '866848898700836864', 'role/resource/edit', '2', '2', '3', null, 'sys:role:edit', null, 'admin@btte.net', '2017-06-02 13:51:54', 'admin@btte.net', '2017-06-02 13:51:53');
-INSERT INTO `sys_resource` VALUES ('7', '添加修改菜单', '870518762313375744', '866595798555656192,866595883125407744,870518762313375744', '1', '866848898700831111', '866595883125407744', 'resource/addEdit', '2', '2', '3', null, 'sys:menu:edit', null, 'admin@btte.net', '2017-06-02 13:53:41', 'admin@btte.net', '2017-06-02 13:53:41');
-INSERT INTO `sys_resource` VALUES ('8', '添加修改权限项', '870518983730683904', '866595798555656192,866595883125407744,870518983730683904', '1', '866848898700831111', '866595883125407744', 'permission/addEdit', '2', '2', '3', null, 'sys:permission:edit', null, 'admin@btte.net', '2017-06-02 13:54:34', 'admin@btte.net', '2017-06-02 13:54:34');
-INSERT INTO `sys_resource` VALUES ('9', '删除菜单权限', '870519327332261888', '866595798555656192,866595883125407744,870519327332261888', '1', '866848898700831111', '866595883125407744', 'pms/resource/delete', '2', '3', '3', null, 'sys:menu:delete', null, 'admin@btte.net', '2017-06-02 13:55:56', 'admin@btte.net', '2017-06-02 13:55:56');
-INSERT INTO `sys_resource` VALUES ('10', '权限删除权限', '870519474401337344', '866595798555656192,866595883125407744,870519474401337344', '1', '866848898700831111', '866595883125407744', 'permission/delete', '2', '4', '3', null, 'sys:permission:delete', null, 'admin@btte.net', '2017-06-02 13:56:31', 'admin@btte.net', '2017-06-02 13:56:31');
-INSERT INTO `sys_resource` VALUES ('11', '角色启用禁用', '870521335120420864', '866595798555656192,866848898700836864,870521335120420864', '1', '866848898700831111', '866848898700836864', 'role/enable', '2', '4', '3', null, 'sys:role:enable', null, 'admin@btte.net', '2017-06-02 14:03:55', 'admin@btte.net', '2017-06-23 15:50:41');
-INSERT INTO `sys_resource` VALUES ('12', '添加账户权限', '425022833241030656', '866595798555656192,866848827737407488,425022833241030656', '1', '866848898700831111', '866848827737407488', 'user/partner/add', '2', '1', '3', null, 'sys:user:partner:add', null, 'admin@btte.net', '2017-09-12 11:43:55', 'admin@btte.net', '2017-09-12 11:43:55');
-INSERT INTO `sys_resource` VALUES ('13', '账户修改权限', '425028504292360192', '866595798555656192,866848827737407488,425028504292360192', '1', '866848898700831111', '866848827737407488', 'user/partner/edit', '2', '2', '3', null, 'sys:user:partner:edit', null, 'admin@btte.net', '2017-09-12 12:06:27', 'admin@btte.net', '2017-09-12 12:06:27');
-INSERT INTO `sys_resource` VALUES ('14', '账户删除权限', '425028916437254144', '866595798555656192,866848827737407488,425028916437254144', '1', '866848898700831111', '866848827737407488', 'user/partner/delete', '2', '3', '3', null, 'sys:user:partner:delete', null, 'admin@btte.net', '2017-09-12 12:08:05', 'admin@btte.net', '2017-09-12 12:08:05');
+INSERT INTO `sys_resource` VALUES ('1', '权限管理', '866595798555656192', '866595798555656192', '1', '866848898700831111', null, 'resource/list_menu', '1', '4', '1', 'fa fa-key', '', 'resource', 'admin@btte.net', '2017-05-22 18:05:14', 'admin@btte.net', '2017-06-12 14:27:25');
+INSERT INTO `sys_resource` VALUES ('2', '资源管理', '866595883125407744', '866595798555656192,866595883125407744', '1', '866848898700831111', '866595798555656192', 'pms/resource/list', '1', '1', '2', 'icon', 'pms:resource:list', '', 'admin@btte.net', '2017-05-22 18:05:34', 'admin@btte.net', '2017-06-02 13:57:37');
+INSERT INTO `sys_resource` VALUES ('3', '用户管理', '866848827737407488', '866595798555656192,866848827737407488', '1', '866848898700831111', '866595798555656192', 'pms/user/list', '1', '2', '2', 'icon', 'pms:user:list', 'ffffff', 'admin@btte.net', '2017-05-23 10:50:40', 'admin@btte.net', '2017-05-23 10:50:40');
+INSERT INTO `sys_resource` VALUES ('4', '角色管理', '866848898700836864', '866595798555656192,866848898700836864', '1', '866848898700831111', '866595798555656192', 'pms/role/list', '1', '3', '2', 'icon', 'pms:role:list', '角色管理', 'admin@btte.net', '2017-05-23 10:50:57', 'admin@btte.net', '2017-06-02 15:12:30');
+INSERT INTO `sys_resource` VALUES ('5', '角色权限设置', '870516832400859136', '866595798555656192,866848898700836864,870516832400859136', '1', '866848898700831111', '866848898700836864', 'role/resourceSetting', '2', '1', '3', null, 'pms:role:resourceSetting', null, 'admin@btte.net', '2017-06-02 13:46:01', 'admin@btte.net', '2017-06-02 13:46:01');
+INSERT INTO `sys_resource` VALUES ('6', '角色添加&修改', '870518310993682432', '866595798555656192,866848898700836864,870518310993682432', '1', '866848898700831111', '866848898700836864', 'role/resource/edit', '2', '2', '3', null, 'pms:role:edit', null, 'admin@btte.net', '2017-06-02 13:51:54', 'admin@btte.net', '2017-06-02 13:51:53');
+INSERT INTO `sys_resource` VALUES ('7', '添加修改菜单', '870518762313375744', '866595798555656192,866595883125407744,870518762313375744', '1', '866848898700831111', '866595883125407744', 'resource/addEdit', '2', '2', '3', null, 'pms:menu:edit', null, 'admin@btte.net', '2017-06-02 13:53:41', 'admin@btte.net', '2017-06-02 13:53:41');
+INSERT INTO `sys_resource` VALUES ('8', '添加修改权限项', '870518983730683904', '866595798555656192,866595883125407744,870518983730683904', '1', '866848898700831111', '866595883125407744', 'permission/addEdit', '2', '2', '3', null, 'pms:permission:edit', null, 'admin@btte.net', '2017-06-02 13:54:34', 'admin@btte.net', '2017-06-02 13:54:34');
+INSERT INTO `sys_resource` VALUES ('9', '删除菜单权限', '870519327332261888', '866595798555656192,866595883125407744,870519327332261888', '1', '866848898700831111', '866595883125407744', 'pms/resource/delete', '2', '3', '3', null, 'pms:menu:delete', null, 'admin@btte.net', '2017-06-02 13:55:56', 'admin@btte.net', '2017-06-02 13:55:56');
+INSERT INTO `sys_resource` VALUES ('10', '权限删除权限', '870519474401337344', '866595798555656192,866595883125407744,870519474401337344', '1', '866848898700831111', '866595883125407744', 'permission/delete', '2', '4', '3', null, 'pms:permission:delete', null, 'admin@btte.net', '2017-06-02 13:56:31', 'admin@btte.net', '2017-06-02 13:56:31');
+INSERT INTO `sys_resource` VALUES ('11', '角色启用禁用', '870521335120420864', '866595798555656192,866848898700836864,870521335120420864', '1', '866848898700831111', '866848898700836864', 'role/enable', '2', '4', '3', null, 'pms:role:enable', null, 'admin@btte.net', '2017-06-02 14:03:55', 'admin@btte.net', '2017-06-23 15:50:41');
+INSERT INTO `sys_resource` VALUES ('12', '添加账户权限', '425022833241030656', '866595798555656192,866848827737407488,425022833241030656', '1', '866848898700831111', '866848827737407488', 'user/partner/add', '2', '1', '3', null, 'pms:user:partner:add', null, 'admin@btte.net', '2017-09-12 11:43:55', 'admin@btte.net', '2017-09-12 11:43:55');
+INSERT INTO `sys_resource` VALUES ('13', '账户修改权限', '425028504292360192', '866595798555656192,866848827737407488,425028504292360192', '1', '866848898700831111', '866848827737407488', 'user/partner/edit', '2', '2', '3', null, 'pms:user:partner:edit', null, 'admin@btte.net', '2017-09-12 12:06:27', 'admin@btte.net', '2017-09-12 12:06:27');
+INSERT INTO `sys_resource` VALUES ('14', '账户删除权限', '425028916437254144', '866595798555656192,866848827737407488,425028916437254144', '1', '866848898700831111', '866848827737407488', 'user/partner/delete', '2', '3', '3', null, 'pms:user:partner:delete', null, 'admin@btte.net', '2017-09-12 12:08:05', 'admin@btte.net', '2017-09-12 12:08:05');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -98,12 +98,15 @@ CREATE TABLE `sys_role` (
   `last_update_by` varchar(50) DEFAULT NULL COMMENT '最新更新人',
   `last_update_date` datetime DEFAULT NULL COMMENT '最新更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色表';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '445738124174856192', '超级管理员', '1', 'SUPER_ADMIN', '超管', 'admin', '2017-11-08 15:39:40', 'admin', '2017-11-08 15:39:47');
+INSERT INTO `sys_role` VALUES ('2', '455580870561665024', '开发人员', '1', 'COMMON', '开发角色', 'admin', '2017-12-05 19:30:39', 'admin', '2017-12-05 19:30:39');
+INSERT INTO `sys_role` VALUES ('3', '455584946598875136', '测试角色', '1', 'COMMON', 'dfff', 'admin', '2017-12-05 19:46:50', 'admin', '2017-12-05 19:46:50');
+INSERT INTO `sys_role` VALUES ('4', '455586883025145856', '管理角色', '1', 'COMMON', '发发发llll', 'admin', '2017-12-05 19:54:32', 'admin', '2017-12-06 10:26:43');
 
 -- ----------------------------
 -- Table structure for sys_role_resource
@@ -114,11 +117,27 @@ CREATE TABLE `sys_role_resource` (
   `role_code` varchar(30) DEFAULT NULL COMMENT '角色编码',
   `resource_code` varchar(30) DEFAULT NULL COMMENT '资源编码',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统角色资源关联表';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COMMENT='系统角色资源关联表';
 
 -- ----------------------------
 -- Records of sys_role_resource
 -- ----------------------------
+INSERT INTO `sys_role_resource` VALUES ('1', '455580870561665024', '866595798555656192');
+INSERT INTO `sys_role_resource` VALUES ('2', '455580870561665024', '866595883125407744');
+INSERT INTO `sys_role_resource` VALUES ('3', '455580870561665024', '870518762313375744');
+INSERT INTO `sys_role_resource` VALUES ('4', '455580870561665024', '866848827737407488');
+INSERT INTO `sys_role_resource` VALUES ('5', '455580870561665024', '425022833241030656');
+INSERT INTO `sys_role_resource` VALUES ('6', '455580870561665024', '425028504292360192');
+INSERT INTO `sys_role_resource` VALUES ('14', '455586883025145856', '866595798555656192');
+INSERT INTO `sys_role_resource` VALUES ('15', '455586883025145856', '866595883125407744');
+INSERT INTO `sys_role_resource` VALUES ('16', '455586883025145856', '870518762313375744');
+INSERT INTO `sys_role_resource` VALUES ('17', '455586883025145856', '870518983730683904');
+INSERT INTO `sys_role_resource` VALUES ('18', '455586883025145856', '870519327332261888');
+INSERT INTO `sys_role_resource` VALUES ('19', '455586883025145856', '870519474401337344');
+INSERT INTO `sys_role_resource` VALUES ('20', '455584946598875136', '866595798555656192');
+INSERT INTO `sys_role_resource` VALUES ('21', '455584946598875136', '866848898700836864');
+INSERT INTO `sys_role_resource` VALUES ('22', '455584946598875136', '870516832400859136');
+INSERT INTO `sys_role_resource` VALUES ('23', '455584946598875136', '870518310993682432');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -137,12 +156,13 @@ CREATE TABLE `sys_user` (
   `last_update_by` varchar(50) DEFAULT NULL COMMENT '最新更新人',
   `last_update_date` datetime DEFAULT NULL COMMENT '最新更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='系统用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'd93a5def7511da3d0f2d171d9c344e91', '管理员', '445738124174856192', '1', 'admin@btte.net', 'admin', '2017-11-08 14:36:13', 'admin', '2017-11-08 14:36:21');
+INSERT INTO `sys_user` VALUES ('2', 'heihei@btte.net', 'd93a5def7511da3d0f2d171d9c344e91', '嘿嘿222', '455586883025145856', '1', 'heihei@btte.net', 'admin', '2017-12-06 17:49:38', 'admin', '2017-12-06 18:29:01');
 
 -- ----------------------------
 -- Table structure for sys_user_role
