@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.hiveview.base.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -203,5 +204,52 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
                 map.put(key, DateUtils.formatDate(date,DateUtils.DATE_PATTERN_COMPLEX));
             }
         }
+    }
+
+
+    /**
+     * 对集合 进行分组操作
+     *   用于 数据量较大 分批处理
+     * @param list
+     * @param periodSize  分组长度
+     * @param eachIndex   当前循环序号
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getPeriodList(List<T> list,int periodSize, int eachIndex){
+        //集合为空 或者 长度 小于 分段长度 不处理
+        if(CollectionUtils.isEmpty(list) || list.size() <= periodSize){
+            return list;
+        }
+
+        /**
+         * 循环 序号 小于0 或者 大于 最大 值
+         */
+        if(eachIndex < 0 || eachIndex > list.size() / periodSize){
+            return null;
+        }
+
+        if(eachIndex != list.size()/periodSize){
+            int start = eachIndex * periodSize;
+            int end = (eachIndex+1)*periodSize - 1;
+            return getListByBetweenSize(list,start,end);
+        }else{
+            if(list.size() % periodSize == 0){
+                //数组长度 是 分段长度 的整数倍 最后一次循环不做处理
+                return null;
+            }else{
+                int start = eachIndex * periodSize;
+                int end = list.size() - 1;
+                return getListByBetweenSize(list,start,end);
+            }
+        }
+
+    }
+
+    public static <T> List<T> getListByBetweenSize(List<T> list, int start, int end){
+        if(!CollectionUtils.isEmpty(list) && list.size() >= end + 1 && end >= start ){
+            return list.subList(start,end+1);
+        }
+        return null;
     }
 }
