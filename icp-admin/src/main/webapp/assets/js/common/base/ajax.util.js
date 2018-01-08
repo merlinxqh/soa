@@ -36,12 +36,12 @@ function ableSubmitBtn(){
 
 //关闭modal窗口 刷新父页面，或指定div 或根据回调函数刷新
 function modalAjaxDone(json){
-	if(json.hasOwnProperty('returnValue') && json.returnValue == 0){
+	if(json.hasOwnProperty('code') && json.code == 0){
 		//关闭mode 
 		wrapperHideModal('base_modal');
 
 		//提示成功消息
-		_successTipsFun(json.errorMessage);
+		_successTipsFun(json.msg);
 		if(json.hasOwnProperty('callbackMethod')){//有传回调函数
             eval(json['callbackMethod']+'()');//执行回调函数
 		}else{//默认刷新列表
@@ -106,8 +106,8 @@ function ajaxToPost(url,data,callback){
 // 刷新父页面，或指定div 或根据回调函数刷新
 function ajaxDone(json,callback){
     if(!json) return ;
-	if(json.hasOwnProperty('returnValue') && json.returnValue == 0){
-		_successTipsFun(json.errorMessage);
+	if(json.hasOwnProperty('code') && json.code == 0){
+		_successTipsFun(json.msg);
 		if(callback != undefined){
 			eval(callback+'(json)');
 		}else if(json.hasOwnProperty('callbackMethod')){//有传回调函数

@@ -1,8 +1,13 @@
 package com.hiveview.base.util.http;
 
+import com.alibaba.fastjson.JSON;
 import com.hiveview.base.util.serializer.ObjectUtils;
+import lombok.Data;
+import org.springframework.util.CollectionUtils;
 
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.*;
 
 /**
  * Created by leo on 2017/10/23.
@@ -66,5 +71,34 @@ public class WrapperHttpUtils {
 
     public static <T> T getReturnObj(String url,Class<T> clz){
         return getReturnObj(url,null,clz);
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+//        String url="http://localhost:8081/api/tv/v1.2/order/skuTakeOrder";
+//        Map<String,String> map=new HashMap<>();
+//        map.put("params","{\"userid\":1006641,\"goodsSkuSn\":\"442478018805010433_3\",\"goodsSn\":\"442478018805010433\",\"receiveId\":24,\"quantity\":1,\"isInvoice\":true,\"invoiceType\":\"单位\",\"invoiceTitle\":\"深圳水公司\",\"invoiceContent\":\"本发票用于购物\"}");
+//        map.put("token","954efe020afd3d73bedc800097db4718_1006641");
+//        map.put("sign","8B4AA72A908AFA7B06E722C1CC83E62A");
+//        System.out.println(doPost(url,map));
+
+        List<Demo> dlist=new ArrayList<>();
+        dlist.add(new Demo(2,"er"));
+        dlist.add(new Demo(5,"er"));
+        dlist.add(new Demo(1,"er"));
+        dlist.add(new Demo(4,"er"));
+        Collections.sort(dlist,Comparator.comparingInt(Demo::getGrade));
+        System.out.println(JSON.toJSONString(dlist));
+    }
+
+    @Data
+    public static class Demo{
+        private int grade;
+
+        private String name;
+
+        public Demo(int grade,String name){
+            this.grade=grade;
+            this.name=name;
+        }
     }
 }

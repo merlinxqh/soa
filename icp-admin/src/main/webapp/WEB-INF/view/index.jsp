@@ -224,6 +224,11 @@
 		<script type="text/javascript" src="${ctx}/assets/js/common/summernote.min.js"></script>
 
         <script type="text/javascript" src="${ctx}/assets/js/common/viewer/viewer.js"></script>
+        <script type="text/javascript" src="${ctx}/assets/js/common/jquery-confirm/jquery-confirm.min.js"></script>
+        <link rel="stylesheet" href="${ctx}/assets/js/common/jquery-confirm/jquery-confirm.min.css"/>
+        <script type="text/javascript" src="${ctx}/assets/js/common/jquery-confirm/wrapper_confirm.js"></script>
+        <script type="text/javascript" src="${ctx}/assets/js/common/html5shiv.js"></script>
+        <script type="text/javascript" src="${ctx}/assets/js/common/respond.min.js"></script>
         <!-- modal -->
         <div id="base_modal" class="modal fade" tabindex="-1" role="dialog"
              aria-hidden="true"
