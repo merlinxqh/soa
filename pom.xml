@@ -15,6 +15,7 @@
         <module>icp-admin</module>
         <module>icp-tv-api</module>
         <module>common-api</module>
+        <module>schedule</module>
     </modules>
     <properties>
         <spring.version>4.2.5.RELEASE</spring.version>
@@ -47,6 +48,7 @@
         <poi.version>3.15-beta2</poi.version>
         <validation.version>1.1.0.Final</validation.version>
         <apache.roketmq.version>4.1.0-incubating</apache.roketmq.version>
+        <quartz.version>2.2.1</quartz.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -215,6 +217,12 @@
                 </exclusions>
             </dependency>
             <!--zookeeper end-->
+
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>redis.clients</groupId>

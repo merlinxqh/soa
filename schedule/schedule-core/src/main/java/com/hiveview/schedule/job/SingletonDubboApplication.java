@@ -1,4 +1,4 @@
-package com.hiveview.base.task;
+package com.hiveview.schedule.job;
 
 import java.util.Map;
 

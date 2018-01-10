@@ -1,4 +1,4 @@
-package com.hiveview.base.task;
+package com.hiveview.schedule.job;
 
 
 import java.lang.annotation.Annotation;

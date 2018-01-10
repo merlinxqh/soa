@@ -82,6 +82,8 @@ public class WrapperHttpUtils {
 //        System.out.println(doPost(url,map));
 
         List<Demo> dlist=new ArrayList<>();
+        char a=1;
+        Character c=1233;
         dlist.add(new Demo(2,"er"));
         dlist.add(new Demo(5,"er"));
         dlist.add(new Demo(1,"er"));

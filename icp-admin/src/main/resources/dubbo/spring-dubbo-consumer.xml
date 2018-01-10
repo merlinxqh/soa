@@ -13,4 +13,6 @@
     <dubbo:reference id="sysResourceApiService" interface="com.hiveview.pms.api.SysResourceApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
 
     <dubbo:reference id="sysRoleApiService" interface="com.hiveview.pms.api.SysRoleApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
+
+    <dubbo:reference id="scheduleJobApiService" interface="com.hiveview.schedule.api.ScheduleJobApiService" version="1.0.0"  registry="zookeeperClient" protocol="dubbo"/>
 </beans>

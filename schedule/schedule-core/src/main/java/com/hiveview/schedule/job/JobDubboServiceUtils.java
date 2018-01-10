@@ -1,4 +1,4 @@
-package com.hiveview.base.task;
+package com.hiveview.schedule.job;
 
 import com.alibaba.dubbo.config.spring.ReferenceBean;
 import com.alibaba.dubbo.rpc.service.GenericService;
