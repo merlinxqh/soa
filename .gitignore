@@ -26,3 +26,8 @@ pms/pms-api/.settings/
 */.settings/*
 pms/*/.settings/*
 common-api/target/
+schedule/schedule-web/target/
+schedule/schedule-entity/target/
+schedule/schedule-core/target/
+schedule/schedule-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+schedule/schedule-api/target/
