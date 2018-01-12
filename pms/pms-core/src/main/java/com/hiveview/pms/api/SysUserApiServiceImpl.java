@@ -48,6 +48,11 @@ public class SysUserApiServiceImpl implements SysUserApiService {
     }
 
     @Override
+    public void rpcTest() {
+        System.out.println("rpc test......");
+    }
+
+    @Override
     @Transactional
     public int saveData(SysUserDto data) {
         return sysUserService.saveData(ObjectUtils.copyObject(data,SysUser.class));

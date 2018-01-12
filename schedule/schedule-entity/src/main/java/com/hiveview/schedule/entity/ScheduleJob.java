@@ -3,6 +3,7 @@ package com.hiveview.schedule.entity;
 import com.hiveview.base.common.BaseEntity;
 import com.hiveview.schedule.enums.ScheduleTypeEnum;
 import lombok.Data;
+import org.springframework.util.StringUtils;
 
 /**
  * 
@@ -83,5 +84,16 @@ public class ScheduleJob extends BaseEntity {
      * http执行url
      */
     private String httpUrl;
+
+    /**
+     * 获取泛化调用ID
+     * @return
+     */
+    public String getGenericServiceId(){
+        if(StringUtils.hasText(this.beanClass) && StringUtils.hasText(this.methodName)){
+            return this.beanClass.concat(".").concat(this.methodName);
+        }
+        return null;
+    }
 
 }

@@ -1,4 +1,4 @@
-package com.hiveview.schedule.job;
+package com.hiveview.schedule.service.quartz;
 
 
 import java.lang.annotation.Annotation;

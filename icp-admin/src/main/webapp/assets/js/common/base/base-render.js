@@ -56,7 +56,7 @@ function defaultDateFormatter(value) {
  * @param row
  * @param index
  */
-function statusRender(value, row ,index){
+function statusRenderValid(value, row ,index){
     if(value == 1){
         return '有效';
     }

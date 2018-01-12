@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="name" class="col-sm-2 col-xs-2 control-label">任务名称</label>
             <div class="col-sm-4 col-md-offset-2">
-                <input type="text" class="form-control" id="name" name="name" placeholder="名称" data-error="请输入名称" value="${data.name }"  required/>
+                <input type="text" class="form-control" id="name" name="name" placeholder="名称" data-error="请输入名称" value="${data.name }"  required="false"/>
                 <div class="help-block with-errors"></div>
             </div>
         </div>
@@ -43,24 +43,45 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="beanClass" class="col-sm-2 col-xs-2 control-label">类名</label>
+            <label for="jobGroup" class="col-sm-2 col-xs-2 control-label">执行方式</label>
             <div class="col-sm-4 col-md-offset-2">
-                <input type="text" class="form-control" id="beanClass" name="beanClass" placeholder="类名" data-error="请输入类名"  value="${data.beanClass }"  required/>
+                <select class="select2 select2-offscreen" id="scheduleType"  name="scheduleType" style="width: 240px;" data-error="请选择执行方式" data-placeholder="执行方式" tabindex="-1" title="" required>
+                    <option value="RPC">RPC调用</option>
+                    <option value="HTTP">HTTP调用</option>
+                </select>
                 <div class="help-block with-errors"></div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="methodName" class="col-sm-2 col-xs-2 control-label">方法名</label>
-            <div class="col-sm-4 col-md-offset-2">
-                <input type="text" class="form-control" id="methodName" name="methodName" placeholder="方法名" data-error="请输入方法名"  value="${data.methodName }" required/>
-                <div class="help-block with-errors"></div>
+        <div id="rpc_invoke_div">
+            <div class="form-group">
+                <label for="beanClass" class="col-sm-2 col-xs-2 control-label">类名</label>
+                <div class="col-sm-4 col-md-offset-2">
+                    <input type="text" class="form-control" id="beanClass" name="beanClass" placeholder="类名" data-error="请输入类名"  value="${data.beanClass }"  required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="methodName" class="col-sm-2 col-xs-2 control-label">方法名</label>
+                <div class="col-sm-4 col-md-offset-2">
+                    <input type="text" class="form-control" id="methodName" name="methodName" placeholder="方法名" data-error="请输入方法名"  value="${data.methodName }" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="springId" class="col-sm-2 col-xs-2 control-label">实例ID</label>
+                <div class="col-sm-4 col-md-offset-2">
+                    <input type="text" class="form-control" id="springId" placeholder="实例ID" data-error="请输入实例ID" name="springId" value="${data.springId }" required>
+                    <div class="help-block with-errors"></div>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="springId" class="col-sm-2 col-xs-2 control-label">实例ID</label>
-            <div class="col-sm-4 col-md-offset-2">
-                <input type="text" class="form-control" id="springId" placeholder="实例ID" data-error="请输入实例ID" name="springId" value="${data.springId }" required>
-                <div class="help-block with-errors"></div>
+        <div id="http_invoke_div">
+            <div class="form-group">
+                <label for="httpUrl" class="col-sm-2 col-xs-2 control-label">HTTP调用url</label>
+                <div class="col-sm-4 col-md-offset-2">
+                    <input type="text" class="form-control" id="httpUrl" name="httpUrl" placeholder="HTTP调用url" data-error="请输入HTTP调用url"  value="${data.httpUrl }" required/>
+                    <div class="help-block with-errors"></div>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -84,4 +105,5 @@
     </div>
 </form>
 </body>
+<script src="${pageContext.request.contextPath}/assets/js/module/schedule/schedule_edit.js"></script>
 </html>

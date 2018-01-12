@@ -12,4 +12,6 @@ public interface SysUserApiService extends CrudApiService<SysUserDto>{
 
     void modifyData(SysUserDto dto);
 
+    void rpcTest();
+
 }

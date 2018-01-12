@@ -1,6 +1,7 @@
 package com.hiveview.schedule.job;
 
 import com.alibaba.dubbo.rpc.service.GenericService;
+import com.hiveview.base.util.http.WrapperHttpUtils;
 import com.hiveview.schedule.common.SpringContextHolder;
 import com.hiveview.schedule.entity.ScheduleJob;
 import com.hiveview.schedule.enums.ScheduleTypeEnum;
@@ -21,13 +22,25 @@ public class TaskUtils {
 	 */
 
 	public static void invokMethod(ScheduleJob scheduleJob) {
-		logger.debug("======================执行任务开始=============================" + scheduleJob.getId());
+		logger.debug("======================执行任务开始=============================" + scheduleJob.getGenericServiceId());
 		if(ScheduleTypeEnum.RPC.equals(scheduleJob.getScheduleType())){
 			dubboService(scheduleJob);
-		} else {
+		} else if(ScheduleTypeEnum.HTTP.equals(scheduleJob.getScheduleType())) {
+			httpService(scheduleJob);
+		}else{
 			localService(scheduleJob);
 		}
-		logger.debug("++++++++++++++++++++++执行任务结束+++++++++++++++++++++++++++++" + scheduleJob.getId());
+		logger.debug("++++++++++++++++++++++执行任务结束+++++++++++++++++++++++++++++" + scheduleJob.getGenericServiceId());
+	}
+
+	/**
+	 * http调用
+	 * @param job
+	 */
+	public static void httpService(ScheduleJob job){
+		logger.info("Job调用http调度服务开始, http url:" + job.getHttpUrl());
+		String resp=WrapperHttpUtils.doGet(job.getHttpUrl());
+		logger.info("Job调用http调度服务结束, http url:" + job.getHttpUrl()+",返回结果:"+resp);
 	}
 
 	/**
@@ -35,16 +48,16 @@ public class TaskUtils {
 	 * @param scheduleJob
 	 */
 	public static void dubboService(ScheduleJob scheduleJob){
-		logger.info("Job调用Dubbo服务开始，id：" + scheduleJob.getId());
+		logger.info("Job调用Dubbo服务开始，id：" + scheduleJob.getGenericServiceId());
 
-		GenericService genericService = JobDubboGenericServiceMap.getInstance().serviceMap.get(scheduleJob.getId());
+		GenericService genericService = JobDubboGenericServiceMap.getInstance().serviceMap.get(scheduleJob.getGenericServiceId());
 		if(null == genericService){
-			logger.info("在Redis中，没有job任务服务被找到(Dubbo泛化调用服务)，ID：" + scheduleJob.getId());
+			logger.info("没有job任务服务被找到(Dubbo泛化调用服务)，ID：" + scheduleJob.getGenericServiceId());
 			return ;
 		}
 
 		genericService.$invoke(scheduleJob.getMethodName(), null, null);
-		logger.info("Job调用Dubbo服务结束，id：" + scheduleJob.getId());
+		logger.info("Job调用Dubbo服务结束，id：" + scheduleJob.getGenericServiceId());
 	}
 
 	/**

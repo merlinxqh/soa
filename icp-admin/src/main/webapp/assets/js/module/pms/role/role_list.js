@@ -25,7 +25,7 @@ function operateRender(value, row, index){
     if($("#setRolePermission").length>0){
         action+=' <a data-toggle="modal" data-target="#base_modal" href="'+rootPath+'/pms/role/resourceSetting?roleCode='+row.code+'"  class="view-link">权限设置</a>';
     }
-    return commonDropDownLink(action);
+    return _commonDropDownLink(action);
 }
 
 var roleTypeEnum={COMMON:'普通',SUPER_ADMIN:'超级管理员'};

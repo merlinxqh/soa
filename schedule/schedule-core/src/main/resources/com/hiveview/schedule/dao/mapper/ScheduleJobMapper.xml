@@ -66,13 +66,13 @@
         and t.http_url = #{params.httpUrl,jdbcType=VARCHAR}
       </if>
       <if test="params.createBy != null and '' != params.createBy" >
-        and t.create_by = #{params.createBy.userName,jdbcType=VARCHAR}
+        and t.create_by = #{params.createBy,jdbcType=VARCHAR}
       </if>
       <if test="params.createDate != null" >
         and t.create_date = #{params.createDate,jdbcType=TIMESTAMP}
       </if>
       <if test="params.lastUpdateBy != null and '' != params.lastUpdateBy" >
-        and t.last_update_by = #{params.lastUpdateBy.userName,jdbcType=VARCHAR}
+        and t.last_update_by = #{params.lastUpdateBy,jdbcType=VARCHAR}
       </if>
       <if test="params.lastUpdateDate != null" >
         and t.last_update_date = #{params.lastUpdateDate,jdbcType=TIMESTAMP}
@@ -126,8 +126,8 @@
     values (#{id,jdbcType=BIGINT}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
       #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{cronExpression,jdbcType=VARCHAR}, 
       #{beanClass,jdbcType=VARCHAR}, #{isConcurrent,jdbcType=INTEGER}, #{springId,jdbcType=VARCHAR}, 
-      #{methodName,jdbcType=VARCHAR},#{scheduleType,jdbcType=VARCHAR},#{httpUrl,jdbcType=VARCHAR}, #{createBy.userName,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
-      #{lastUpdateBy.userName,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP})
+      #{methodName,jdbcType=VARCHAR},#{scheduleType,jdbcType=VARCHAR},#{httpUrl,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+      #{lastUpdateBy,jdbcType=VARCHAR}, #{lastUpdateDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hiveview.schedule.entity.ScheduleJob" >
     insert into schedule_job
@@ -225,13 +225,13 @@
         #{httpUrl,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null" >
-        #{createBy.userName,jdbcType=VARCHAR},
+        #{createBy,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastUpdateBy != null" >
-        #{lastUpdateBy.userName,jdbcType=VARCHAR},
+        #{lastUpdateBy,jdbcType=VARCHAR},
       </if>
       <if test="lastUpdateDate != null" >
         #{lastUpdateDate,jdbcType=TIMESTAMP},
@@ -275,13 +275,13 @@
         http_url = #{httpUrl,jdbcType=VARCHAR},
       </if>
       <if test="createBy != null" >
-        create_by = #{createBy.userName,jdbcType=VARCHAR},
+        create_by = #{createBy,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastUpdateBy != null" >
-        last_update_by = #{lastUpdateBy.userName,jdbcType=VARCHAR},
+        last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
       </if>
       <if test="lastUpdateDate != null" >
         last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP},
@@ -302,9 +302,9 @@
       method_name = #{methodName,jdbcType=VARCHAR},
       schedule_type = #{scheduleType,jdbcType=VARCHAR},
       http_url = #{httpUrl,jdbcType=VARCHAR},
-      create_by = #{createBy.userName,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      last_update_by = #{lastUpdateBy.userName,jdbcType=VARCHAR},
+      last_update_by = #{lastUpdateBy,jdbcType=VARCHAR},
       last_update_date = #{lastUpdateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

@@ -36,6 +36,7 @@
                    data-side-pagination="server">
                 <thead>
                 <tr>
+                    <th data-field="" data-align="left" data-formatter="operateRender">操作</th>
                     <th data-checkbox="true" data-align="left">序号</th>
                     <th data-field="name" data-align="left" data-formatter="autoWrapRender">任务名称</th>
                     <th data-field="jobGroup" data-align="left">任务分组</th>
@@ -43,17 +44,16 @@
                     <th data-field="methodName" data-align="left">方法名</th>
                     <th data-field="springId" data-align="left">实例ID</th>
                     <th data-field="cronExpression" data-align="left">执行时间</th>
-                    <th data-field="status" data-align="left" data-formatter="statusRender">状态</th>
+                    <th data-field="status" data-align="left" data-formatter="statusRenderValid">状态</th>
                     <th data-field="createDate" data-align="left" data-formatter="defaultDateFormatter" >创建时间</th>
-                    <th data-field="createBy.userName" data-align="left" >创建者</th>
-                    <th data-field="lastUpdateBy.userName" data-align="left" >最后操作者</th>
+                    <th data-field="createBy" data-align="left" >创建者</th>
+                    <th data-field="lastUpdateBy" data-align="left" >最后操作者</th>
                     <th data-field="lastUpdateDate" data-align="left" data-formatter="defaultDateFormatter">修改日期</th>
-                    <th data-field="" data-align="left" data-formatter="operateRender">操作</th>
                 </tr>
                 </thead>
             </table>
         </div>
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/assets/js/schedule/schedule_list.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/module/schedule/schedule_list.js"></script>
 </html>

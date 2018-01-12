@@ -2,6 +2,7 @@ package com.hiveview.schedule.job;
 
 import java.util.Map;
 
+import com.hiveview.schedule.service.quartz.GenericBeanFactoryUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
@@ -56,7 +57,7 @@ public class SingletonDubboApplication {
 	/**
 	 * 单例
 	 */
-	public final static class Singleton implements ApplicationListener<ApplicationEvent> {
+	public static class Singleton implements ApplicationListener<ApplicationEvent> {
 		
 		private static final Singleton instance = new Singleton();
 

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.hiveview.base.dao.CrudMapper;
 import com.hiveview.base.exception.ServiceException;
 import com.hiveview.base.service.impl.BaseCrudServiceImpl;
+import com.hiveview.base.util.id.IdWorker;
 import com.hiveview.common.api.ModifyCommonDto;
 import com.hiveview.common.api.enums.ModifyTypeEnum;
 import com.hiveview.schedule.dao.ScheduleJobMapper;
@@ -48,7 +49,8 @@ public class ScheduleJobServiceImpl extends BaseCrudServiceImpl<ScheduleJob> imp
     public int saveData(ScheduleJob entity) throws ServiceException {
         Assert.notNull(entity,"参数不能为空");
         if(StringUtils.isEmpty(entity.getId())){
-            entity.setStatus(0);//默认禁用状态
+            entity.setStatus(ScheduleJob.JOB_NOT_RUNNING_STATUS);//默认禁用状态
+            entity.setCode(IdWorker.getStringCode());
             entity.setIsConcurrent(ScheduleJob.JOB_CONCURRENT_IS);
             return scheduleJobMapper.insert(entity);
         }else{
@@ -69,6 +71,7 @@ public class ScheduleJobServiceImpl extends BaseCrudServiceImpl<ScheduleJob> imp
             data.setStatus(ScheduleJob.JOB_RUNNING_STATUS);
             try {
                 quartzJobService.addJob(data);
+                JobDubboServiceUtils.setService(data);
             } catch (SchedulerException e) {
                 logger.error("",e);
             }
@@ -78,6 +81,7 @@ public class ScheduleJobServiceImpl extends BaseCrudServiceImpl<ScheduleJob> imp
             data.setStatus(ScheduleJob.JOB_NOT_RUNNING_STATUS);
             try {
                 quartzJobService.deleteJob(data);
+                JobDubboServiceUtils.removeService(data);
             } catch (SchedulerException e) {
                 logger.error("",e);
             }
@@ -97,30 +101,30 @@ public class ScheduleJobServiceImpl extends BaseCrudServiceImpl<ScheduleJob> imp
         }
     }
 
-//    /**
-//     * 添加任务到quartz
-//     * @throws Exception
-//     */
-//    @PostConstruct
-//    public void initJob() throws Exception {
-//
-//        //获取所有任务数据
-//        Map<String,Object> param=new HashMap<>();
-//        param.put("status",ScheduleJob.JOB_RUNNING_STATUS);
-//        List<ScheduleJob> list=scheduleJobMapper.selectByParams(param);
-//        if(!CollectionUtils.isEmpty(list)){
-//            for(ScheduleJob job:list){
-//                if(ScheduleTypeEnum.RPC.equals(job.getScheduleType())){
-//                    //处理远程调用 执行方式
-//                    try {
-//                        JobDubboServiceUtils.setService(job.getBeanClass(),job.getMethodName());
-//                    }catch (Exception e){
-//                        logger.error("添加rpc dubbo远程调用任务出错"+ JSON.toJSONString(job),e);
-//                        continue;
-//                    }
-//                }
-//                quartzJobService.addJob(job);
-//            }
-//        }
-//    }
+    /**
+     * 添加任务到quartz
+     * @throws Exception
+     */
+    @PostConstruct
+    public void initJob() throws Exception {
+
+        //获取所有任务数据
+        Map<String,Object> param=new HashMap<>();
+        param.put("status",ScheduleJob.JOB_RUNNING_STATUS);
+        List<ScheduleJob> list=scheduleJobMapper.selectByParams(param);
+        if(!CollectionUtils.isEmpty(list)){
+            for(ScheduleJob job:list){
+                if(ScheduleTypeEnum.RPC.equals(job.getScheduleType())){
+                    //处理远程调用 执行方式
+                    try {
+                        JobDubboServiceUtils.setService(job);
+                    }catch (Exception e){
+                        logger.error("添加rpc dubbo远程调用任务出错"+ JSON.toJSONString(job),e);
+                        continue;
+                    }
+                }
+                quartzJobService.addJob(job);
+            }
+        }
+    }
 }

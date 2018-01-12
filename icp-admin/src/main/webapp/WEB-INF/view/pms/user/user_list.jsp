@@ -43,16 +43,16 @@
                     data-side-pagination="server">
                 <thead>
                 <tr>
+                    <th data-field="" data-align="left" data-formatter="operateRender">操作</th>
                     <th data-field="name" data-align="left">名称</th>
                     <th data-field="username" data-align="left">登录账号</th>
                     <th data-field="email" data-align="left">邮箱</th>
                     <th data-field="defaultRole.name" data-align="left">角色</th>
-                    <th data-field="status" data-align="left" data-formatter="statusRender">状态</th>
+                    <th data-field="status" data-align="left" data-formatter="statusRenderValid">状态</th>
                     <th data-field="createBy" data-align="left" >创建者</th>
                     <th data-field="createDate" data-align="left"  data-formatter="defaultDateFormatter">创建日期</th>
                     <th data-field="lastUpdateBy" data-align="left" >最后修改人</th>
                     <th data-field="lastUpdateDate" data-align="left"  data-formatter="defaultDateFormatter">最后修改日期</th>
-                    <th data-field="" data-align="left" data-formatter="operateRender">操作</th>
                 </tr>
                 </thead>
             </table>

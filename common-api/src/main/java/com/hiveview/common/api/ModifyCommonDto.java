@@ -2,11 +2,13 @@ package com.hiveview.common.api;
 
 import com.hiveview.common.api.enums.ModifyTypeEnum;
 
+import java.io.Serializable;
+
 /**
  * Created by leo on 2018/1/10.
  * 通用操作启用,禁用,审核,删除 等操作
  */
-public class ModifyCommonDto {
+public class ModifyCommonDto implements Serializable{
 
     private ModifyTypeEnum modifyType;//操作类型
 

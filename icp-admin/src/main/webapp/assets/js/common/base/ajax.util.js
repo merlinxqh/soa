@@ -36,21 +36,34 @@ function ableSubmitBtn(){
 
 //关闭modal窗口 刷新父页面，或指定div 或根据回调函数刷新
 function modalAjaxDone(json){
-	if(json.hasOwnProperty('code') && json.code == 0){
-		//关闭mode 
-		wrapperHideModal('base_modal');
+    if(null != json && json.hasOwnProperty('code') && json.code == 0){
+        //关闭mode
+        wrapperHideModal('base_modal');
 
-		//提示成功消息
-		_successTipsFun(json.msg);
-		if(json.hasOwnProperty('callbackMethod')){//有传回调函数
-            eval(json['callbackMethod']+'()');//执行回调函数
-		}else{//默认刷新列表
+        //提示成功消息
+        _successTipsFun(json.msg);
+        var _call=checkHasCallBack(json);
+        if(_call){
+            eval(_call+'()');
+        }else{
             refreshTable();
         }
-	}else{
-		_errorTipsFun(json.data);
+    }else{
+        _errorTipsFun(json.data);
         ableSubmitBtn();
-	}
+    }
+}
+/**
+ * 校验是否包含回调函数
+ * @param json
+ * @returns {boolean}
+ */
+function checkHasCallBack(json){
+    if(null != json){
+        if(json.hasOwnProperty('data') && null != json['data'] && json['data'].hasOwnProperty('callbackMethod')){
+            return json['data']['callbackMethod'];
+        }
+    }
 }
 
 function ajaxError(json){
