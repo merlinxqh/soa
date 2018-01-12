@@ -260,10 +260,15 @@ function wrapperOnLoadSuccess(tableId,data){
  * @returns {boolean}
  */
 function currentHasModal(){
-    if($(".modal-body").length>0){
-        return true;
-    }
-    return false;
+    var list = $("div[role='dialog']");
+    var flag=false;
+    $.each(list,function(index,obj){
+        if($(obj).hasClass("in")){
+            flag=true;
+            return false;
+        }
+    });
+    return flag;
 }
 
 /**
