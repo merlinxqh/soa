@@ -3,7 +3,7 @@ package com.hiveview.pms.service.impl;
 import com.hiveview.base.dao.CrudMapper;
 import com.hiveview.base.service.impl.BaseCrudServiceImpl;
 import com.hiveview.pms.dao.SysRoleResourceMapper;
-import com.hiveview.pms.entity.SysRoleResource;
+import com.hiveview.pms.entity.sys.SysRoleResource;
 import com.hiveview.pms.service.SysRoleResourceService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;

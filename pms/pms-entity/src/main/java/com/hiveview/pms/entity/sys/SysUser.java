@@ -1,4 +1,4 @@
-package com.hiveview.pms.entity;
+package com.hiveview.pms.entity.sys;
 
 import com.hiveview.base.common.BaseEntity;
 import lombok.Data;
@@ -44,5 +44,4 @@ public class SysUser extends BaseEntity {
      * 默认角色
      */
     private SysRole defaultRole;
-
 }

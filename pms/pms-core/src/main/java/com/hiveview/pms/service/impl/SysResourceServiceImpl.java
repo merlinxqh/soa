@@ -5,7 +5,7 @@ import com.hiveview.base.exception.ServiceException;
 import com.hiveview.base.service.impl.BaseCrudServiceImpl;
 import com.hiveview.base.util.id.IdWorker;
 import com.hiveview.pms.dao.SysResourceMapper;
-import com.hiveview.pms.entity.SysResource;
+import com.hiveview.pms.entity.sys.SysResource;
 import com.hiveview.pms.service.SysResourceService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

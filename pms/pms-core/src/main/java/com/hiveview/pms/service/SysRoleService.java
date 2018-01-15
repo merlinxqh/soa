@@ -2,7 +2,7 @@ package com.hiveview.pms.service;
 
 import com.hiveview.base.service.BaseCrudService;
 import com.hiveview.pms.dto.RoleResourceDto;
-import com.hiveview.pms.entity.SysRole;
+import com.hiveview.pms.entity.sys.SysRole;
 
 /**
  * sys_role

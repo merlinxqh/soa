@@ -4,7 +4,7 @@ import com.hiveview.base.util.serializer.ObjectUtils;
 import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.common.WrapperApiService;
 import com.hiveview.pms.dto.SysUserDto;
-import com.hiveview.pms.entity.SysUser;
+import com.hiveview.pms.entity.sys.SysUser;
 import com.hiveview.pms.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

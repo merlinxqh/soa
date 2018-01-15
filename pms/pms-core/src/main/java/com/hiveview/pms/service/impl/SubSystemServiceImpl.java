@@ -3,7 +3,7 @@ package com.hiveview.pms.service.impl;
 import com.hiveview.base.dao.CrudMapper;
 import com.hiveview.base.service.impl.BaseCrudServiceImpl;
 import com.hiveview.pms.dao.SubSystemMapper;
-import com.hiveview.pms.entity.SubSystem;
+import com.hiveview.pms.entity.sys.SubSystem;
 import com.hiveview.pms.service.SubSystemService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;

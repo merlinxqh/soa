@@ -1,7 +1,7 @@
 package com.hiveview.pms.service;
 
 import com.hiveview.base.service.BaseCrudService;
-import com.hiveview.pms.entity.SysRoleResource;
+import com.hiveview.pms.entity.sys.SysRoleResource;
 
 /**
  * sys_role_resource

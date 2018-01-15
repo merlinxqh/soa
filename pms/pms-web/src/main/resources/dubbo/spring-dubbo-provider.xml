@@ -14,4 +14,10 @@
     <dubbo:service interface="com.hiveview.pms.api.SysRoleApiService" timeout="30000" ref="sysRoleApiService" version="1.0.0" registry="zookeeperService"/>
     <bean id="sysRoleApiService" class="com.hiveview.pms.api.SysRoleApiServiceImpl"/>
 
+    <dubbo:service interface="com.hiveview.pms.api.BasicDataApiService" timeout="30000" ref="basicDataApiService" version="1.0.0" registry="zookeeperService"/>
+    <bean id="basicDataApiService" class="com.hiveview.pms.api.BasicDataApiServiceImpl"/>
+
+    <dubbo:service interface="com.hiveview.pms.api.BasicDataTypeApiService" timeout="30000" ref="basicDataTypeApiService" version="1.0.0" registry="zookeeperService"/>
+    <bean id="basicDataTypeApiService" class="com.hiveview.pms.api.BasicDataTypeApiServiceImpl"/>
+
 </beans>

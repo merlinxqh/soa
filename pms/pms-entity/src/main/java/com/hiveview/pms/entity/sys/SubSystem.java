@@ -1,4 +1,4 @@
-package com.hiveview.pms.entity;
+package com.hiveview.pms.entity.sys;
 
 import com.hiveview.base.common.BaseEntity;
 

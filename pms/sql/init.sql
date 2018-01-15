@@ -179,3 +179,43 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', 'admin', '445738124174856192');
+
+
+CREATE TABLE `basic_data_type` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `code` varchar(100) DEFAULT NULL COMMENT '编码',
+  `parent_code` varchar(100) DEFAULT NULL COMMENT '父级编码',
+  `multiple_online` bit(1) DEFAULT NULL COMMENT '是否允许多个同时上线(启用)',
+   type varchar(50)  NOT NULL COMMENT '数据类型分类',
+  `long_code` varchar(500) DEFAULT NULL COMMENT '长编码',
+  `name` varchar(100) DEFAULT NULL COMMENT '名称',
+  `remark` varchar(300) DEFAULT NULL COMMENT '备注',
+  `level` int(11) DEFAULT '1' COMMENT '级别',
+  `orders` int(11) DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间 : \r\n',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_index_code` (`code`) USING BTREE,
+  KEY `index_parent_code` (`parent_code`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='基础数据类型表';
+
+
+CREATE TABLE `basic_data` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `type_code` varchar(80) DEFAULT NULL COMMENT '关联类型code',
+  `type_long_code` varchar(500) DEFAULT NULL COMMENT '长编码',
+  `label` varchar(100) DEFAULT NULL COMMENT '标签',
+  `value` varchar(500) DEFAULT NULL COMMENT '值',
+  `description` varchar(300) DEFAULT NULL COMMENT '描述',
+  `orders` int(11) DEFAULT '0' COMMENT '排序',
+  `status` int(1) DEFAULT NULL COMMENT '状态 1:启用,2:禁用',
+  `del_flag` int(1) DEFAULT NULL COMMENT '删除状态1:正常 2:已删除',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_date` datetime DEFAULT NULL COMMENT '创建时间 : \r\n',
+  `last_update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `last_update_date` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `index_type_code` (`type_code`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8 COMMENT='基础数据表';
+
+

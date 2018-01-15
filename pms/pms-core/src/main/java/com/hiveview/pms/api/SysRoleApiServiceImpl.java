@@ -5,7 +5,7 @@ import com.hiveview.common.api.PageDto;
 import com.hiveview.pms.common.WrapperApiService;
 import com.hiveview.pms.dto.RoleResourceDto;
 import com.hiveview.pms.dto.SysRoleDto;
-import com.hiveview.pms.entity.SysRole;
+import com.hiveview.pms.entity.sys.SysRole;
 import com.hiveview.pms.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

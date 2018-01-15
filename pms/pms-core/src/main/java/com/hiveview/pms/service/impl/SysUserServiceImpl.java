@@ -6,7 +6,7 @@ import com.hiveview.base.exception.ServiceException;
 import com.hiveview.base.service.impl.BaseCrudServiceImpl;
 import com.hiveview.base.util.encry.EncryUtils;
 import com.hiveview.pms.dao.SysUserMapper;
-import com.hiveview.pms.entity.SysUser;
+import com.hiveview.pms.entity.sys.SysUser;
 import com.hiveview.pms.service.SysUserService;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;

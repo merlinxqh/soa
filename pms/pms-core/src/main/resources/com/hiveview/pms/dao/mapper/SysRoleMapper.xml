@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hiveview.pms.dao.SysRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.hiveview.pms.entity.SysRole" >
+  <resultMap id="BaseResultMap" type="com.hiveview.pms.entity.sys.SysRole" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
@@ -88,11 +88,11 @@
     delete from sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByPrimarayKeyForModel" parameterType="com.hiveview.pms.entity.SysRole" >
+  <delete id="deleteByPrimarayKeyForModel" parameterType="com.hiveview.pms.entity.sys.SysRole" >
     delete from sys_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.hiveview.pms.entity.SysRole" >
+  <insert id="insert" parameterType="com.hiveview.pms.entity.sys.SysRole" >
     insert into sys_role (id, code, name, 
       status, role_type, remark, 
       create_by, create_date, last_update_by, 
@@ -102,7 +102,7 @@
       #{createBy,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateBy,jdbcType=VARCHAR}, 
       #{lastUpdateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hiveview.pms.entity.SysRole" >
+  <insert id="insertSelective" parameterType="com.hiveview.pms.entity.sys.SysRole" >
     insert into sys_role
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -169,7 +169,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hiveview.pms.entity.SysRole" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.hiveview.pms.entity.sys.SysRole" >
     update sys_role
     <set >
       <if test="code != null" >
@@ -202,7 +202,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.hiveview.pms.entity.SysRole" >
+  <update id="updateByPrimaryKey" parameterType="com.hiveview.pms.entity.sys.SysRole" >
     update sys_role
     set code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},

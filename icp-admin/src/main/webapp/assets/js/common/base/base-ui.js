@@ -1,15 +1,15 @@
 /**
- * 
+ *
  */
 var _globalParamObj={};//存储查询参数
 var _globalTableViewer;//列表图片查看viewer对象
 $(function() {
-	// 处理session 超时
-	$.ajaxSetup({
-		contentType : "application/x-www-form-urlencoded;charset=utf-8",
+    // 处理session 超时
+    $.ajaxSetup({
+        contentType : "application/x-www-form-urlencoded;charset=utf-8",
         cache : false,// 关闭AJAX相应的缓存
-		dataType : 'json',
-		complete : function(xhr, status) {
+        dataType : 'json',
+        complete : function(xhr, status) {
             switch(xhr.status) {
                 case 404 :
                     wrapperHideModal('base_modal');
@@ -30,47 +30,47 @@ $(function() {
                     }, 1500);
                     break;
             }
-		}
-	});
+        }
+    });
 
-	// navTab 方式打开页面
-	$("body").delegate("*[data-target='navTab']","click",function() {
-		var url = $(this).attr("href") || $(this).data("url");
-		$("#navTab").load(url, initHtml);
-		return false;
-	});
+    // navTab 方式打开页面
+    $("body").delegate("*[data-target='navTab']","click",function() {
+        var url = $(this).attr("href") || $(this).data("url");
+        $("#navTab").load(url, initHtml);
+        return false;
+    });
 
-	// navTab 方式打开页面
-	$("body").delegate( "*[data-target='divload']", "click", function() {
-		var url = $(this).attr("href") || $(this).data("url");
-		var div = $(this).data("div");
-		$("#"+div).data("url",url);
-		$("#"+div).load(url, initHtml);
+    // navTab 方式打开页面
+    $("body").delegate( "*[data-target='divload']", "click", function() {
+        var url = $(this).attr("href") || $(this).data("url");
+        var div = $(this).data("div");
+        $("#"+div).data("url",url);
+        $("#"+div).load(url, initHtml);
 
-		//只加载菜单特殊处理
-		if(div=="sidebar-menu"){
-			$("#baseContainer").html("");
-		}
-		return false;
-	});
+        //只加载菜单特殊处理
+        if(div=="sidebar-menu"){
+            $("#baseContainer").html("");
+        }
+        return false;
+    });
 
-	// 防止modal缓存
-	$("#base_modal,#base_modal_center").on("loaded.bs.modal", function() {
-		initHtml();
-		// 重置校验
-		resetValidator();
-	});
+    // 防止modal缓存
+    $("#base_modal,#base_modal_center").on("loaded.bs.modal", function() {
+        initHtml();
+        // 重置校验
+        resetValidator();
+    });
 
-	$("#base_modal,#base_modal_center").on("hidden.bs.modal", function() {
-		// 清除modal缓存
+    $("#base_modal,#base_modal_center").on("hidden.bs.modal", function() {
+        // 清除modal缓存
         modalHideClearCache($(this));
-		resetValidator();
-	});
+        resetValidator();
+    });
 
-	// modal 打开完后激活 校验
-	$('#base_modal,#base_modal_center').on('shown.bs.modal', function() {
-		initValidator();
-	});
+    // modal 打开完后激活 校验
+    $('#base_modal,#base_modal_center').on('shown.bs.modal', function() {
+        initValidator();
+    });
 
     //回车事件
     document.onkeydown=function(e){
@@ -82,7 +82,7 @@ $(function() {
             return false;
         }
     };
-	//解决modal 弹框 select2搜索框不能输入问题
+    //解决modal 弹框 select2搜索框不能输入问题
     $.fn.modal.Constructor.prototype.enforceFocus = function () { };
     //监控 浏览器窗口大小变化事件
     window.onresize = function(){
@@ -143,55 +143,55 @@ function initHtml() {
 
     autoSetWidthHeight();
     wrapperSetStoreSearchParam($("#paramForm"));
-	// 绑定 ajaxToDo 事件
-	$(".ajaxToDo").unbind().bind( "click", function() {
-		var url = $(this).attr("href");
+    // 绑定 ajaxToDo 事件
+    $(".ajaxToDo").unbind().bind( "click", function() {
+        var url = $(this).attr("href");
         wrapperConfirmFun('ajaxToDo','确定执行该操作吗?',{url:url});
-	});
+    });
     //绑定 bootstrap-table 事件
     bindBootstrapTableEvent($("#paramForm"));
     // bootstrap-table渲染
     initBootstrapTable();
 
     /**
-	 * 设置 dataTable最小宽度 为了解决 小屏电脑 显示问题
+     * 设置 dataTable最小宽度 为了解决 小屏电脑 显示问题
      * @type {*}
      * @private
      */
     var _panel=$(".table-hover").parents(".adapt-window-height");
     if(!_panel.hasClass("panel-data-table")
-		&& !_panel.hasClass("auth-width")){//不需要最小宽度1200px的 添加这个class
+        && !_panel.hasClass("auth-width")){//不需要最小宽度1200px的 添加这个class
         _panel.addClass("panel-data-table");
-	}
+    }
     /**
-	 * 清空按钮
+     * 清空按钮
      */
     $(".clearSearch").unbind().bind("click",function(){
 
         wrapperClearFun(this);
     });
     /**
-	 * 查询按钮
+     * 查询按钮
      */
     $(".searchBtn").unbind().bind("click",function(){
 
         wrapperFormSearch(this);
     });
 
-	// 绑定 tableAjaxTodo 事件
-	$(".tableAjaxTodo").unbind().bind( "click", function() {
-		var url = $(this).attr("href");
-		$.Notification.confirm('success', 'top center', '操作提示！',
-				tableAjaxTodo, url);
-	});
+    // 绑定 tableAjaxTodo 事件
+    $(".tableAjaxTodo").unbind().bind( "click", function() {
+        var url = $(this).attr("href");
+        $.Notification.confirm('success', 'top center', '操作提示！',
+            tableAjaxTodo, url);
+    });
 
-	$(".ajaxDel").unbind().bind( "click", function(event) {
-		event.preventDefault();
-		var url = $(this).attr("href");
-		ajaxDel(url);
-	});
+    $(".ajaxDel").unbind().bind( "click", function(event) {
+        event.preventDefault();
+        var url = $(this).attr("href");
+        ajaxDel(url);
+    });
     /**
-	 * 滚动条问题 回到顶部
+     * 滚动条问题 回到顶部
      */
 }
 
@@ -241,18 +241,18 @@ function bindBootstrapTableEvent(objForm){
  */
 function wrapperOnLoadSuccess(tableId,data){
     //
-   if($("#"+tableId).find("img").length>0){
-       //图片延迟加载
-       $("img.lazy").lazyload({effect: "fadeIn"});
+    if($("#"+tableId).find("img").length>0){
+        //图片延迟加载
+        $("img.lazy").lazyload({effect: "fadeIn"});
 
-       //查看图片插件viewer
-       if(_globalTableViewer){
-           _globalTableViewer.destroy();
-       }
-       _globalTableViewer=new Viewer(document.getElementById(tableId), {
-           url: 'data-original'
-       });
-   }
+        //查看图片插件viewer
+        if(_globalTableViewer){
+            _globalTableViewer.destroy();
+        }
+        _globalTableViewer=new Viewer(document.getElementById(tableId), {
+            url: 'data-original'
+        });
+    }
 }
 
 /**
@@ -260,15 +260,10 @@ function wrapperOnLoadSuccess(tableId,data){
  * @returns {boolean}
  */
 function currentHasModal(){
-    var list = $("div[role='dialog']");
-    var flag=false;
-    $.each(list,function(index,obj){
-        if($(obj).hasClass("in")){
-            flag=true;
-            return false;
-        }
-    });
-    return flag;
+    if($(".modal-body").length>0){
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -276,18 +271,18 @@ function currentHasModal(){
  * @param obj
  */
 function judgeHasBootstrapTable(obj){
-   if(obj == undefined){
-       //查询全局
-       if($('[data-toggle="table"]').length>0){
-           return true;
-       }
-   }else{
-       if(obj.find('[data-toggle="table"]').length>0){
-           return true;
-       }
-   }
+    if(obj == undefined){
+        //查询全局
+        if($('[data-toggle="table"]').length>0){
+            return true;
+        }
+    }else{
+        if(obj.find('[data-toggle="table"]').length>0){
+            return true;
+        }
+    }
 
-   return false;
+    return false;
 }
 
 /**
@@ -295,16 +290,15 @@ function judgeHasBootstrapTable(obj){
  */
 function enterKeyPressSearch(){
     //当前 有 弹窗 并且 有需要渲染的 分页table
-    if(currentHasModal()){
-        if(judgeHasBootstrapTable($(".modal-body"))){
-            if($(".modal-body").find(".searchBtn").length>0){
-                $(".modal-body").find(".searchBtn").click();
-            }
+    if(currentHasModal() && judgeHasBootstrapTable($(".modal-body"))){
+        if($(".modal-body").find(".searchBtn").length>0){
+            $(".modal-body").find(".searchBtn").click();
         }
     }else{
         //没有模态框 找查询按钮 click
         $(".searchBtn").click();
     }
+
 }
 
 /**
@@ -320,10 +314,11 @@ function initBootstrapTable(){
             }else if($(".modal-body").find(".table-hover").length>0){
                 urlJson.url=$(".modal-body").find(".table-hover").attr("data-url");
             }
+            $(".modal-body").find('[data-toggle="table"]').bootstrapTable(urlJson);
         }else{
             urlJson.url=wrapperParamFormUrl($("#paramForm"));
+            $('[data-toggle="table"]').bootstrapTable(urlJson);
         }
-        $('[data-toggle="table"]').bootstrapTable(urlJson);
     }
 }
 
@@ -351,13 +346,13 @@ function wrapperParamFormUrl(form){
  * @param obj 对应form对象
  */
 function wrapperStoreSearchParam(obj){
-   var _curParList=obj.serializeArray();
-   var _tableId=obj.attr("tableId");
-   var _curPar={};
-   $.each(_curParList,function(){
-       _curPar[this.name]=this.value;
-   });
-   _globalParamObj[_tableId]=_curPar;
+    var _curParList=obj.serializeArray();
+    var _tableId=obj.attr("tableId");
+    var _curPar={};
+    $.each(_curParList,function(){
+        _curPar[this.name]=this.value;
+    });
+    _globalParamObj[_tableId]=_curPar;
 }
 
 /**
@@ -377,8 +372,8 @@ function _getStoreDataByTableId(tableId){
 function wrapperClearSearchParam(obj){
     var _tableId=$(obj).attr("tableId");
     if(_globalParamObj.hasOwnProperty(_tableId)){
-    	delete _globalParamObj[_tableId];
-	}
+        delete _globalParamObj[_tableId];
+    }
 }
 
 /**
@@ -436,61 +431,61 @@ function wrapperClearFun(obj){
 }
 
 function initNavTabValidator() {
-	// modal form 校验 及提交
-	$('.navTabform').bootstrapValidator({
-		excluded : ':disabled, :hidden, :not(:visible)',
-		submitHandler : function(validator, form, submitButton) {
-			$.ajax({
-				type : form.method || 'POST',
-				url : form.attr("action"),
-				data : form.serializeArray(),
-				dataType : "json",
-				cache : false,
-				success : modalAjaxDone,
-				error : ajaxError
-			});
-			this.disableSubmitButtons(true);
-		}
-	});
-	// 带上传文件的form 校验
-	$('.iframenavTabform').bootstrapValidator();
+    // modal form 校验 及提交
+    $('.navTabform').bootstrapValidator({
+        excluded : ':disabled, :hidden, :not(:visible)',
+        submitHandler : function(validator, form, submitButton) {
+            $.ajax({
+                type : form.method || 'POST',
+                url : form.attr("action"),
+                data : form.serializeArray(),
+                dataType : "json",
+                cache : false,
+                success : modalAjaxDone,
+                error : ajaxError
+            });
+            this.disableSubmitButtons(true);
+        }
+    });
+    // 带上传文件的form 校验
+    $('.iframenavTabform').bootstrapValidator();
 }
 
 
 function initValidator() {
-	//TODO
+    //TODO
 }
 
 
 
 function reloadDiv(callback){
-	var url = $("#baseContainer").data("url");
-	$("#baseContainer").load(url, function(){
-	    if(callback){
-	        callback();
-	    }
-	    initHtml();
-	});
+    var url = $("#baseContainer").data("url");
+    $("#baseContainer").load(url, function(){
+        if(callback){
+            callback();
+        }
+        initHtml();
+    });
 }
 
 function reloadDivTip(data,callback){
-	modalAjaxDone(data);
-	var url = $("#baseContainer").data("url");
-	$("#baseContainer").load(url, function(){
-	    if(callback){
-	        callback();
-	    }
-	    initHtml();
-	});
+    modalAjaxDone(data);
+    var url = $("#baseContainer").data("url");
+    $("#baseContainer").load(url, function(){
+        if(callback){
+            callback();
+        }
+        initHtml();
+    });
 }
 
 function resetValidator() {
-	if ($('.bvform').data('bootstrapValidator')) {
-		$('.bvform').data('bootstrapValidator').resetForm();
-	}
-	if ($('.iframeform').data('bootstrapValidator')) {
-		$('.iframeform').data('bootstrapValidator').resetForm();
-	}
+    if ($('.bvform').data('bootstrapValidator')) {
+        $('.bvform').data('bootstrapValidator').resetForm();
+    }
+    if ($('.iframeform').data('bootstrapValidator')) {
+        $('.iframeform').data('bootstrapValidator').resetForm();
+    }
 }
 
 /**

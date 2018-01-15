@@ -1,6 +1,7 @@
 package com.hiveview.admin.controller.schedule;
 
 import com.hiveview.admin.commom.BaseController;
+import com.hiveview.admin.rpc.schedule.ScheduleApiConsumer;
 import com.hiveview.base.util.response.RespMsg;
 import com.hiveview.common.api.ModifyCommonDto;
 import com.hiveview.common.api.PageDto;
@@ -24,7 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ScheduleController extends BaseController{
 
     @Autowired
-    private ScheduleJobApiService scheduleJobApiService;
+    private ScheduleApiConsumer scheduleApiConsumer;
 
     /**
      * 列表页
@@ -38,7 +39,7 @@ public class ScheduleController extends BaseController{
     @RequestMapping(value = "listData")
     public @ResponseBody
     PageDto listData(PageDto page, ScheduleJobDto dto){
-        return scheduleJobApiService.findPage(page,dto);
+        return scheduleApiConsumer.findPage(page,dto);
     }
 
     /**
@@ -48,7 +49,7 @@ public class ScheduleController extends BaseController{
     @RequestMapping(value = "edit",method = RequestMethod.GET)
     public ModelAndView edit(String id, ModelMap model){
         if(StringUtils.hasText(id)){
-            ScheduleJobDto data=scheduleJobApiService.findById(Long.valueOf(id));
+            ScheduleJobDto data=scheduleApiConsumer.findById(Long.valueOf(id));
             if(null != data){
                 model.put("data",data);
             }
@@ -62,7 +63,7 @@ public class ScheduleController extends BaseController{
     RespMsg<?> saveData(ScheduleJobDto dto){
         try {
             putOperatorInfo(dto);
-            scheduleJobApiService.saveData(dto);
+            scheduleApiConsumer.saveData(dto);
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
         }
@@ -72,7 +73,7 @@ public class ScheduleController extends BaseController{
     @RequestMapping(value = "modifyData",method = RequestMethod.POST)
     public @ResponseBody RespMsg<?> modifyData(ModifyCommonDto dto){
         try {
-            scheduleJobApiService.modifyData(dto);
+            scheduleApiConsumer.modifyData(dto);
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
         }

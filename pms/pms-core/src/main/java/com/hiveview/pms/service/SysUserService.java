@@ -1,7 +1,7 @@
 package com.hiveview.pms.service;
 
 import com.hiveview.base.service.BaseCrudService;
-import com.hiveview.pms.entity.SysUser;
+import com.hiveview.pms.entity.sys.SysUser;
 
 /**
  * sys_user

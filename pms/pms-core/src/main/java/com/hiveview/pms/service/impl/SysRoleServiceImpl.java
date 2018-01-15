@@ -6,8 +6,8 @@ import com.hiveview.base.service.impl.BaseCrudServiceImpl;
 import com.hiveview.base.util.id.IdWorker;
 import com.hiveview.pms.dao.SysRoleMapper;
 import com.hiveview.pms.dto.RoleResourceDto;
-import com.hiveview.pms.entity.SysRole;
-import com.hiveview.pms.entity.SysRoleResource;
+import com.hiveview.pms.entity.sys.SysRole;
+import com.hiveview.pms.entity.sys.SysRoleResource;
 import com.hiveview.pms.service.SysRoleResourceService;
 import com.hiveview.pms.service.SysRoleService;
 import javax.annotation.Resource;
@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-import java.util.Date;
 
 /**
  * 

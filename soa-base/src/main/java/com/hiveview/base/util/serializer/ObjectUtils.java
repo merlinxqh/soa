@@ -6,6 +6,8 @@ package com.hiveview.base.util.serializer;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.hiveview.base.common.TreeEntity;
 import com.hiveview.base.util.DateUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -16,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -251,5 +254,139 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
             return list.subList(start,end+1);
         }
         return null;
+    }
+
+
+    /**
+     * 通用树结构 数据
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> JSONArray wrapperGetTreeData(List<T> list){
+        List<TreeEntity> tlist=copyListObject(list,TreeEntity.class);
+        List<TreeEntity> flist=getFirstTreeList(tlist);
+        JSONArray resArray=new JSONArray();
+        flist.forEach(f->{
+            JSONObject json=new JSONObject();
+            json.put("text", f.getName());
+            json.put("code", f.getCode());
+            json.put("level",1);
+            json.put("id",f.getId());
+            json.put("longCode", f.getLongCode());
+            resArray.add(json);
+
+        });
+        recursionTreeData(tlist,resArray);
+        return resArray;
+    }
+
+    /**
+     * 获取拼装json数据 & 设置 home节点
+     * @param list
+     * @param <T>
+     * @return
+     */
+    public static <T> JSONArray wrapperGetTreeSetHome(List<T> list){
+        JSONArray resArray = wrapperGetTreeData(list);
+        return setTreeHomeNode(resArray);
+    }
+
+    /**
+     * 设置默认HOME节点
+     */
+    public static JSONArray setTreeHomeNode(JSONArray array){
+        JSONArray res=new JSONArray();
+        JSONObject home=new JSONObject();
+        home.put("code", "");
+        home.put("level",0);
+        home.put("id","ROOT");//标识 根节点
+        home.put("parentCode","");
+        home.put("text", "HOME");
+        if(array.size()>0){
+            home.put("nodes", array);
+            home.put("tags", "["+array.size()+"]");
+        }else{
+            home.put("tags", "[0]");
+        }
+        res.add(home);
+        return res;
+    }
+
+    /**
+     * 处理 树结构选中
+     * @param array 当前树结构数据
+     * @param existsData 已经存在的数据
+     */
+    public static void wrapperCheckTreeData(JSONArray array, List<TreeEntity> existsData) {
+        if(!CollectionUtils.isEmpty(array)){
+            for(Object obj:array){
+                recursionCheckData((JSONObject) obj, existsData);
+            }
+        }
+    }
+
+    public static void recursionCheckData(JSONObject json, List<TreeEntity> existsData){
+        json.put("text", json.getString("text"));
+        for(TreeEntity vo:existsData){
+            if(vo.getCode().equals(json.getString("code"))){
+                JSONObject state=new JSONObject();
+                state.put("checked", true);
+                json.put("state", state);
+            }
+        }
+        if(json.containsKey("nodes")){
+            JSONArray childArray=json.getJSONArray("nodes");
+            json.put("tags", "["+childArray.size()+"]");
+            for(Object obj:childArray){
+                recursionCheckData((JSONObject)obj, existsData);
+            }
+        }else{
+            json.put("tags", "[0]");
+        }
+    }
+
+
+    /**
+     * 递归获取 所有商品分类 json格式数据
+     * @param all  所有数据
+     * @param array 一级商品类目
+     */
+    public static void recursionTreeData(List<TreeEntity> all,JSONArray array){
+        for(Object obj:array){
+            JSONObject json=(JSONObject) obj;
+            JSONArray carray=new JSONArray();
+            for(TreeEntity vo:all){
+                if(json.getString("code").equals(vo.getParentCode())){
+                    JSONObject cjson=new JSONObject();
+                    cjson.put("text", vo.getName());
+                    cjson.put("code", vo.getCode());
+                    cjson.put("level",vo.getLevel());
+                    cjson.put("id",vo.getId());
+                    cjson.put("parentCode",vo.getParentCode());
+                    cjson.put("longCode", vo.getLongCode());
+                    carray.add(cjson);
+                }
+            }
+            if(carray.size()>0){
+                recursionTreeData(all,carray);
+                json.put("nodes", carray);
+                json.put("tags", "["+carray.size()+"]");
+            }
+        }
+    }
+
+
+    /**
+     * 获取一级 树结构数据
+     * @param list
+     * @return
+     */
+    private static List<TreeEntity> getFirstTreeList(List<TreeEntity> list) {
+        List<TreeEntity> resList=new ArrayList<>();
+        list.stream().filter(l-> l.getLevel() == 1).forEach(l->{
+            resList.add(l);
+        });
+        return resList;
     }
 }
