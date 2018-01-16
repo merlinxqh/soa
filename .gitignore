@@ -31,4 +31,8 @@ schedule/schedule-entity/target/
 schedule/schedule-core/target/
 schedule/schedule-api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 schedule/schedule-api/target/
+schedule/.settings/
 schedule/schedule-core/.settings/
+schedule/schedule-api/.settings/
+schedule/schedule-entity/.settings/
+schedule/schedule-web/.settings/
