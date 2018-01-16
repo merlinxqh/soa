@@ -50,4 +50,9 @@ public class BasicData extends BaseEntity {
      */
     private Integer status;
 
+    /**
+     * 删除标识 1:正常, 2:已删除
+     */
+    private Integer delFlag;
+
 }

@@ -41,7 +41,7 @@ public class SysUserServiceImpl extends BaseCrudServiceImpl<SysUser> implements 
         Assert.notNull(dto,"参数不能为空");
         Assert.isTrue(null != dto.getId() && null != dto.getStatus(),"ID和修改状态不能为空");
         //状态只有1,2
-        Assert.isTrue(dto.getStatus() == BaseConstants.COMMON_ENABLE || dto.getStatus() == BaseConstants.COMMON_DISABLE,"状态数据不正确");
+        Assert.isTrue(dto.getStatus() == BaseConstants.ENABLE_STATUS || dto.getStatus() == BaseConstants.DISABLE_STATUS,"状态数据不正确");
         SysUser old=sysUserMapper.selectByPrimaryKey(dto.getId());
         Assert.notNull(old,"ID无效");
         Assert.isTrue(dto.getStatus() != old.getStatus(),"数据已经被修改");
@@ -63,7 +63,7 @@ public class SysUserServiceImpl extends BaseCrudServiceImpl<SysUser> implements 
         }else{
             //新增
             entity.setPassword(EncryUtils.encryPwd(entity.getPassword()));
-            entity.setStatus(BaseConstants.COMMON_ENABLE);//默认启用状态
+            entity.setStatus(BaseConstants.ENABLE_STATUS);//默认启用状态
             entity.setUsername(entity.getEmail());
             Map<String,Object>  map=new HashMap<>();
             map.put("username",entity.getEmail());

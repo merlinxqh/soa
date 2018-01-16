@@ -1,7 +1,10 @@
 package com.hiveview.pms.service;
 
 import com.hiveview.base.service.BaseCrudService;
+import com.hiveview.common.api.ModifyCommonDto;
 import com.hiveview.pms.entity.basic.BasicData;
+
+import java.util.List;
 
 /**
  * basic_data
@@ -13,4 +16,12 @@ import com.hiveview.pms.entity.basic.BasicData;
  */
 public interface BasicDataService extends BaseCrudService<BasicData> {
 
+    void modifyData(ModifyCommonDto dto);
+
+    /**
+     * 根据 类型编码 获取数据
+     * @param typeCode
+     * @return
+     */
+    List<BasicData> getByTypeCode(String typeCode);
 }

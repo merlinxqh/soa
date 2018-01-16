@@ -41,6 +41,19 @@ public class BasicDataDto extends BaseEntityDto {
      */
     private Integer status;
 
+    /**
+     * 删除标识 1: 正常, 2:已删除
+     */
+    private Integer delFlag;
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
+
     public String getTypeCode() {
         return typeCode;
     }

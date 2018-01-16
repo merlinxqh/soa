@@ -41,8 +41,8 @@ public class SystemUserUtils {
 		}
 		SysUserDto user=null;
     	String userName=(String) SecurityUtils.getSubject().getPrincipal();
-    	if(redisService.mapExists(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName)){
-    		user=redisService.getHashObject(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName, SysUserDto.class);
+    	if(redisService.mapExists(AdminRedisConstants.ADMIN_SECURITY_USER_MAP_KEY, userName)){
+    		user=redisService.getHashObject(AdminRedisConstants.ADMIN_SECURITY_USER_MAP_KEY, userName, SysUserDto.class);
     	}
     	if(null != user){
 			currentUser.set(user);
@@ -80,8 +80,8 @@ public class SystemUserUtils {
 	 */
 	public static void logout(){
 		String userName=(String) SecurityUtils.getSubject().getPrincipal();
-		if(redisService.mapExists(RedisKeyConstants.SECURITY_USER_MAP_KEY, userName)){
-			redisService.mapRemove(RedisKeyConstants.SECURITY_USER_MAP_KEY,userName);
+		if(redisService.mapExists(AdminRedisConstants.ADMIN_SECURITY_USER_MAP_KEY, userName)){
+			redisService.mapRemove(AdminRedisConstants.ADMIN_SECURITY_USER_MAP_KEY,userName);
 		}
 	}
 
@@ -92,8 +92,8 @@ public class SystemUserUtils {
 	 * @param user
 	 */
 	public static void initUserLoginSuccessEvent(SysUserDto user){
-        redisService.setHashObject(RedisKeyConstants.SECURITY_USER_MAP_KEY,user.getUsername(),user);
-		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
+        redisService.setHashObject(AdminRedisConstants.ADMIN_SECURITY_USER_MAP_KEY,user.getUsername(),user);
+		String resourceKey=String.format(AdminRedisConstants.ADMIN_SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
 		//登录 资源数据重新获取 因此这里删除redis 该角色数据
 		if(redisService.exists(resourceKey)){
 			redisService.deleteByKey(resourceKey);
@@ -108,7 +108,7 @@ public class SystemUserUtils {
     	List<SysResourceDto> resourceList=null;
     	SysUserDto user = getCurrentUser();
     	if(null != user && null != user.getDefaultRole()){
-    		String resourceKey=String.format(RedisKeyConstants.SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
+    		String resourceKey=String.format(AdminRedisConstants.ADMIN_SECURITY_RESOURCE_KEY,user.getDefaultRole().getCode());
     		if(redisService.exists(resourceKey)){
     			resourceList=redisService.getListObj(resourceKey,SysResourceDto.class);
 			}else{
@@ -158,7 +158,7 @@ public class SystemUserUtils {
     	List<SysRoleDto> roleList=null;
     	SysUserDto curUser=getCurrentUser();
     	if(null != curUser){
-    		String redisKey=String.format(RedisKeyConstants.SECURITY_ROLE_KEY, curUser.getUsername());
+    		String redisKey=String.format(AdminRedisConstants.ADMIN_SECURITY_ROLE_KEY, curUser.getUsername());
     		if(redisService.exists(redisKey)){
     			roleList=redisService.getListObj(redisKey, SysRoleDto.class);
     		}

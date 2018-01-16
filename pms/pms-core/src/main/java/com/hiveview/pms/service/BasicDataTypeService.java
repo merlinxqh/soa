@@ -13,4 +13,5 @@ import com.hiveview.pms.entity.basic.BasicDataType;
  */
 public interface BasicDataTypeService extends BaseCrudService<BasicDataType> {
 
+    BasicDataType getByCode(String code);
 }

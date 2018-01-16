@@ -45,6 +45,17 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="type" class="col-sm-2 col-xs-2 control-label">数据类型</label>
+            <div class="col-sm-4 col-md-offset-2">
+                <select class="select2 select2-offscreen" id="type"  name="type" style="width: 240px;" data-error="请选择类型" data-placeholder="请选择" <c:if test="${data ne null}">disabled</c:if> tabindex="-1" title="" required>
+                    <option value="TEXT" <c:if test="${data ne null and data.type eq 'TEXT'}">selected</c:if>>文本</option>
+                    <option value="NUMBER" <c:if test="${data ne null and data.type eq 'NUMBER'}">selected</c:if>>数值</option>
+                    <option value="FILE" <c:if test="${data ne null and data.type eq 'FILE'}">selected</c:if>>文件</option>
+                </select>
+                <div class="help-block with-errors"></div>
+            </div>
+        </div>
+        <div class="form-group">
             <label for="multipleOnline" class="col-sm-2 col-xs-2 control-label">限制</label>
             <div class="col-sm-4 col-md-offset-2">
                 <div class="checkbox checkbox-success checkbox-inline">
@@ -81,4 +92,9 @@
         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">取消</button>
     </div>
 </form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".select2").select2({});
+    });
+</script>
 </html>

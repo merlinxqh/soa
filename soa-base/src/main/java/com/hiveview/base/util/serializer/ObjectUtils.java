@@ -28,7 +28,7 @@ import java.util.Map;
  * Li.XiaoChao
  * @version 2014-6-29
  */
-public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
+public class ObjectUtils{
 
     /**
      * 注解到对象复制，只复制能匹配上的方法。
@@ -264,6 +264,9 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
      * @return
      */
     public static <T> JSONArray wrapperGetTreeData(List<T> list){
+        if(CollectionUtils.isEmpty(list)){
+            return new JSONArray();
+        }
         List<TreeEntity> tlist=copyListObject(list,TreeEntity.class);
         List<TreeEntity> flist=getFirstTreeList(tlist);
         JSONArray resArray=new JSONArray();

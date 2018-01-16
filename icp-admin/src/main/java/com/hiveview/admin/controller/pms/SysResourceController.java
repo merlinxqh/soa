@@ -17,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by leo on 2017/11/6.
@@ -122,9 +120,7 @@ public class SysResourceController extends BaseController{
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
         }
-        Map<String,Object> data=new HashMap<>();
-        data.put("callbackMethod",getString("callbackMethod"));
-        return RespMsg.successResp(data);
+        return RespMsg.successResp(getExtMap("callbackMethod"));
     }
 
     /**
@@ -139,9 +135,7 @@ public class SysResourceController extends BaseController{
          }catch (Exception e){
              return RespMsg.failResp(e.getMessage());
          }
-        Map<String,Object> data=new HashMap<>();
-        data.put("callbackMethod",getString("callbackMethod"));
-        return RespMsg.successResp(data);
+        return RespMsg.successResp(getExtMap("callbackMethod"));
     }
 
 

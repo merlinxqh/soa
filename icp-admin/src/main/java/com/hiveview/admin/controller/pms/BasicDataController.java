@@ -158,6 +158,7 @@ public class BasicDataController extends BaseController {
     @RequestMapping(value = "saveData",method = RequestMethod.POST)
     public @ResponseBody RespMsg<?> saveData(BasicDataDto dto){
         try {
+            putOperatorInfo(dto);
             basicDataApiService.saveData(dto);
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
@@ -172,11 +173,12 @@ public class BasicDataController extends BaseController {
     @RequestMapping(value = "saveTypeData",method = RequestMethod.POST)
     public @ResponseBody RespMsg saveTypeData(BasicDataTypeDto dto){
         try {
+            putOperatorInfo(dto);
             basicDataTypeApiService.saveData(dto);
         }catch (Exception e){
             return RespMsg.failResp(e.getMessage());
         }
-        return RespMsg.successResp();
+        return RespMsg.successResp(getExtMap("callbackMethod"));
     }
 
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -96,6 +97,21 @@ public abstract class BaseController {
 	 */
 	protected Map<String,String> getRequestMap(){
 		return RequestContextHolder.currentParam.get();
+	}
+
+	/**
+	 * 返回拓展 参数
+	 * @param keys
+	 * @return
+	 */
+	public Map<String,Object> getExtMap(String... keys){
+        Map<String,Object> map = new HashMap<>();
+        for(String key:keys){
+        	if(StringUtils.hasText(key)){
+				map.put(key, getString(key));
+			}
+		}
+		return map;
 	}
 
 }
